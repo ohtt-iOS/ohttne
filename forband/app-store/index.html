@@ -14,34 +14,27 @@
 <link rel="icon" type="image/png" href="/forband/icon.png">
 <link rel="apple-touch-icon" href="/forband/icon.png">
 <link rel="canonical" href="https://www.ohttne.com/forband/app-store/">
-<script>
-  // 즉시 App Store로 이동. 나라별 스토어는 Apple이 자동으로 잡아준다.
-  var TARGET = "https://apps.apple.com/app/id6793964973";
-  try { window.location.replace(TARGET); } catch (e) { window.location.href = TARGET; }
-</script>
-<noscript><meta http-equiv="refresh" content="0; url=https://apps.apple.com/app/id6793964973"></noscript>
 <style>
   :root{
     --bg:#ffffff;
     --ink:#111113;
     --ink-2:#6e6e73;
     --tile:#f4f4f5;
+    --line:#e5e5ea;
     --accent:#3478f6;
     --thumb:#c9dcf2;
   }
   @media (prefers-color-scheme: dark){
-    :root{ --bg:#0f0f11; --ink:#f5f5f7; --ink-2:#9a9aa0; --tile:#1c1c1f; --thumb:#1e2a3a; }
+    :root{ --bg:#0f0f11; --ink:#f5f5f7; --ink-2:#9a9aa0; --tile:#1c1c1f; --line:#2c2c30; --thumb:#1e2a3a; }
   }
   *{ box-sizing:border-box; }
-  html,body{ height:100%; }
   body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
+    margin:0; min-height:100vh;
+    background:var(--bg); color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;
     -webkit-font-smoothing:antialiased;
     display:flex; align-items:center; justify-content:center;
-    padding:32px 20px calc(32px + env(safe-area-inset-bottom));
+    padding:36px 20px calc(36px + env(safe-area-inset-bottom));
   }
   .card{ width:100%; max-width:380px; text-align:center; }
   .icon{
@@ -50,21 +43,34 @@
     box-shadow:0 6px 24px rgba(0,0,0,.14);
     background:var(--thumb);
   }
-  h1{ margin:0 0 6px; font-size:24px; font-weight:700; letter-spacing:-.02em; }
-  .sub{ margin:0 0 28px; font-size:15px; line-height:1.5; color:var(--ink-2); }
+  h1{ margin:0 0 6px; font-size:25px; font-weight:800; letter-spacing:-.02em; }
+  .sub{ margin:0 0 26px; font-size:15px; line-height:1.55; color:var(--ink-2); }
   .btn{
     display:block; padding:16px 20px; border-radius:14px;
     background:var(--accent); color:#fff; text-decoration:none;
     font-size:17px; font-weight:600; letter-spacing:-.01em;
+    border:0; width:100%; font-family:inherit; cursor:pointer;
   }
   .btn:active{ opacity:.85; }
-  .note{
-    margin:18px 0 0; font-size:13px; line-height:1.6; color:var(--ink-2);
-    padding:12px 14px; border-radius:12px; background:var(--tile);
-    display:none;
+  .panel{
+    margin:16px 0 0; padding:16px 16px 14px; border-radius:14px;
+    background:var(--tile); text-align:left; display:none;
   }
-  .note.show{ display:block; }
-  .foot{ margin:26px 0 0; font-size:12px; color:var(--ink-2); }
+  .panel.show{ display:block; }
+  .panel h2{
+    margin:0 0 10px; font-size:13px; font-weight:700; color:var(--ink);
+    letter-spacing:-.01em;
+  }
+  .panel p{ margin:0; font-size:13px; line-height:1.65; color:var(--ink-2); }
+  .row{ display:flex; gap:8px; margin:0 0 12px; }
+  .mini{
+    flex:1; padding:11px 8px; border-radius:10px;
+    background:var(--bg); border:1px solid var(--line);
+    color:var(--accent); text-decoration:none; text-align:center;
+    font-size:13.5px; font-weight:600; font-family:inherit; cursor:pointer;
+  }
+  .mini:active{ opacity:.7; }
+  .foot{ margin:24px 0 0; font-size:12px; color:var(--ink-2); }
   .foot a{ color:var(--ink-2); }
 </style>
 </head>
@@ -72,13 +78,22 @@
   <main class="card">
     <img class="icon" src="/forband/icon.png" alt="ForBand 앱 아이콘" width="104" height="104">
     <h1>ForBand</h1>
-    <p class="sub">밴드 연습의 모든 것.<br>App Store로 이동 중입니다…</p>
+    <p class="sub" id="sub">밴드 연습의 모든 것.<br>메트로놈 · 튜너 · 연습 플레이어 · 세트리스트</p>
 
-    <a class="btn" id="go" href="https://apps.apple.com/app/id6793964973">App Store에서 열기</a>
+    <a class="btn" id="go" href="https://apps.apple.com/app/id6793964973">App Store에서 받기</a>
 
-    <p class="note" id="note">
-      화면이 그대로면 오른쪽 아래 <b>···</b> 를 눌러<br><b>“외부 브라우저에서 열기”</b>를 선택해 주세요.
-    </p>
+    <section class="panel" id="panel">
+      <h2>App Store가 열리지 않나요?</h2>
+      <div class="row">
+        <a class="mini" id="safari" href="#">Safari로 열기</a>
+        <button class="mini" id="copy" type="button">링크 복사</button>
+      </div>
+      <p id="hint">
+        인스타그램 안에서는 App Store가 바로 열리지 않을 수 있어요.
+        오른쪽 아래 <b>···</b> → <b>“외부 브라우저에서 열기”</b>를 선택하거나,
+        링크를 복사해 Safari에 붙여넣어 주세요.
+      </p>
+    </section>
 
     <p class="foot">
       <a href="https://ohtt-ios.github.io/ForBand-public/">앱 소개</a> ·
@@ -87,18 +102,64 @@
   </main>
 
 <script>
-  // 자동 이동이 막히는 앱 내장 브라우저(인스타그램·페이스북 등)에서는 안내 문구를 띄운다.
-  (function () {
-    var ua = navigator.userAgent || "";
-    var inApp = /Instagram|FBAN|FBAV|FB_IAB|KAKAOTALK|NAVER\(inapp|Line\//i.test(ua);
-    if (inApp) {
-      document.getElementById("note").classList.add("show");
+(function () {
+  var APPSTORE_HTTPS = "https://apps.apple.com/app/id6793964973";
+  var APPSTORE_SCHEME = "itms-apps://apps.apple.com/app/id6793964973";
+  var SELF = "https://ohttne.com/forband/app-store";
+
+  var ua = navigator.userAgent || "";
+  var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+              (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  var inApp = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|KAKAOTALK|NAVER\(inapp|Line\/|Threads/i.test(ua);
+
+  // 인앱 브라우저에서는 안내 패널을 띄운다.
+  if (inApp) document.getElementById("panel").classList.add("show");
+
+  // Safari 강제 실행은 iOS가 막아둬서 보장할 수 없다. 되는 기기에서만 동작하는 시도.
+  document.getElementById("safari").href = "x-safari-" + SELF;
+
+  // 링크 복사 — 어떤 환경에서도 통하는 최후의 탈출구.
+  var copyBtn = document.getElementById("copy");
+  copyBtn.addEventListener("click", function () {
+    var done = function () {
+      copyBtn.textContent = "복사됨 ✓";
+      setTimeout(function () { copyBtn.textContent = "링크 복사"; }, 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(APPSTORE_HTTPS).then(done, fallback);
+    } else {
+      fallback();
     }
-    // 첫 시도가 삼켜졌을 수 있으니 한 번 더.
+    function fallback() {
+      var t = document.createElement("textarea");
+      t.value = APPSTORE_HTTPS;
+      t.setAttribute("readonly", "");
+      t.style.cssText = "position:absolute;left:-9999px";
+      document.body.appendChild(t);
+      t.select();
+      t.setSelectionRange(0, t.value.length);
+      try { document.execCommand("copy"); done(); } catch (e) {
+        document.getElementById("hint").textContent = APPSTORE_HTTPS;
+      }
+      document.body.removeChild(t);
+    }
+  });
+
+  // 자동 이동은 반드시 페이지가 그려진 뒤에. 예전엔 <head>에서 바로 이동시켜
+  // 인앱 브라우저가 그 이동을 막으면 흰 화면만 남았다.
+  window.addEventListener("load", function () {
     setTimeout(function () {
-      if (!document.hidden) { window.location.href = TARGET; }
-    }, 1200);
-  })();
+      if (document.hidden) return;
+      if (inApp) {
+        // 인앱 브라우저: https로 가면 흰 화면이 될 수 있으니 App Store 앱을 직접 노린다.
+        // 스킴이 처리되지 않으면 아무 일도 안 일어나고 이 페이지가 그대로 남는다.
+        if (isIOS) window.location.href = APPSTORE_SCHEME;
+      } else {
+        window.location.replace(APPSTORE_HTTPS);
+      }
+    }, 400);
+  });
+})();
 </script>
 </body>
 </html>
