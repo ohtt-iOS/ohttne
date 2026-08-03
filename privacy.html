@@ -186,29 +186,23 @@
           <td>기기(로컬)</td>
         </tr>
         <tr>
-          <td>Apple 로그인 식별자 (선택)<br><span class="td-en">Sign in with Apple ID</span></td>
-          <td>이용자가 원할 경우 Apple 계정으로 로그인 상태를 유지하기 위해</td>
-          <td>기기(로컬)</td>
-        </tr>
-        <tr>
           <td>책·단어 검색어<br><span class="td-en">Search terms</span></td>
           <td>책과 단어 검색 결과를 받아오기 위해 (아래 5항)</td>
           <td>외부 검색 API로 전송</td>
         </tr>
         <tr>
           <td>사용 통계·오류 정보<br><span class="td-en">Usage stats · crash reports</span></td>
-          <td>앱 개선과 오류 수정을 위해 — 화면 이동, 기능 사용 이벤트, 기기 모델·OS 버전, 크래시 진단 (노트·인용 등 기록 내용은 포함되지 않음, 아래 5항)</td>
-          <td>Google Firebase로 전송</td>
+          <td>앱 개선과 오류 수정을 위해 — 화면 이동, 기능 사용 이벤트, 기기 모델·OS 버전, 크래시 진단, 도서·사전 API 오류 기록 (노트·인용 등 기록 내용은 포함되지 않음, 아래 5항)</td>
+          <td>Google Firebase · 시오리 서버로 전송</td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <p>앱은 이용자의 <strong>이름·전화번호·이메일 주소·정밀 위치·생체정보 등 민감정보를 별도로 수집하지 않습니다.</strong>
-  Apple 로그인을 선택하는 경우 Apple이 제공하는 익명 식별자와(이용자가 공유를 선택한 경우) 이름만 기기에 저장되며,
-  이메일 주소는 저장하지 않습니다.</p>
+  <strong>회원가입과 로그인이 없어</strong> 이용자를 식별하는 계정 자체를 만들지 않습니다.</p>
   <p class="en-note">We do not collect your name, phone number, email, precise location history, or biometric data.
-  If you choose Sign in with Apple, only the anonymous identifier and, if you share it, your given name are stored on your device — your email is not stored.</p>
+  There is no sign-up and no login, so we never create an account that identifies you.</p>
 
   <!-- 2 -->
   <h2><span class="toc-row"><span class="num">02</span><span class="t">로컬 및 iCloud 저장</span><span class="leader"></span><span class="en">Local &amp; iCloud storage</span></span></h2>
@@ -261,6 +255,10 @@
   광고 식별자(IDFA)를 사용하지 않고 광고·마케팅 목적의 추적이나 프로파일링을 하지 않습니다.
   Firebase의 데이터 처리는 <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase 개인정보 문서</a>를 따릅니다.</p>
   <p class="en-note">The app also uses Google Firebase Analytics &amp; Crashlytics for stability and improvement. This sends an anonymous identifier, device model/OS version, screen and feature-usage events, and crash diagnostics. Nothing you write (notes, quotes, reviews) and no name or email is ever sent; no advertising identifier (IDFA) is used, and there is no ad tracking or profiling. Firebase's data handling is governed by its privacy documentation.</p>
+  <p>위 도서·사전 API가 오류를 돌려준 경우(예: 일일 조회 한도 초과, 인증키 만료) 개발자가 이를 알고
+  고칠 수 있도록 <strong>어느 API가 어떤 오류 코드로 실패했는지와 익명 식별자·앱 버전·기기 모델·OS 버전</strong>을
+  시오리 서버(Cloudflare)로 보냅니다. <strong>검색어와 이용자가 작성한 기록은 포함되지 않습니다.</strong></p>
+  <p class="en-note">When one of the book or dictionary APIs above returns an error (for example a daily quota limit or an expired key), the app sends which API failed with which error code, along with an anonymous identifier, app version, device model and OS version, to the Siori server (Cloudflare) so the developer can fix it. Search terms and anything you write are never included.</p>
   <p>이 밖에 알림 전송을 위해 Apple의 푸시 서비스(APNs)와 iCloud 동기화(CloudKit)를 사용합니다. 앱은
   <strong>광고 네트워크를 일절 사용하지 않습니다.</strong></p>
   <p class="en-note">The app also uses Apple's push service (APNs) and iCloud sync (CloudKit). It uses no advertising networks.</p>
