@@ -23,6 +23,7 @@
     --line:#e5e5ea;
     --accent:#3478f6;
     --thumb:#c9dcf2;
+    --iab-accent:#3478f6; /* 인앱 탈출 안내 시트의 주 버튼 색 */
   }
   @media (prefers-color-scheme: dark){
     :root{ --bg:#0f0f11; --ink:#f5f5f7; --ink-2:#9a9aa0; --tile:#1c1c1f; --line:#2c2c30; --thumb:#1e2a3a; }
@@ -52,24 +53,12 @@
     border:0; width:100%; font-family:inherit; cursor:pointer;
   }
   .btn:active{ opacity:.85; }
-  .panel{
-    margin:16px 0 0; padding:16px 16px 14px; border-radius:14px;
+  .hint{
+    margin:16px 0 0; padding:14px 16px; border-radius:14px;
     background:var(--tile); text-align:left; display:none;
+    font-size:13px; line-height:1.65; color:var(--ink-2);
   }
-  .panel.show{ display:block; }
-  .panel h2{
-    margin:0 0 10px; font-size:13px; font-weight:700; color:var(--ink);
-    letter-spacing:-.01em;
-  }
-  .panel p{ margin:0; font-size:13px; line-height:1.65; color:var(--ink-2); }
-  .row{ display:flex; gap:8px; margin:0 0 12px; }
-  .mini{
-    flex:1; padding:11px 8px; border-radius:10px;
-    background:var(--bg); border:1px solid var(--line);
-    color:var(--accent); text-decoration:none; text-align:center;
-    font-size:13.5px; font-weight:600; font-family:inherit; cursor:pointer;
-  }
-  .mini:active{ opacity:.7; }
+  .hint.show{ display:block; }
   .foot{ margin:24px 0 0; font-size:12px; color:var(--ink-2); }
   .foot a{ color:var(--ink-2); }
 </style>
@@ -82,18 +71,9 @@
 
     <a class="btn" id="go" href="https://apps.apple.com/app/id6793964973">App Store에서 받기</a>
 
-    <section class="panel" id="panel">
-      <h2>App Store가 열리지 않나요?</h2>
-      <div class="row">
-        <a class="mini" id="safari" href="#">Safari로 열기</a>
-        <button class="mini" id="copy" type="button">링크 복사</button>
-      </div>
-      <p id="hint">
-        인스타그램 안에서는 App Store가 바로 열리지 않을 수 있어요.
-        오른쪽 아래 <b>···</b> → <b>“외부 브라우저에서 열기”</b>를 선택하거나,
-        링크를 복사해 Safari에 붙여넣어 주세요.
-      </p>
-    </section>
+    <p class="hint" id="hint">
+      지금은 앱 안의 브라우저예요. 위 버튼을 누르면 기본 브라우저로 App Store를 엽니다.
+    </p>
 
     <p class="foot">
       <a href="https://ohtt-ios.github.io/ForBand-public/">앱 소개</a> ·
@@ -101,62 +81,26 @@
     </p>
   </main>
 
+<script src="/assets/inapp-browser.js"></script>
 <script>
 (function () {
-  var APPSTORE_HTTPS = "https://apps.apple.com/app/id6793964973";
-  var APPSTORE_SCHEME = "itms-apps://apps.apple.com/app/id6793964973";
-  var SELF = "https://ohttne.com/forband/app-store";
+  var APPSTORE = "https://apps.apple.com/app/id6793964973";
 
-  var ua = navigator.userAgent || "";
-  var isIOS = /iPad|iPhone|iPod/.test(ua) ||
-              (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  var inApp = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|KAKAOTALK|NAVER\(inapp|Line\/|Threads/i.test(ua);
+  // 인앱 브라우저 탈출은 inapp-browser.js가 #go 링크에 자동으로 붙는다
+  // (apps.apple.com 링크를 위임 처리). 여기서는 안내와 자동 이동만 맡는다.
+  var inApp = InAppBreakout.isInApp();
 
-  // 인앱 브라우저에서는 안내 패널을 띄운다.
-  if (inApp) document.getElementById("panel").classList.add("show");
+  if (inApp) document.getElementById("hint").classList.add("show");
 
-  // Safari 강제 실행은 iOS가 막아둬서 보장할 수 없다. 되는 기기에서만 동작하는 시도.
-  document.getElementById("safari").href = "x-safari-" + SELF;
-
-  // 링크 복사 — 어떤 환경에서도 통하는 최후의 탈출구.
-  var copyBtn = document.getElementById("copy");
-  copyBtn.addEventListener("click", function () {
-    var done = function () {
-      copyBtn.textContent = "복사됨 ✓";
-      setTimeout(function () { copyBtn.textContent = "링크 복사"; }, 2000);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(APPSTORE_HTTPS).then(done, fallback);
-    } else {
-      fallback();
-    }
-    function fallback() {
-      var t = document.createElement("textarea");
-      t.value = APPSTORE_HTTPS;
-      t.setAttribute("readonly", "");
-      t.style.cssText = "position:absolute;left:-9999px";
-      document.body.appendChild(t);
-      t.select();
-      t.setSelectionRange(0, t.value.length);
-      try { document.execCommand("copy"); done(); } catch (e) {
-        document.getElementById("hint").textContent = APPSTORE_HTTPS;
-      }
-      document.body.removeChild(t);
-    }
-  });
-
-  // 자동 이동은 반드시 페이지가 그려진 뒤에. 예전엔 <head>에서 바로 이동시켜
+  // 자동 이동은 페이지가 그려진 뒤에. 예전엔 <head>에서 바로 이동시켜
   // 인앱 브라우저가 그 이동을 막으면 흰 화면만 남았다.
+  //
+  // 인앱 브라우저에서는 자동 이동을 아예 하지 않는다 — 탈출 스킴은 사용자
+  // 탭(제스처) 안에서 호출해야 iOS가 받아준다. 타이머에서 쏘면 무시된다.
   window.addEventListener("load", function () {
+    if (inApp) return;
     setTimeout(function () {
-      if (document.hidden) return;
-      if (inApp) {
-        // 인앱 브라우저: https로 가면 흰 화면이 될 수 있으니 App Store 앱을 직접 노린다.
-        // 스킴이 처리되지 않으면 아무 일도 안 일어나고 이 페이지가 그대로 남는다.
-        if (isIOS) window.location.href = APPSTORE_SCHEME;
-      } else {
-        window.location.replace(APPSTORE_HTTPS);
-      }
+      if (!document.hidden) window.location.replace(APPSTORE);
     }, 400);
   });
 })();
