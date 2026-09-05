@@ -129,14 +129,14 @@
     </h1>
     <p class="meta">
       <b>시오리</b>(이하 "앱")는 이용자의 개인정보를 소중히 여기며, 아래와 같이 데이터를 처리합니다.<br>
-      시행일자 (Effective date): <b>2026년 7월 8일</b> · 최종 수정: 2026년 7월 11일
+      시행일자 (Effective date): <b>2026년 7월 8일</b> · 최종 수정: 2026년 9월 5일
     </p>
   </header>
 
   <div class="lede">
     <strong>한눈에 보기.</strong> 시오리는 광고를 싣지 않고, 광고·마케팅 목적의 추적을 하지 않습니다.
     독서 기록·노트·사진·단어장은 <strong>이용자의 기기와 이용자 본인의 iCloud에만 저장</strong>되며,
-    개발자를 포함한 제3자에게 전송되지 않습니다. 책·단어 검색어는 해당 검색 API로 전송되고,
+    개발자를 포함한 제3자에게 전송되지 않습니다(안드로이드판은 iCloud 대신 <strong>이용자 본인의 구글 드라이브 앱 전용 폴더</strong> — 10항 참조). 책·단어 검색어는 해당 검색 API로 전송되고,
     앱 개선을 위한 <strong>익명 사용 통계·오류 정보</strong>가 Google Firebase를 통해 수집됩니다
     (이용자가 쓴 기록 내용은 절대 포함되지 않습니다 — 5항 참조).
     <br><br>
@@ -292,7 +292,34 @@
   <p class="en-note">You can view, edit, and delete your data at any time within the app. The developer holds no separate identifiable copy, so access and erasure are carried out by you directly, in-app or via iCloud.</p>
 
   <!-- 10 -->
-  <h2><span class="toc-row"><span class="num">10</span><span class="t">방침의 변경</span><span class="leader"></span><span class="en">Changes</span></span></h2>
+  <h2><span class="toc-row"><span class="num">10</span><span class="t">안드로이드판</span><span class="leader"></span><span class="en">Android edition</span></span></h2>
+  <p>안드로이드판 시오리도 <strong>회원가입과 로그인이 없고, 개발자가 운영하는 서버가 없습니다.</strong>
+  아래는 위 항목과 <strong>다른 부분만</strong> 적습니다. 나머지는 위 내용과 같습니다.</p>
+  <p class="en-note">The Android edition also has no sign-up, no login, and no developer-run server. Only the differences from the sections above are listed here.</p>
+  <ul>
+    <li><strong>저장과 동기화.</strong> 기록·노트·사진·단어장은 앱 전용 저장 공간에 보관됩니다. iCloud 대신
+    <strong>구글 드라이브의 앱 전용 폴더(appDataFolder)</strong>로 동기화할 수 있으며, <strong>이용자가 직접 켤 때만</strong> 동작합니다.
+    앱에 열리는 것은 이 숨김 폴더뿐이고 <strong>드라이브의 다른 파일은 목록조차 보이지 않습니다.</strong>
+    연결된 계정을 화면에 표시하기 위해 <strong>구글 계정의 이메일 주소</strong>를 받아 기기에만 저장합니다.
+    이 동기화는 이용자와 Google 사이에서만 이루어지며 <strong>개발자는 접근할 수 없습니다</strong>
+    (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 개인정보처리방침</a>).</li>
+    <li><strong>카메라 · 사진 · 문자 인식.</strong> 문장 인식은 앱에 동봉된 <strong>Google ML Kit 한국어 인식 모델로 기기 안에서만</strong> 처리되며,
+    이미지와 인식된 텍스트를 외부로 전송하지 않습니다. 사진은 안드로이드 사진 선택기로 고른 <strong>그 한 장만</strong> 앱에 전달되고,
+    앱은 사진 전체에 대한 접근 권한을 요구하지 않습니다.</li>
+    <li><strong>결제.</strong> 시오리 플러스와 메모지 상품의 결제는 <strong>Google Play 결제</strong>가 처리합니다.
+    카드번호 등 결제 수단 정보는 <strong>앱이 보지도, 저장하지도 않으며</strong>, 앱은 "무엇을 소장하고 있는지"만 Google에 확인합니다.</li>
+    <li><strong>통계 · 광고.</strong> 안드로이드판은 <strong>Firebase Analytics·Crashlytics를 사용하지 않습니다.</strong>
+    광고 ID(AAID)를 요청하지 않고, 광고 네트워크도 싣지 않습니다.</li>
+    <li><strong>위치.</strong> 안드로이드판에는 동네책방 지도가 없어 <strong>위치 권한을 요구하지 않습니다</strong>(4항 해당 없음).</li>
+    <li><strong>검색.</strong> 5항의 도서·사전 API 가운데 알라딘·카카오·Google Books·Open Library·표준국어대사전·우리말샘을 같은 방식으로 사용합니다.
+    전송되는 것은 검색어 또는 ISBN뿐입니다.</li>
+    <li><strong>삭제.</strong> 앱을 삭제하면 기기의 데이터가 함께 지워집니다. 드라이브에 올라간 사본은
+    구글 계정 → 데이터 및 개인 정보 보호 → 서드 파티 앱 및 서비스에서 연결을 끊고 삭제할 수 있습니다.</li>
+  </ul>
+  <p class="en-note">On Android: records sync only into your own Google Drive app-data folder, and only if you turn it on; the app can see nothing else in your Drive. Your Google account email is stored on the device only, to show which account is connected. Text recognition runs entirely on-device with a bundled Google ML Kit model. Purchases are handled by Google Play — the app never sees payment details. The Android edition uses no Firebase Analytics or Crashlytics, requests no advertising ID, and has no bookshop map, so no location permission is requested.</p>
+
+  <!-- 11 -->
+  <h2><span class="toc-row"><span class="num">11</span><span class="t">방침의 변경</span><span class="leader"></span><span class="en">Changes</span></span></h2>
   <p>본 방침이 변경되는 경우 이 페이지를 통해 개정 내용과 시행일자를 공지합니다.</p>
 
   <div class="contact">
