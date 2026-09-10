@@ -129,7 +129,7 @@
     </h1>
     <p class="meta">
       <b>시오리</b>(이하 "앱")는 이용자의 개인정보를 소중히 여기며, 아래와 같이 데이터를 처리합니다.<br>
-      시행일자 (Effective date): <b>2026년 7월 8일</b> · 최종 수정: 2026년 9월 6일
+      시행일자 (Effective date): <b>2026년 7월 8일</b> · 최종 수정: 2026년 9월 10일
     </p>
   </header>
 
@@ -308,7 +308,9 @@
     앱은 사진 전체에 대한 접근 권한을 요구하지 않습니다.</li>
     <li><strong>결제.</strong> 시오리 플러스와 메모지 상품의 결제는 <strong>Google Play 결제</strong>가 처리합니다.
     카드번호 등 결제 수단 정보는 <strong>앱이 보지도, 저장하지도 않으며</strong>, 앱은 "무엇을 소장하고 있는지"만 Google에 확인합니다.</li>
-    <li><strong>통계 · 광고.</strong> 안드로이드판은 <strong>Firebase Analytics·Crashlytics를 사용하지 않습니다.</strong>
+    <li><strong>통계 · 오류 정보 · 광고.</strong> iOS판과 같이 <strong>Google Firebase Analytics·Crashlytics</strong>를 사용합니다(5항).
+    전송되는 것은 익명 식별자, 기기 모델·OS 버전, 화면 이동·기능 사용 이벤트, 오류(크래시) 진단 기록뿐이며,
+    <strong>이용자가 쓴 기록 내용과 이름·이메일은 전송되지 않습니다.</strong>
     광고 ID(AAID)를 요청하지 않고, 광고 네트워크도 싣지 않습니다.</li>
     <li><strong>위치.</strong> 안드로이드판에는 동네책방 지도가 없어 <strong>위치 권한을 요구하지 않습니다</strong>(4항 해당 없음).</li>
     <li><strong>검색.</strong> 5항의 도서·사전 API 가운데 예스24·카카오·Google Books·Open Library·표준국어대사전·우리말샘을 같은 방식으로 사용합니다.
@@ -316,7 +318,7 @@
     <li><strong>삭제.</strong> 앱을 삭제하면 기기의 데이터가 함께 지워집니다. 드라이브에 올라간 사본은
     구글 계정 → 데이터 및 개인 정보 보호 → 서드 파티 앱 및 서비스에서 연결을 끊고 삭제할 수 있습니다.</li>
   </ul>
-  <p class="en-note">On Android: records sync only into your own Google Drive app-data folder, and only if you turn it on; the app can see nothing else in your Drive. Your Google account email is stored on the device only, to show which account is connected. Text recognition runs entirely on-device with a bundled Google ML Kit model. Purchases are handled by Google Play — the app never sees payment details. The Android edition uses no Firebase Analytics or Crashlytics, requests no advertising ID, and has no bookshop map, so no location permission is requested.</p>
+  <p class="en-note">On Android: records sync only into your own Google Drive app-data folder, and only if you turn it on; the app can see nothing else in your Drive. Your Google account email is stored on the device only, to show which account is connected. Text recognition runs entirely on-device with a bundled Google ML Kit model. Purchases are handled by Google Play — the app never sees payment details. Like the iOS edition, the Android edition uses Google Firebase Analytics &amp; Crashlytics (anonymous identifier, device model/OS version, screen and feature-usage events, crash diagnostics; nothing you write is ever sent — see section 5). It requests no advertising ID and has no bookshop map, so no location permission is requested.</p>
 
   <!-- 11 -->
   <h2><span class="toc-row"><span class="num">11</span><span class="t">방침의 변경</span><span class="leader"></span><span class="en">Changes</span></span></h2>
