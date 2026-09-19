@@ -110,14 +110,13 @@ def links():
             f'<a href="/privacy.html">Privacy</a>')
 
 
-def index_rows(current=None, peek=True):
+def index_rows(current=None):
     rows = []
     for n, a in enumerate(APPS, 1):
         cur = ' cur' if a["key"] == current else ''
-        pk = f' data-peek="/assets/apps/{a["key"]}-1.webp"' if peek else ''
         new = '<i>NEW</i>' if a["new"] else ''
         rows.append(
-            f'    <li><a class="row{cur}" href="/{a["key"]}/"{pk}>'
+            f'    <li><a class="row{cur}" href="/{a["key"]}/">'
             f'<span class="no">[{n:02d}]</span><span class="t">{e(a["title"])}</span>'
             f'<span class="badge"><img src="/assets/apps/{a["key"]}.png" alt="" width="27" height="27">'
             f'<span><b>{e(a["ko"])}{new}</b>{e(a["cat"])}</span></span></a></li>')
@@ -143,7 +142,6 @@ def page_home():
 </main>
 <div class="corner l">{links()}</div>
 <div class="corner r">©{YEAR}</div>
-<div class="peek" aria-hidden="true"><img alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
 ''' + tail()
 
 
@@ -176,7 +174,7 @@ def page_app(a):
     </div>
     <section class="p-index" aria-label="다른 앱">
       <ul class="index">
-{index_rows(current=a["key"], peek=False)}
+{index_rows(current=a["key"])}
       </ul>
     </section>
   </div>
@@ -212,7 +210,7 @@ def page_about():
     </div>
     <section class="p-index" aria-label="앱 목록">
       <ul class="index">
-{index_rows(peek=False)}
+{index_rows()}
       </ul>
     </section>
   </div>

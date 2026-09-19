@@ -1,9 +1,8 @@
-/* Ohtt — 눈 따라오기 · 홈 인트로 · 인덱스 미리보기 · 상세 페이지 제목 안무 */
+/* Ohtt — 눈 따라오기 · 홈 인트로 · 상세 페이지 제목 안무 */
 (function(){
   'use strict';
   var root = document.documentElement;
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var canHover = matchMedia('(hover: hover)').matches;
   function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
   function lerp(a, b, t){ return a + (b - a) * t; }
   function ease(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
@@ -56,32 +55,6 @@
       root.classList.remove('intro');
       try{ sessionStorage.setItem('ohtt-intro', '1'); }catch(e){}
     }, 1250);
-  }
-
-  /* ── 인덱스 미리보기 (마우스가 있을 때만) ── */
-  var peek = document.querySelector('.peek');
-  if(peek && canHover){
-    var list = document.querySelector('.home .index');
-    var img = peek.querySelector('img'), gx = 0, gy = 0, cx = 0, cy = 0, lastX = 0, rot = 0, on = false;
-    document.querySelectorAll('.row[data-peek]').forEach(function(row){
-      new Image().src = row.dataset.peek;          // 미리 받아 두기
-      row.addEventListener('pointerenter', function(e){
-        if(img.getAttribute('src') !== row.dataset.peek) img.src = row.dataset.peek;
-        if(!on){ cx = e.clientX; cy = e.clientY; }
-        on = true; peek.classList.add('on');
-      });
-      row.addEventListener('pointerleave', function(){ on = false; peek.classList.remove('on'); });
-    });
-    addEventListener('pointermove', function(e){ gx = e.clientX; gy = e.clientY; }, {passive:true});
-    (function peekTick(){
-      cx += (gx - cx) * .14; cy += (gy - cy) * .14;
-      var v = cx - lastX; lastX = cx; rot += (clamp(v * .9, -9, 9) - rot) * .12;
-      var w = 200, h = w * 1434 / 660;
-      var edge = list ? list.getBoundingClientRect().right + 36 : 0;      // 제목을 가리지 않게 목록 오른쪽 바깥에서
-      var x = clamp(Math.max(cx + 28, edge), 8, innerWidth - w - 8), y = clamp(cy - h * .5, 8, innerHeight - h - 8);
-      peek.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + (reduced ? 0 : rot).toFixed(2) + 'deg)';
-      requestAnimationFrame(peekTick);
-    })();
   }
 
   /* ── 상세 페이지: 큰 제목 → 왼쪽 위 작은 제목 ── */

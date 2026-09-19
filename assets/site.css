@@ -103,14 +103,6 @@ html.intro .index li{opacity:0;transform:translateY(12px)}
 .corner.r{right:var(--pad);font-weight:700}
 .corner a:hover,.foot a:hover{opacity:.5}
 
-/* 인덱스 위에서 커서를 따라다니는 미리보기 */
-.peek{
-  position:fixed;left:0;top:0;z-index:45;width:200px;pointer-events:none;
-  opacity:0;transition:opacity .25s ease;will-change:transform;
-}
-.peek.on{opacity:1}
-.peek img{width:100%;height:auto;aspect-ratio:660/1434;border-radius:10px;border:1px solid var(--line);background:var(--line);box-shadow:0 24px 60px rgba(0,0,0,.18)}
-
 /* ───────── 앱 상세 (기본 = 흐르는 레이아웃, 넓은 화면 + JS면 아래에서 고정형으로) ───────── */
 .p-title{
   margin:0;padding:calc(var(--nav) + 30px) var(--pad) 0;
