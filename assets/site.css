@@ -1,0 +1,196 @@
+/* Ohtt — www.ohttne.com
+   흰 바탕 · 큰 세리프 제목 · 아주 작은 그로테스크 메타 · 번호 붙은 앱 인덱스.
+   페이지는 _build/build.py 가 만든다. */
+
+:root{
+  --bg:#ffffff; --ink:#0b0b0b; --ink-2:#6f6f6f; --mute:#c6c6c6; --line:#e9e9e9;
+  --eye-stroke:#0b0b0b;
+  --serif:"Instrument Serif","Times New Roman",Times,serif;
+  --sans:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  --pad:24px; --nav:56px;
+  --F:clamp(72px,9.5vw,168px);           /* 상세 페이지 큰 제목 */
+  --fs:clamp(44px,6.1vw,96px);           /* 인덱스 행 */
+}
+@media (prefers-color-scheme:dark){
+  :root{ --bg:#0b0b0b; --ink:#f4f4f2; --ink-2:#9b9b9b; --mute:#454545; --line:#222; --eye-stroke:transparent; }
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:13px;line-height:1.5;letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+::selection{background:var(--ink);color:var(--bg)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ───────── 상단 ───────── */
+.nav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav);z-index:50;
+  display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);
+  font-size:12.5px;text-transform:uppercase;letter-spacing:-.015em;
+  color:#fff;mix-blend-mode:difference;      /* 흰 바탕에선 검정, 검은 포스터 위에선 흰색 */
+  pointer-events:none;transition:opacity .6s ease .5s;
+}
+.nav a,.nav span{pointer-events:auto}
+.nav-l{display:flex;gap:12px;align-items:baseline}
+.nav-l b{font-weight:700;letter-spacing:-.02em;font-size:13.5px}
+.nm{text-transform:none}
+.nav-r{display:flex;gap:18px}
+.nav a{transition:opacity .2s}
+.nav a:hover{opacity:.5}
+
+/* 가운데 로고 = 눈 */
+.eyes-link{
+  position:fixed;top:0;left:50%;height:var(--nav);width:64px;margin-left:-32px;z-index:60;
+  display:grid;place-items:center;
+}
+.eyes{display:block;width:46px;height:auto;overflow:visible;transition:transform .95s cubic-bezier(.7,0,.18,1)}
+.eyes .white{fill:#fff;stroke:var(--eye-stroke);stroke-width:2.2}
+.eyes .pupil{fill:#0b0b0b;transform-box:fill-box;transform-origin:center;transition:transform .12s ease-out}
+.eyes .eye{transform-box:fill-box;transform-origin:center;transition:transform .08s ease-out}
+.eyes.blink .eye{transform:scaleY(.06)}
+.eyes.o .pupil{transform:scale(.62)}
+
+/* 첫 방문 인트로: 눈이 화면 가운데서 크게 두리번 → 상단으로 올라가며 인덱스 등장 */
+html.intro .eyes-link .eyes{transform:translateY(calc(50vh - 28px)) scale(5.2)}
+html.intro .nav,html.intro .corner{opacity:0}
+html.intro .index li{opacity:0;transform:translateY(12px)}
+
+/* ───────── 홈 ───────── */
+.home{
+  min-height:100vh;min-height:100svh;display:grid;place-items:center;
+  padding:calc(var(--nav) + 24px) var(--pad) 110px;
+}
+.index{list-style:none;margin:0;padding:0}
+.index li{transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.index li:nth-child(1){transition-delay:.45s}
+.index li:nth-child(2){transition-delay:.53s}
+.index li:nth-child(3){transition-delay:.61s}
+.index li:nth-child(4){transition-delay:.69s}
+.index li:nth-child(5){transition-delay:.77s}
+.index li:nth-child(6){transition-delay:.85s}
+.row{
+  display:inline-flex;align-items:flex-start;
+  font-family:var(--serif);font-size:var(--fs);line-height:1.1;letter-spacing:-.022em;
+  color:var(--ink);transition:color .25s ease;
+}
+.row .no{
+  flex:none;width:2.9em;padding-top:calc(var(--fs) * .17);
+  font-family:var(--sans);font-size:10.5px;letter-spacing:0;line-height:1;
+}
+.row .badge{
+  display:inline-flex;align-items:center;gap:9px;align-self:center;margin-left:.34em;
+  font-family:var(--sans);font-size:10.5px;line-height:1.22;letter-spacing:0;
+  transition:opacity .25s ease;
+}
+.row .badge img{width:27px;height:27px;border-radius:22.37%;box-shadow:0 0 0 .5px rgba(0,0,0,.18)}
+.row .badge b{font-weight:600;display:block}
+.row .badge i{font-style:normal;display:inline-block;margin-left:5px;padding:0 5px;border-radius:99px;background:var(--ink);color:var(--bg);font-size:8.5px;letter-spacing:.06em;line-height:14px;vertical-align:1px}
+@media (hover:hover){
+  .index:hover .row{color:var(--mute)}
+  .index:hover .row .badge{opacity:.3}
+  .index .row:hover{color:var(--ink)}
+  .index .row:hover .badge{opacity:1}
+}
+
+/* 모서리: 링크 · 연도 */
+.corner{position:fixed;bottom:18px;z-index:40;font-size:12.5px;line-height:1.35;transition:opacity .6s ease .7s}
+.corner.l{left:var(--pad);display:flex;flex-direction:column}
+.corner.r{right:var(--pad);font-weight:700}
+.corner a:hover,.foot a:hover{opacity:.5}
+
+/* 인덱스 위에서 커서를 따라다니는 미리보기 */
+.peek{
+  position:fixed;left:0;top:0;z-index:45;width:200px;pointer-events:none;
+  opacity:0;transition:opacity .25s ease;will-change:transform;
+}
+.peek.on{opacity:1}
+.peek img{width:100%;height:auto;aspect-ratio:660/1434;border-radius:10px;border:1px solid var(--line);background:var(--line);box-shadow:0 24px 60px rgba(0,0,0,.18)}
+
+/* ───────── 앱 상세 (기본 = 흐르는 레이아웃, 넓은 화면 + JS면 아래에서 고정형으로) ───────── */
+.p-title{
+  margin:0;padding:calc(var(--nav) + 30px) var(--pad) 0;
+  font-family:var(--serif);font-weight:400;font-size:clamp(60px,18vw,104px);line-height:1;letter-spacing:-.025em;
+}
+.p-side{padding:20px var(--pad) 0;max-width:520px}
+.p-side .ko{margin:0 0 10px;font-size:12.5px;text-transform:uppercase}
+.p-side h2{margin:18px 0 4px;font-size:12.5px;font-weight:400;text-transform:uppercase;letter-spacing:-.01em}
+.p-side p{margin:0;font-size:12.5px;line-height:1.6;word-break:keep-all}
+.p-side .lead{font-size:12.5px}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.pill{
+  display:inline-flex;align-items:center;height:20px;padding:0 10px;border-radius:99px;
+  background:var(--ink);color:var(--bg);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;
+}
+a.pill{height:30px;padding:0 15px;font-size:11px;letter-spacing:.02em;transition:opacity .2s}
+a.pill:hover{opacity:.7}
+a.pill.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+a.pill svg{width:12px;height:12px;fill:currentColor;margin-right:6px;margin-top:-1px}
+
+.p-main{padding:32px var(--pad) 0}
+.poster{margin:0;aspect-ratio:16/9;background:var(--poster,#111);display:grid;place-items:center;overflow:hidden}
+.poster .icon{width:30%;max-width:240px;height:auto;aspect-ratio:1;border-radius:22.37%;box-shadow:0 30px 80px rgba(0,0,0,.32)}
+.poster .eyes{width:36%;max-width:340px;transition:none}
+.cap{display:flex;justify-content:space-between;gap:16px;padding-top:9px;font-size:10.5px;line-height:1.25;text-transform:uppercase}
+.cap .r{display:flex;gap:24px;text-align:left}
+.cap b{font-weight:400;color:var(--ink-2);display:block}
+.shots{
+  display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+  margin:40px calc(var(--pad) * -1) 0;padding:0 var(--pad);
+}
+.shots::-webkit-scrollbar{display:none}
+.shots img{flex:none;width:62vw;max-width:300px;height:auto;aspect-ratio:660/1434;border:1px solid var(--line);border-radius:6px;background:var(--line);scroll-snap-align:center}
+.statement{margin:48px 0 0;font-size:clamp(22px,2.5vw,38px);font-weight:500;letter-spacing:-.035em;line-height:1.32;word-break:keep-all;max-width:20em}
+.prose{margin-top:22px}
+.prose p{margin:0 0 14px;font-size:15px;line-height:1.75;color:var(--ink-2);word-break:keep-all;max-width:36em}
+.p-index{margin-top:96px;padding-bottom:64px;--fs:clamp(36px,4.3vw,68px)}
+.p-index .row{color:var(--mute)}
+.p-index .row .badge{opacity:.3}
+.p-index .row.cur,.p-index .row.cur .badge{color:var(--ink);opacity:1}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;padding:0 var(--pad) 18px;font-size:12.5px;line-height:1.35}
+.foot .l{display:flex;flex-direction:column}
+.foot .r{font-weight:700}
+
+/* 넓은 화면: 제목이 스크롤에 따라 왼쪽 위로 줄어들며 고정, 왼쪽 칼럼이 나타나고 오른쪽이 흐른다 */
+@media (min-width:960px){
+  html.js .p-title{
+    position:fixed;left:0;top:0;z-index:20;padding:0;font-size:var(--F);white-space:nowrap;
+    transform-origin:0 0;will-change:transform;pointer-events:none;
+    transform:translate(27vw,27vh);
+  }
+  html.js .p-side{
+    position:fixed;left:var(--pad);top:132px;width:min(300px,calc(37.5vw - 56px));z-index:15;padding:0;
+    max-height:calc(100vh - 132px - 78px);overflow:auto;scrollbar-width:none;opacity:0;
+  }
+  html.js .p-side::-webkit-scrollbar{display:none}
+  html.js .p-main{margin-left:37.5vw;padding:76vh var(--pad) 0 0}
+  html.js .poster .icon{width:21%}
+  html.js .shots{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible;margin:64px 0 0;padding:0}
+  html.js .shots img{width:100%;max-width:none}
+  html.js .p-index{margin-top:24vh;padding-bottom:22vh}
+  html.js .foot{padding-left:var(--pad)}
+}
+
+/* 좁은 화면: 본문이 상단 글자 밑으로 지나가며 겹치지 않게 바탕 띠를 깐다 */
+@media (max-width:959px){
+  body::before{content:"";position:fixed;top:0;left:0;right:0;height:calc(var(--nav) + 10px);z-index:45;pointer-events:none;
+    background:linear-gradient(var(--bg) 72%,transparent)}
+}
+
+@media (max-width:640px){
+  :root{--pad:16px;--fs:clamp(40px,12.5vw,64px)}
+  .nav-l span{display:none}
+  .row .badge span{display:none}          /* 좁으면 아이콘만 */
+  .row .badge{margin-left:.28em}
+  .row .no{width:2.4em}
+  .cap .r{gap:14px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .eyes,.index li,.nav,.corner{transition:none}
+  html.intro .eyes-link .eyes{transform:none}
+}

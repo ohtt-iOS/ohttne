@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="ko" class="nojs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ohttne — 취미가 오래 가도록, 작은 앱을 만듭니다</title>
+<meta name="description" content="1인 개발 스튜디오 ohttne. 독서 기록 앱 시오리, 밴드 합주 연습 앱 포밴드, 사진 정리 앱 아사진정리해야되는데를 만듭니다.">
+<meta property="og:title" content="ohttne">
+<meta property="og:description" content="취미가 오래 가도록, 작은 앱을 만듭니다. 시오리 · 포밴드 · 아사진정리해야되는데">
+<meta property="og:image" content="https://www.ohttne.com/assets/og.png">
+<meta property="og:url" content="https://www.ohttne.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.ohttne.com/">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#efe9e2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14151d" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  /* ───────────────────────── 토큰 ───────────────────────── */
+  :root{
+    --wall:#efe9e2;
+    --blob1:#ffd3bf; --blob2:#cddfff; --blob3:#fff0b8;
+    --glass:rgba(255,255,255,.58);
+    --glass-strong:rgba(255,255,255,.78);
+    --win:#ffffff;
+    --win-edge:rgba(0,0,0,.14);
+    --titlebar:linear-gradient(#f6f6f7,#ececee);
+    --sidebar:rgba(244,244,246,.92);
+    --ink:#1d1d1f; --ink-2:#6e6e73; --ink-3:#a1a1a6;
+    --line:rgba(0,0,0,.08); --line-2:rgba(0,0,0,.14);
+    --fill:rgba(0,0,0,.045); --fill-2:rgba(0,0,0,.08);
+    --sel:#2f6df6;
+    --label:#1d1d1f; --label-halo:rgba(255,255,255,.75);
+    --shadow-win:0 24px 70px rgba(0,0,0,.24),0 2px 6px rgba(0,0,0,.08);
+    --shadow-win-blur:0 12px 34px rgba(0,0,0,.14),0 1px 3px rgba(0,0,0,.06);
+    --sticky:#fff59a; --sticky-ink:#4a4210;
+    --light-off:#d5d5d8;
+    --f-body:#ebe3d3; --f-body2:#d8ceba; --f-bezel:#cdc2ab; --f-screen:#fbfaf6; --f-ink:#232326; --f-cheek:#f3b1ad;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard Variable",Pretendard,"Noto Sans KR","Segoe UI",Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --wall:#14151d;
+      --blob1:#3d3060; --blob2:#1d3a4c; --blob3:#4a2f44;
+      --glass:rgba(24,24,30,.55);
+      --glass-strong:rgba(28,28,34,.8);
+      --win:#1e1f25;
+      --win-edge:rgba(255,255,255,.14);
+      --titlebar:linear-gradient(#2a2b31,#232429);
+      --sidebar:rgba(36,37,44,.92);
+      --ink:#f2f2f5; --ink-2:#a3a3ab; --ink-3:#6b6b73;
+      --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
+      --fill:rgba(255,255,255,.06); --fill-2:rgba(255,255,255,.1);
+      --sel:#3b7bff;
+      --label:#f2f2f5; --label-halo:rgba(0,0,0,.6);
+      --shadow-win:0 28px 80px rgba(0,0,0,.6),0 2px 6px rgba(0,0,0,.3);
+      --shadow-win-blur:0 14px 40px rgba(0,0,0,.4),0 1px 3px rgba(0,0,0,.2);
+      --sticky:#f1e27a; --sticky-ink:#3d3608;
+      --light-off:#4b4b52;
+      --f-body:#cfc6b1; --f-body2:#b8ad95; --f-bezel:#a99e86; --f-screen:#f7f5ee; --f-ink:#1b1b1e; --f-cheek:#eaa39e;
+    }
+  }
+  :root[data-theme="dark"]{
+    --wall:#14151d;
+    --blob1:#3d3060; --blob2:#1d3a4c; --blob3:#4a2f44;
+    --glass:rgba(24,24,30,.55);
+    --glass-strong:rgba(28,28,34,.8);
+    --win:#1e1f25;
+    --win-edge:rgba(255,255,255,.14);
+    --titlebar:linear-gradient(#2a2b31,#232429);
+    --sidebar:rgba(36,37,44,.92);
+    --ink:#f2f2f5; --ink-2:#a3a3ab; --ink-3:#6b6b73;
+    --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
+    --fill:rgba(255,255,255,.06); --fill-2:rgba(255,255,255,.1);
+    --sel:#3b7bff;
+    --label:#f2f2f5; --label-halo:rgba(0,0,0,.6);
+    --shadow-win:0 28px 80px rgba(0,0,0,.6),0 2px 6px rgba(0,0,0,.3);
+    --shadow-win-blur:0 14px 40px rgba(0,0,0,.4),0 1px 3px rgba(0,0,0,.2);
+    --sticky:#f1e27a; --sticky-ink:#3d3608;
+    --light-off:#4b4b52;
+    --f-body:#cfc6b1; --f-body2:#b8ad95; --f-bezel:#a99e86; --f-screen:#f7f5ee; --f-ink:#1b1b1e; --f-cheek:#eaa39e;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;min-height:100vh;background:var(--wall);color:var(--ink);
+    font-family:var(--sans);font-size:14px;line-height:1.6;letter-spacing:-.01em;
+    -webkit-font-smoothing:antialiased;overflow:hidden;
+  }
+  a{color:inherit}
+  button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+  img{display:block}
+  ::selection{background:var(--sel);color:#fff}
+  [hidden]{display:none!important}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* ───────────────────────── 배경화면 ───────────────────────── */
+  .wall{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--wall)}
+  .wall i{
+    position:absolute;border-radius:50%;filter:blur(70px);opacity:.9;
+    will-change:transform;
+  }
+  .wall .b1{width:60vmax;height:60vmax;left:-14vmax;top:-18vmax;background:var(--blob1);animation:drift1 26s ease-in-out infinite alternate}
+  .wall .b2{width:52vmax;height:52vmax;right:-14vmax;top:-6vmax;background:var(--blob2);animation:drift2 31s ease-in-out infinite alternate}
+  .wall .b3{width:56vmax;height:44vmax;left:22vmax;bottom:-22vmax;background:var(--blob3);animation:drift3 29s ease-in-out infinite alternate}
+  @keyframes drift1{to{transform:translate(6vmax,5vmax) scale(1.06)}}
+  @keyframes drift2{to{transform:translate(-5vmax,7vmax) scale(.96)}}
+  @keyframes drift3{to{transform:translate(-8vmax,-4vmax) scale(1.05)}}
+
+  /* ───────────────────────── 메뉴바 ───────────────────────── */
+  .menubar{
+    position:fixed;top:0;left:0;right:0;height:30px;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 10px 0 8px;
+    background:var(--glass);-webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);
+    border-bottom:1px solid var(--line);font-size:13px;user-select:none;-webkit-user-select:none;
+  }
+  .mb-left,.mb-right{display:flex;align-items:center;gap:2px;height:100%}
+  .mb-item{
+    display:inline-flex;align-items:center;gap:7px;height:22px;padding:0 9px;border-radius:5px;
+    text-decoration:none;white-space:nowrap;color:var(--ink);
+  }
+  .mb-item:hover,.mb-item.open{background:var(--fill-2)}
+  .mb-item.open{background:var(--sel);color:#fff}
+  .mb-logo b{font-weight:700;letter-spacing:-.02em}
+  .mb-logo .face{width:22px;height:22px}
+  .mb-clock{font-variant-numeric:tabular-nums;padding:0 6px;color:var(--ink)}
+  .mb-theme{width:26px;height:22px;justify-content:center;padding:0}
+  .mb-theme svg{width:15px;height:15px}
+  .mb-theme .moon{display:none}
+  :root[data-theme="dark"] .mb-theme .sun{display:none}
+  :root[data-theme="dark"] .mb-theme .moon{display:block}
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]) .mb-theme .sun{display:none}
+    :root:not([data-theme="light"]) .mb-theme .moon{display:block}
+  }
+
+  .menu{
+    position:fixed;top:32px;left:8px;min-width:220px;z-index:1100;
+    padding:5px;border-radius:10px;
+    background:var(--glass-strong);-webkit-backdrop-filter:saturate(180%) blur(28px);backdrop-filter:saturate(180%) blur(28px);
+    border:1px solid var(--line-2);box-shadow:0 12px 40px rgba(0,0,0,.22);
+    animation:menuIn .12s ease-out;
+  }
+  @keyframes menuIn{from{opacity:0;transform:translateY(-3px)}}
+  .menu .mi{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;
+    padding:5px 10px;border-radius:6px;font-size:13px;text-decoration:none;text-align:left;color:var(--ink);
+  }
+  .menu .mi:hover{background:var(--sel);color:#fff}
+  .menu .mi:hover small{color:rgba(255,255,255,.8)}
+  .menu .mi small{color:var(--ink-3);font-size:11.5px;font-family:var(--mono)}
+  .menu .mi img{width:18px;height:18px;border-radius:5px;margin-right:2px}
+  .menu .mi-l{display:flex;align-items:center;gap:8px}
+  .menu hr{border:0;border-top:1px solid var(--line-2);margin:5px 8px}
+
+  /* ───────────────────────── 바탕화면 ───────────────────────── */
+  .desktop{position:fixed;inset:30px 0 0 0;z-index:1;overflow:hidden}
+
+  /* 바탕화면 아이콘 */
+  .dicons{
+    position:absolute;top:16px;right:14px;display:flex;flex-direction:column;gap:10px;align-items:stretch;
+    z-index:2;
+  }
+  .dicon{
+    width:96px;display:flex;flex-direction:column;align-items:center;gap:5px;
+    padding:6px 4px 4px;border-radius:8px;text-decoration:none;
+  }
+  .dicon img,.dicon svg{width:56px;height:56px}
+  .dicon img{border-radius:22.37%;filter:drop-shadow(0 4px 8px rgba(0,0,0,.18))}
+  .dicon span{
+    font-size:12px;line-height:1.25;text-align:center;color:var(--label);
+    text-shadow:0 0 6px var(--label-halo),0 0 2px var(--label-halo);
+    padding:1px 5px;border-radius:4px;max-width:100%;
+  }
+  .dicon:hover img,.dicon:hover svg{transform:translateY(-1px)}
+  .dicon.sel img,.dicon.sel svg{filter:brightness(.82) drop-shadow(0 4px 8px rgba(0,0,0,.18))}
+  .dicon.sel span{background:var(--sel);color:#fff;text-shadow:none}
+
+  /* 위젯 */
+  .widgets{position:absolute;left:22px;bottom:118px;display:flex;flex-direction:column;gap:14px;z-index:2}
+  .widget{
+    width:170px;border-radius:20px;background:var(--glass-strong);
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.1);padding:14px 16px;
+  }
+  .w-date .wd-dow{font-size:12px;font-weight:700;color:#e5484d;letter-spacing:.02em}
+  .w-date .wd-day{font-size:44px;font-weight:600;line-height:1;margin:2px 0 6px;letter-spacing:-.04em}
+  .w-date .wd-sub{font-size:12px;color:var(--ink-2);display:flex;justify-content:space-between}
+  .w-date .wd-sub b{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+  .w-sticky{
+    background:var(--sticky);color:var(--sticky-ink);border:0;border-radius:4px;
+    box-shadow:0 10px 24px rgba(0,0,0,.14),0 1px 0 rgba(0,0,0,.05);transform:rotate(-1.6deg);
+    font-size:13px;line-height:1.55;padding:14px 16px 16px;
+  }
+  .w-sticky small{display:block;font-size:11px;opacity:.6;margin-bottom:8px;letter-spacing:.06em}
+  .w-sticky p{margin:0}
+  .w-sticky em{font-style:normal;display:block;margin-top:8px;opacity:.7}
+
+  /* ───────────────────────── 창 ───────────────────────── */
+  .win{
+    position:absolute;left:0;top:0;width:600px;height:440px;
+    max-width:calc(100vw - 16px);
+    background:var(--win);color:var(--ink);border-radius:12px;
+    box-shadow:var(--shadow-win),0 0 0 .5px var(--win-edge);
+    display:flex;flex-direction:column;overflow:hidden;
+    transform-origin:center;
+  }
+  .win.blur{box-shadow:var(--shadow-win-blur),0 0 0 .5px var(--win-edge)}
+  .win.dragging{transition:none!important;cursor:grabbing}
+  .win.opening{animation:winIn .26s cubic-bezier(.2,.8,.2,1)}
+  .win.closing{animation:winOut .16s ease-in forwards}
+  @keyframes winIn{from{opacity:0;transform:scale(.94) translateY(8px)}}
+  @keyframes winOut{to{opacity:0;transform:scale(.96)}}
+  .win.max{left:10px!important;top:10px!important;width:calc(100% - 20px)!important;height:calc(100% - 118px)!important;transition:left .25s,top .25s,width .25s,height .25s}
+
+  .titlebar{
+    position:relative;flex:none;height:40px;display:flex;align-items:center;justify-content:center;
+    background:var(--titlebar);border-bottom:1px solid var(--line);
+    user-select:none;-webkit-user-select:none;touch-action:none;
+  }
+  .win.blur .titlebar{opacity:.9}
+  .titlebar .title{margin:0;font-size:13px;font-weight:600;color:var(--ink);letter-spacing:-.01em;pointer-events:none}
+  .win.blur .titlebar .title{color:var(--ink-3)}
+  .titlebar .title img{width:16px;height:16px;border-radius:4px;display:inline-block;vertical-align:-3px;margin-right:6px}
+  .lights{position:absolute;left:12px;top:0;bottom:0;display:flex;gap:8px;align-items:center}
+  .l{width:12px;height:12px;border-radius:50%;position:relative;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.18)}
+  .l.close{background:#ff5f57}.l.min{background:#febc2e}.l.max{background:#28c840}
+  .win.blur .l{background:var(--light-off)}
+  .l::before{content:"";position:absolute;inset:0;opacity:0;background:center/8px 8px no-repeat}
+  .l.close::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.6 1.6l4.8 4.8m0-4.8L1.6 6.4' stroke='%23000' stroke-opacity='.62' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E")}
+  .l.min::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.3 4h5.4' stroke='%23000' stroke-opacity='.62' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E")}
+  .l.max::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.4 6.6V3.2l3.4 3.4zM6.6 1.4v3.4L3.2 1.4z' fill='%23000' fill-opacity='.62'/%3E%3C/svg%3E")}
+  .lights:hover .l::before{opacity:1}
+  .content{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
+
+  /* 버튼 */
+  .btn{
+    display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px;border-radius:9px;
+    font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;
+    background:var(--fill);color:var(--ink);border:1px solid var(--line);transition:background .15s,transform .15s;
+  }
+  .btn:hover{background:var(--fill-2)}
+  .btn:active{transform:scale(.98)}
+  .btn.primary{background:var(--ink);color:var(--win);border-color:transparent}
+  .btn.primary:hover{opacity:.88;background:var(--ink)}
+  .btn svg{width:14px;height:14px;fill:currentColor}
+  .btn.dis{opacity:.55;pointer-events:none}
+
+  /* ── 소개 창 ── */
+  .about{display:flex;gap:28px;padding:30px 32px 26px;align-items:flex-start;min-height:100%}
+  .about-face{flex:none;width:196px;padding-top:8px}
+  .about-face .face{width:100%;height:auto;filter:drop-shadow(0 12px 22px rgba(0,0,0,.14))}
+  .about-text{flex:1;min-width:0}
+  .kicker{margin:0 0 6px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-3)}
+  .about h1{margin:0 0 10px;font-size:34px;font-weight:700;letter-spacing:-.04em;line-height:1}
+  .about .lead{margin:0 0 12px;font-size:19px;font-weight:600;line-height:1.4;letter-spacing:-.02em}
+  .about .desc{margin:0 0 18px;color:var(--ink-2);font-size:13.5px;line-height:1.7;max-width:34em}
+  .specs{margin:0 0 20px;padding:0;display:grid;grid-template-columns:max-content 1fr;gap:5px 14px;font-size:13px}
+  .specs dt{color:var(--ink-2);font-weight:500}
+  .specs dd{margin:0}
+  .specs dd a{text-decoration:none;border-bottom:1px solid var(--line-2)}
+  .btns{display:flex;gap:8px;flex-wrap:wrap}
+  .fine{margin:22px 0 0;font-size:11.5px;color:var(--ink-3)}
+  .fine a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line-2)}
+
+  /* ── Finder 창 ── */
+  .finder{display:flex;height:100%;min-height:0}
+  .fsb{
+    flex:none;width:168px;padding:10px 8px;background:var(--sidebar);border-right:1px solid var(--line);
+    display:flex;flex-direction:column;gap:2px;font-size:12.5px;overflow:auto;
+  }
+  .fsb-h{margin:8px 0 4px 10px;font-size:11px;font-weight:600;color:var(--ink-3)}
+  .fsb-h:first-child{margin-top:2px}
+  .fsb-i{display:flex;align-items:center;gap:8px;width:100%;padding:5px 9px;border-radius:6px;text-align:left;text-decoration:none;color:var(--ink)}
+  .fsb-i svg{width:16px;height:16px;flex:none;color:var(--sel)}
+  .fsb-i:hover{background:var(--fill)}
+  .fsb-i.on{background:var(--fill-2)}
+  .ftag{display:flex;align-items:center;gap:9px;padding:4px 10px;color:var(--ink-2)}
+  .ftag i{width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 .5px rgba(0,0,0,.15)}
+  .fmain{flex:1;min-width:0;display:flex;flex-direction:column}
+  .ftool{flex:none;height:42px;display:flex;align-items:center;gap:10px;padding:0 14px;border-bottom:1px solid var(--line);font-size:13px}
+  .ftool .fnav{display:flex;gap:2px;color:var(--ink-3)}
+  .ftool .fnav b{display:inline-grid;place-items:center;width:24px;height:22px;border-radius:5px;font-weight:400;font-size:16px}
+  .ftool .fnav b:first-child{color:var(--ink-2)}
+  .ftool .fpath{font-weight:600;flex:1;display:flex;align-items:center;gap:6px}
+  .ftool .fpath svg{width:16px;height:14px}
+  .ftool .fview{display:flex;gap:2px;background:var(--fill);border-radius:6px;padding:2px}
+  .ftool .fview i{display:inline-grid;place-items:center;width:26px;height:20px;border-radius:5px;color:var(--ink-3)}
+  .ftool .fview i.on{background:var(--win);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+  .ftool .fview svg{width:13px;height:13px}
+  .fpane{flex:1;min-height:0;overflow:auto;padding:18px 16px}
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px 6px}
+  .fitem{display:flex;flex-direction:column;align-items:center;gap:7px;padding:12px 6px 10px;border-radius:10px;text-align:center}
+  .fitem img,.fitem svg{width:64px;height:64px}
+  .fitem img{border-radius:22.37%;box-shadow:0 6px 14px rgba(0,0,0,.14);transition:transform .2s cubic-bezier(.3,1.4,.5,1)}
+  .fitem:hover{background:var(--fill)}
+  .fitem:hover img{transform:translateY(-3px) scale(1.03)}
+  .fitem b{font-size:12.5px;font-weight:600;line-height:1.3;margin-top:2px}
+  .fitem small{font-size:11.5px;color:var(--ink-2);line-height:1.3}
+  .fitem .new{position:absolute}
+  .fitem{position:relative}
+  .badge{
+    position:absolute;top:8px;right:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;
+    background:#d9ff4b;color:#1b2400;padding:2px 6px;border-radius:99px;font-weight:700;
+  }
+  .flist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+  .flist li{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:9px}
+  .flist li:hover{background:var(--fill)}
+  .flist img{width:40px;height:40px;border-radius:22.37%;box-shadow:0 3px 8px rgba(0,0,0,.12)}
+  .flist b{display:block;font-size:13px}
+  .flist small{color:var(--ink-2);font-size:12px}
+  .flist .pill{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-2);border:1px solid var(--line-2);border-radius:99px;padding:2px 8px;white-space:nowrap}
+  .fpane .fnote{margin:14px 4px 0;font-size:12px;color:var(--ink-3)}
+  .fstatus{flex:none;height:24px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-2);display:flex;align-items:center;justify-content:center;background:var(--sidebar)}
+
+  /* ── 앱 창 ── */
+  .app{padding:24px 26px 20px;--accent:#ddd}
+  .app-head{display:grid;grid-template-columns:96px 1fr auto;gap:20px 22px;align-items:start;margin-bottom:20px}
+  .app-icon{width:96px;height:96px;border-radius:22.37%;box-shadow:0 10px 26px rgba(0,0,0,.18)}
+  .app-id .kicker{margin-bottom:5px}
+  .app-id h3{margin:0 0 3px;font-size:24px;font-weight:700;letter-spacing:-.03em;line-height:1.15;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+  .app-id h3 small{font-size:13px;font-weight:500;color:var(--ink-2);letter-spacing:0}
+  .app-id .tag{margin:0 0 10px;font-size:14.5px;color:var(--ink);font-weight:500}
+  .chips{display:flex;flex-wrap:wrap;gap:5px}
+  .chips span{font-size:11.5px;color:var(--ink-2);background:var(--fill);border-radius:6px;padding:3px 8px;white-space:nowrap}
+  .chips span.hi{background:var(--accent);color:#111;font-weight:600}
+  .app-cta{display:flex;flex-direction:column;gap:8px;align-items:stretch;min-width:170px}
+  .app-cta .btn{justify-content:center}
+  .gallery{
+    display:flex;gap:10px;overflow-x:auto;padding:4px 2px 12px;margin:0 -4px;
+    scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent;
+  }
+  .gallery img{
+    flex:none;width:186px;aspect-ratio:660/1434;height:auto;border-radius:14px;
+    border:1px solid var(--line);scroll-snap-align:start;background:var(--fill);
+  }
+  .feats{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 18px}
+  .feats li{font-size:13px;color:var(--ink-2);line-height:1.55;padding-left:12px;position:relative}
+  .feats li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:inset 0 0 0 .5px rgba(0,0,0,.15)}
+  .feats b{display:block;color:var(--ink);font-weight:600;margin-bottom:1px}
+  .app-foot{margin-top:20px;padding-top:12px;border-top:1px solid var(--line);display:flex;gap:16px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);flex-wrap:wrap}
+
+  /* ── 휴지통 창 ── */
+  .trash-c{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:24px;gap:6px}
+  .trash-c svg{width:64px;height:64px;margin-bottom:8px}
+  .trash-c b{font-size:15px}
+  .trash-c p{margin:0;color:var(--ink-2);font-size:13px}
+  .trash-c button{margin-top:10px}
+
+  /* ───────────────────────── 독 ───────────────────────── */
+  .dock{
+    position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:900;
+    display:flex;align-items:flex-end;gap:5px;height:70px;padding:0 8px;
+    background:var(--glass);-webkit-backdrop-filter:saturate(180%) blur(24px);backdrop-filter:saturate(180%) blur(24px);
+    border:1px solid var(--line-2);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.18);
+  }
+  .dk{
+    position:relative;width:52px;height:52px;margin-bottom:9px;flex:none;
+    transform-origin:50% 100%;transition:transform .12s ease-out,margin .12s ease-out;
+    display:grid;place-items:center;text-decoration:none;
+  }
+  .dk img,.dk svg{width:52px;height:52px}
+  .dk img{border-radius:22.37%;box-shadow:0 4px 10px rgba(0,0,0,.18)}
+  .dk::after{
+    content:"";position:absolute;bottom:-7px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;
+    background:var(--ink);opacity:0;transition:opacity .2s;
+  }
+  .dk.on::after{opacity:.75}
+  .dk::before{
+    content:attr(data-label);position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(4px);
+    padding:4px 10px;border-radius:7px;font-size:12px;white-space:nowrap;color:var(--ink);
+    background:var(--glass-strong);border:1px solid var(--line-2);box-shadow:0 6px 18px rgba(0,0,0,.14);
+    opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;
+  }
+  .dk:hover::before{opacity:1;transform:translateX(-50%) translateY(0)}
+  .dk-sep{width:1px;height:44px;margin:0 5px 13px;background:var(--line-2)}
+  .dk .face{width:50px;height:50px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.16))}
+
+  /* ───────────────────────── 캐릭터 ───────────────────────── */
+  .face{display:block;overflow:visible}
+  .face .pupil{transform-box:fill-box;transform-origin:center;transition:transform .09s ease-out}
+  .face.blink .pupil{transform:scaleY(.08)}
+  .face .pupil-pos{will-change:transform}
+  .face .mouth-o{display:none}
+  .face.o .mouth{display:none}
+  .face.o .mouth-o{display:block}
+
+  /* ───────────────────────── 모바일: 창 쌓기 ───────────────────────── */
+  @media (max-width:760px){
+    body{overflow:auto}
+    .desktop{position:static;inset:auto;overflow:visible;padding:44px 10px 104px;min-height:100vh}
+    .win,.win.max{
+      position:relative!important;left:auto!important;top:auto!important;width:auto!important;height:auto!important;
+      max-width:none;margin:0 0 14px;box-shadow:var(--shadow-win-blur),0 0 0 .5px var(--win-edge);transform:none!important;opacity:1!important;
+    }
+    .content{overflow:visible}
+    .l.min,.l.max{display:none}
+    .dicons,.widgets{display:none}
+    .mb-hide-sm{display:none}
+    .about{flex-direction:column;gap:18px;padding:22px 20px 20px}
+    .about-face{width:150px;align-self:center}
+    .about h1{font-size:30px}
+    .finder{flex-direction:column}
+    .fsb{width:auto;flex-direction:row;flex-wrap:wrap;gap:4px;border-right:0;border-bottom:1px solid var(--line);padding:8px}
+    .fsb-h{display:none}
+    .ftag{display:none}
+    .fpane{max-height:none}
+    .app{padding:18px 16px 16px}
+    .app-head{grid-template-columns:72px 1fr;gap:14px 16px}
+    .app-icon{width:72px;height:72px}
+    .app-cta{grid-column:1 / -1;flex-direction:row;flex-wrap:wrap}
+    .app-cta .btn{flex:1}
+    .gallery img{width:150px}
+    .dock{bottom:10px;height:62px;gap:2px;padding:0 6px;border-radius:20px;max-width:calc(100vw - 20px)}
+    .dk{width:42px;height:42px;margin-bottom:8px}
+    .dk img,.dk svg{width:42px;height:42px}
+    .dk .face{width:40px;height:40px}
+    .dk-sep{height:36px;margin:0 3px 11px}
+    .dk-sep:last-of-type,.dk[data-open="trash"]{display:none}
+    .dk::before{display:none}
+    .win{scroll-margin-top:40px}
+  }
+  @media (max-width:1199px){ .widgets{display:none} }
+  html.nojs .win{display:flex!important}
+  html.nojs .desktop{position:static;padding:44px 10px 104px}
+  html.nojs .win{position:relative!important;width:auto!important;height:auto!important;margin:0 0 14px}
+
+  @media (prefers-reduced-motion:reduce){
+    .wall i{animation:none}
+    .win.opening,.win.closing{animation:none}
+    .dk{transition:none}
+    .face .pupil{transition:none}
+  }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.remove('nojs');document.documentElement.classList.add('js');try{var t=localStorage.getItem('ohttne-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+
+<div class="wall" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+
+<!-- 캐릭터 원본 (메뉴바·독에 복제) -->
+<template id="face-tpl">
+  <svg class="face" viewBox="0 0 200 184" aria-hidden="true" focusable="false">
+    <path d="M66 162h68l14 18H52z" fill="var(--f-body2)"/>
+    <rect x="12" y="4" width="176" height="162" rx="30" fill="var(--f-body)"/>
+    <rect x="30" y="22" width="140" height="106" rx="18" fill="var(--f-bezel)"/>
+    <rect x="38" y="30" width="124" height="90" rx="13" fill="var(--f-screen)"/>
+    <g class="eye" transform="translate(74 73)"><circle r="14" fill="none"/><g class="pupil-pos"><ellipse class="pupil" rx="7" ry="8.5" fill="var(--f-ink)"/></g></g>
+    <g class="eye" transform="translate(126 73)"><circle r="14" fill="none"/><g class="pupil-pos"><ellipse class="pupil" rx="7" ry="8.5" fill="var(--f-ink)"/></g></g>
+    <circle cx="58" cy="90" r="5.5" fill="var(--f-cheek)" opacity=".85"/>
+    <circle cx="142" cy="90" r="5.5" fill="var(--f-cheek)" opacity=".85"/>
+    <path class="mouth" d="M91 92q9 8 18 0" stroke="var(--f-ink)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse class="mouth-o" cx="100" cy="95" rx="4.5" ry="5.5" fill="var(--f-ink)"/>
+    <rect x="72" y="140" width="56" height="6" rx="3" fill="var(--f-bezel)"/>
+    <rect x="38" y="139" width="8" height="8" rx="2.5" fill="var(--f-cheek)"/>
+    <circle cx="160" cy="143" r="3.5" fill="#6fd39a"/>
+  </svg>
+</template>
+
+<!-- ───────── 메뉴바 ───────── -->
+<header class="menubar">
+  <div class="mb-left">
+    <button class="mb-item mb-logo" data-menu="m-ohttne" aria-haspopup="true" aria-expanded="false"><span class="face-slot"></span><b>ohttne</b></button>
+    <button class="mb-item" data-menu="m-apps" aria-haspopup="true" aria-expanded="false">앱</button>
+    <button class="mb-item mb-hide-sm" data-menu="m-win" aria-haspopup="true" aria-expanded="false">창</button>
+    <a class="mb-item mb-hide-sm" href="mailto:ohttangent@gmail.com">연락</a>
+  </div>
+  <div class="mb-right">
+    <button class="mb-item mb-theme" aria-label="라이트/다크 전환" title="라이트/다크 전환">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M5.3 18.7L7 17M17 7l1.7-1.7"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg>
+    </button>
+    <span class="mb-clock" id="clock" aria-live="off"></span>
+  </div>
+
+  <div class="menu" id="m-ohttne" role="menu" hidden>
+    <button class="mi" role="menuitem" data-open="about"><span>ohttne에 관하여</span></button>
+    <hr>
+    <a class="mi" role="menuitem" href="/siori/"><span>시오리 소개 페이지</span><small>↗</small></a>
+    <a class="mi" role="menuitem" href="/privacy.html"><span>개인정보 처리방침</span></a>
+    <hr>
+    <a class="mi" role="menuitem" href="mailto:ohttangent@gmail.com"><span>메일 보내기</span><small>ohttangent@gmail.com</small></a>
+  </div>
+  <div class="menu" id="m-apps" role="menu" hidden>
+    <button class="mi" role="menuitem" data-open="apps"><span class="mi-l">모든 앱</span><small>3</small></button>
+    <hr>
+    <button class="mi" role="menuitem" data-open="siori"><span class="mi-l"><img src="/assets/apps/siori.png" alt="">시오리</span><small>독서 기록</small></button>
+    <button class="mi" role="menuitem" data-open="forband"><span class="mi-l"><img src="/assets/apps/forband.png" alt="">포밴드</span><small>밴드 연습</small></button>
+    <button class="mi" role="menuitem" data-open="photodesk"><span class="mi-l"><img src="/assets/apps/photodesk.png" alt="">아사진정리해야되는데</span><small>사진 정리</small></button>
+    <hr>
+    <button class="mi" role="menuitem" data-open="apps" data-pane="wip"><span>만드는 중…</span><small>2</small></button>
+  </div>
+  <div class="menu" id="m-win" role="menu" hidden>
+    <button class="mi" role="menuitem" data-action="arrange"><span>창 정리</span></button>
+    <button class="mi" role="menuitem" data-action="openAll"><span>모두 열기</span></button>
+    <button class="mi" role="menuitem" data-action="closeAll"><span>모두 닫기</span></button>
+  </div>
+</header>
+
+<!-- ───────── 바탕화면 ───────── -->
+<main class="desktop" id="desktop">
+
+  <nav class="dicons" aria-label="바탕화면 아이콘">
+    <button class="dicon" data-open="siori"><img src="/assets/apps/siori.png" alt=""><span>시오리</span></button>
+    <button class="dicon" data-open="forband"><img src="/assets/apps/forband.png" alt=""><span>포밴드</span></button>
+    <button class="dicon" data-open="photodesk"><img src="/assets/apps/photodesk.png" alt=""><span>아사진정리<br>해야되는데</span></button>
+    <button class="dicon" data-open="apps" data-pane="wip">
+      <svg viewBox="0 0 64 56" aria-hidden="true"><path d="M4 12a6 6 0 0 1 6-6h15l6 6h23a6 6 0 0 1 6 6v26a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6z" fill="#7fb6ef"/><path d="M4 20h56v24a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6z" fill="#a9d1fa"/></svg>
+      <span>만드는 중</span>
+    </button>
+    <a class="dicon" href="/privacy.html">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 4h24l14 14v42H14z" fill="#fff" stroke="rgba(0,0,0,.18)"/><path d="M38 4v14h14" fill="#e6e6ea" stroke="rgba(0,0,0,.18)"/><path d="M22 30h22M22 38h22M22 46h14" stroke="#b8b8bf" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <span>개인정보<br>처리방침</span>
+    </a>
+  </nav>
+
+  <aside class="widgets" aria-hidden="true">
+    <div class="widget w-date">
+      <div class="wd-dow" id="wd-dow">—</div>
+      <div class="wd-day" id="wd-day">—</div>
+      <div class="wd-sub"><span id="wd-month">—</span><b id="wd-time">—</b></div>
+    </div>
+    <div class="widget w-sticky">
+      <small>MEMO</small>
+      <p>일단 만들고, 다듬는 건 매일 조금씩.<br>그러다 보면 어느새 App Store에.</p>
+      <em>— ohttne</em>
+    </div>
+  </aside>
+
+  <!-- ── 소개 창 ── -->
+  <section class="win" data-win="about" data-w="640" data-h="516" aria-labelledby="t-about" hidden>
+    <div class="titlebar">
+      <div class="lights"><button class="l close" aria-label="닫기"></button><button class="l min" aria-label="최소화"></button><button class="l max" aria-label="크게"></button></div>
+      <h2 class="title" id="t-about">ohttne에 관하여</h2>
+    </div>
+    <div class="content about">
+      <div class="about-face">
+        <svg class="face" viewBox="0 0 200 184" aria-hidden="true" focusable="false">
+          <path d="M66 162h68l14 18H52z" fill="var(--f-body2)"/>
+          <rect x="12" y="4" width="176" height="162" rx="30" fill="var(--f-body)"/>
+          <rect x="30" y="22" width="140" height="106" rx="18" fill="var(--f-bezel)"/>
+          <rect x="38" y="30" width="124" height="90" rx="13" fill="var(--f-screen)"/>
+          <g class="eye" transform="translate(74 73)"><circle r="14" fill="none"/><g class="pupil-pos"><ellipse class="pupil" rx="7" ry="8.5" fill="var(--f-ink)"/></g></g>
+          <g class="eye" transform="translate(126 73)"><circle r="14" fill="none"/><g class="pupil-pos"><ellipse class="pupil" rx="7" ry="8.5" fill="var(--f-ink)"/></g></g>
+          <circle cx="58" cy="90" r="5.5" fill="var(--f-cheek)" opacity=".85"/>
+          <circle cx="142" cy="90" r="5.5" fill="var(--f-cheek)" opacity=".85"/>
+          <path class="mouth" d="M91 92q9 8 18 0" stroke="var(--f-ink)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <ellipse class="mouth-o" cx="100" cy="95" rx="4.5" ry="5.5" fill="var(--f-ink)"/>
+          <rect x="72" y="140" width="56" height="6" rx="3" fill="var(--f-bezel)"/>
+          <rect x="38" y="139" width="8" height="8" rx="2.5" fill="var(--f-cheek)"/>
+          <circle cx="160" cy="143" r="3.5" fill="#6fd39a"/>
+        </svg>
+      </div>
+      <div class="about-text">
+        <p class="kicker">ONE-PERSON APP STUDIO</p>
+        <h1>ohttne</h1>
+        <p class="lead">취미가 오래 가도록,<br>작은 앱을 만듭니다.</p>
+        <p class="desc">책을 읽고, 밴드 합주를 하고, 밀린 사진을 정리하는 일. 제가 매일 하는 일에 필요한 도구를 직접 만들어 쓰고, 손에 익은 것부터 하나씩 App Store에 올리고 있어요.</p>
+        <dl class="specs">
+          <dt>앱</dt><dd>3개 — 시오리 · 포밴드 · 아사진정리해야되는데</dd>
+          <dt>플랫폼</dt><dd>iPhone · iPad · Mac, Android는 준비 중</dd>
+          <dt>만드는 사람</dt><dd>1명</dd>
+          <dt>문의</dt><dd><a href="mailto:ohttangent@gmail.com">ohttangent@gmail.com</a></dd>
+        </dl>
+        <div class="btns">
+          <button class="btn primary" data-open="apps">앱 둘러보기</button>
+          <a class="btn" href="mailto:ohttangent@gmail.com">메일 보내기</a>
+        </div>
+        <p class="fine">© 2026 ohttne · <a href="/privacy.html">개인정보 처리방침</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 앱 (Finder) 창 ── -->
+  <section class="win" data-win="apps" data-w="660" data-h="440" aria-labelledby="t-apps" hidden>
+    <div class="titlebar">
+      <div class="lights"><button class="l close" aria-label="닫기"></button><button class="l min" aria-label="최소화"></button><button class="l max" aria-label="크게"></button></div>
+      <h2 class="title" id="t-apps">앱</h2>
+    </div>
+    <div class="content finder">
+      <aside class="fsb">
+        <p class="fsb-h">즐겨찾기</p>
+        <button class="fsb-i on" data-pane="all"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1.2"/><rect x="9" y="2" width="5" height="5" rx="1.2"/><rect x="2" y="9" width="5" height="5" rx="1.2"/><rect x="9" y="9" width="5" height="5" rx="1.2"/></svg>모든 앱</button>
+        <button class="fsb-i" data-pane="wip"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9.5 3.5l3 3M3 13l6.5-6.5M11 2.5l2.5 2.5-1.5 1.5L9.5 4z"/></svg>만드는 중</button>
+        <button class="fsb-i" data-open="about"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 7.2v4M8 5h.01" stroke-linecap="round"/></svg>ohttne에 관하여</button>
+        <a class="fsb-i" href="/privacy.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h5l3 3v9H4z"/><path d="M9 2v3h3"/></svg>개인정보 처리방침</a>
+        <p class="fsb-h">태그</p>
+        <span class="ftag" style="--c:#f2c94c"><i></i>독서</span>
+        <span class="ftag" style="--c:#3478f6"><i></i>음악</span>
+        <span class="ftag" style="--c:#c8f542"><i></i>사진</span>
+      </aside>
+      <div class="fmain">
+        <div class="ftool">
+          <span class="fnav" aria-hidden="true"><b>‹</b><b>›</b></span>
+          <span class="fpath" id="fpath"><svg viewBox="0 0 64 56" aria-hidden="true"><path d="M4 12a6 6 0 0 1 6-6h15l6 6h23a6 6 0 0 1 6 6v26a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6z" fill="#7fb6ef"/><path d="M4 20h56v24a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6z" fill="#a9d1fa"/></svg><span>모든 앱</span></span>
+          <span class="fview" aria-hidden="true"><i class="on"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg></i><i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4h12M2 8h12M2 12h12"/></svg></i></span>
+        </div>
+        <div class="fpane" data-pane="all">
+          <div class="fgrid">
+            <button class="fitem" data-open="siori"><img src="/assets/apps/siori.png" alt=""><b>시오리</b><small>독서 기록</small></button>
+            <button class="fitem" data-open="forband"><img src="/assets/apps/forband.png" alt=""><b>포밴드</b><small>밴드 합주 연습</small></button>
+            <button class="fitem" data-open="photodesk"><span class="badge">NEW</span><img src="/assets/apps/photodesk.png" alt=""><b>아사진정리<br>해야되는데</b><small>사진 정리</small></button>
+            <button class="fitem" data-pane="wip"><svg viewBox="0 0 64 56" aria-hidden="true"><path d="M4 12a6 6 0 0 1 6-6h15l6 6h23a6 6 0 0 1 6 6v26a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6z" fill="#7fb6ef"/><path d="M4 20h56v24a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6z" fill="#a9d1fa"/></svg><b>만드는 중</b><small>2개 항목</small></button>
+          </div>
+        </div>
+        <div class="fpane" data-pane="wip" hidden>
+          <ul class="flist">
+            <li><img src="/assets/apps/siori.png" alt=""><div><b>시오리 for Android</b><small>Google Play · 비공개 테스트 중</small></div><span class="pill">TESTING</span></li>
+            <li><img src="/assets/apps/siori.png" alt=""><div><b>시오리 for Mac</b><small>Mac App Store · 다듬는 중</small></div><span class="pill">SOON</span></li>
+          </ul>
+          <p class="fnote">준비가 되면 이 폴더에서 밖으로 꺼냅니다.</p>
+        </div>
+        <div class="fstatus" id="fstatus">3개 항목, 만드는 중 2개</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 시오리 ── -->
+  <section class="win" data-win="siori" data-w="780" data-h="560" aria-labelledby="t-siori" hidden>
+    <div class="titlebar">
+      <div class="lights"><button class="l close" aria-label="닫기"></button><button class="l min" aria-label="최소화"></button><button class="l max" aria-label="크게"></button></div>
+      <h2 class="title" id="t-siori"><img src="/assets/apps/siori.png" alt="">시오리</h2>
+    </div>
+    <div class="content app" style="--accent:#f6dc7a">
+      <header class="app-head">
+        <img class="app-icon" src="/assets/apps/siori.png" alt="시오리 앱 아이콘">
+        <div class="app-id">
+          <p class="kicker">01 / READING JOURNAL</p>
+          <h3>시오리 <small>독서기록</small></h3>
+          <p class="tag">책 읽다 좋았던 문장, 잊어버리기 전에.</p>
+          <div class="chips"><span class="hi">무료</span><span>iOS 17.3+</span><span>iPhone · iPad · Mac</span><span>Android 준비 중</span></div>
+        </div>
+        <div class="app-cta">
+          <a class="btn primary" href="https://apps.apple.com/kr/app/id6788732084"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>App Store</a>
+          <a class="btn" href="/siori/">소개 페이지 ↗</a>
+        </div>
+      </header>
+      <div class="gallery" aria-label="시오리 스크린샷">
+        <img src="/assets/apps/siori-1.webp" alt="시오리 — 독서 노트" loading="lazy">
+        <img src="/assets/apps/siori-2.webp" alt="시오리 — 지금 읽는 책 서재" loading="lazy">
+        <img src="/assets/apps/siori-3.webp" alt="시오리 — 리딩 로그" loading="lazy">
+        <img src="/assets/apps/siori-4.webp" alt="시오리 — 리딩 리시트" loading="lazy">
+        <img src="/assets/apps/siori-5.webp" alt="시오리 — 인물 관계도" loading="lazy">
+        <img src="/assets/apps/siori-6.webp" alt="시오리 — 집중 타이머" loading="lazy">
+        <img src="/assets/apps/siori-7.webp" alt="시오리 — 단어장" loading="lazy">
+      </div>
+      <ul class="feats">
+        <li><b>독서 노트</b>인용·메모·사진·포스트잇을 채팅하듯 남겨요. 책 속 문장은 카메라로 스캔하면 글자가 돼요.</li>
+        <li><b>인물 관계도</b>“이 사람 누구였지?” 헷갈리는 등장인물을 카드와 선으로, 가계도까지.</li>
+        <li><b>리딩 로그</b>독서 잔디와 연속 기록, 일 년을 영수증처럼 뽑아 주는 리딩 리시트.</li>
+        <li><b>집중 타이머 · 단어장</b>다이얼을 돌려 읽는 시간을 기록하고, 낯선 단어는 위젯에서 다시 만나요.</li>
+      </ul>
+      <footer class="app-foot"><span>RELEASED 2026.08</span><span>IOS · IPADOS</span><span>BY OHTTNE</span></footer>
+    </div>
+  </section>
+
+  <!-- ── 포밴드 ── -->
+  <section class="win" data-win="forband" data-w="780" data-h="560" aria-labelledby="t-forband" hidden>
+    <div class="titlebar">
+      <div class="lights"><button class="l close" aria-label="닫기"></button><button class="l min" aria-label="최소화"></button><button class="l max" aria-label="크게"></button></div>
+      <h2 class="title" id="t-forband"><img src="/assets/apps/forband.png" alt="">포밴드</h2>
+    </div>
+    <div class="content app" style="--accent:#a9c8ff">
+      <header class="app-head">
+        <img class="app-icon" src="/assets/apps/forband.png" alt="포밴드 앱 아이콘">
+        <div class="app-id">
+          <p class="kicker">02 / BAND PRACTICE</p>
+          <h3>포밴드 <small>ForBand</small></h3>
+          <p class="tag">카피 연습부터 합주, 무대까지. 주머니 속 연습실.</p>
+          <div class="chips"><span class="hi">₩5,900</span><span>iOS 18+</span><span>iPhone · iPad</span><span>음악</span></div>
+        </div>
+        <div class="app-cta">
+          <a class="btn primary" href="https://apps.apple.com/kr/app/id6793964973"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>App Store</a>
+        </div>
+      </header>
+      <div class="gallery" aria-label="포밴드 스크린샷">
+        <img src="/assets/apps/forband-1.webp" alt="포밴드 — 연습 플레이어" loading="lazy">
+        <img src="/assets/apps/forband-2.webp" alt="포밴드 — 메트로놈" loading="lazy">
+        <img src="/assets/apps/forband-3.webp" alt="포밴드 — 연주 영상 촬영" loading="lazy">
+        <img src="/assets/apps/forband-4.webp" alt="포밴드 — 튜너" loading="lazy">
+        <img src="/assets/apps/forband-5.webp" alt="포밴드 — 세트리스트" loading="lazy">
+      </div>
+      <ul class="feats">
+        <li><b>연습 플레이어</b>음정은 그대로 템포만 50–150%, 피치 ±6반음, A-B 구간 반복과 스피드 트레이너.</li>
+        <li><b>메트로놈</b>BPM 20–300, 변박과 서브디비전, 박마다 진동. 곡별 프리셋 저장.</li>
+        <li><b>튜너</b>베이스 저음까지 잡는 크로매틱 튜너, 기타·베이스·우쿨렐레 프리셋 8종.</li>
+        <li><b>녹음 · 세트리스트</b>노래를 틀어 둔 채 연주 영상을 찍고, 공연 순서대로 곡을 정리해요.</li>
+      </ul>
+      <footer class="app-foot"><span>RELEASED 2026.07</span><span>IOS · IPADOS</span><span>BY OHTTNE</span></footer>
+    </div>
+  </section>
+
+  <!-- ── 아사진정리해야되는데 ── -->
+  <section class="win" data-win="photodesk" data-w="780" data-h="560" aria-labelledby="t-photodesk" hidden>
+    <div class="titlebar">
+      <div class="lights"><button class="l close" aria-label="닫기"></button><button class="l min" aria-label="최소화"></button><button class="l max" aria-label="크게"></button></div>
+      <h2 class="title" id="t-photodesk"><img src="/assets/apps/photodesk.png" alt="">아사진정리해야되는데</h2>
+    </div>
+    <div class="content app" style="--accent:#d9ff4b">
+      <header class="app-head">
+        <img class="app-icon" src="/assets/apps/photodesk.png" alt="아사진정리해야되는데 앱 아이콘">
+        <div class="app-id">
+          <p class="kicker">03 / PHOTO CLEANUP · NEW</p>
+          <h3>아사진정리해야되는데</h3>
+          <p class="tag">밀린 사진 정리, 하루치씩 가볍게.</p>
+          <div class="chips"><span class="hi">무료</span><span>iOS 18+</span><span>iPhone</span><span>사진 · 비디오</span></div>
+        </div>
+        <div class="app-cta">
+          <a class="btn primary" href="https://apps.apple.com/kr/app/id6808960253"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>App Store</a>
+        </div>
+      </header>
+      <div class="gallery" aria-label="아사진정리해야되는데 스크린샷">
+        <img src="/assets/apps/photodesk-1.webp" alt="아사진정리해야되는데 — 날짜별 사진첩" loading="lazy">
+        <img src="/assets/apps/photodesk-2.webp" alt="아사진정리해야되는데 — 밀어서 보관·삭제" loading="lazy">
+        <img src="/assets/apps/photodesk-3.webp" alt="아사진정리해야되는데 — 폴더로 나누기" loading="lazy">
+        <img src="/assets/apps/photodesk-4.webp" alt="아사진정리해야되는데 — 하루치씩" loading="lazy">
+        <img src="/assets/apps/photodesk-5.webp" alt="아사진정리해야되는데 — 지우기 전에 한 번 더" loading="lazy">
+      </div>
+      <ul class="feats">
+        <li><b>하루치씩</b>날짜를 고르고 넘기다 보면 어느새 그날 정리 끝. 다 할 필요 없이 원하는 날부터.</li>
+        <li><b>세 방향 스와이프</b>남길 건 오른쪽, 지울 건 위로, 고민되면 왼쪽. 당장 결정하지 않아도 괜찮아요.</li>
+        <li><b>앱이 먼저 찾아줘요</b>비슷한 사진, 흔들린 사진, 쌓인 스크린샷부터.</li>
+        <li><b>지우기 전에 한 번 더</b>넘긴 사진은 휴지통에 모아 두고, 확인을 누르기 전엔 지우지 않아요. 되돌리기도 바로.</li>
+      </ul>
+      <footer class="app-foot"><span>RELEASED 2026.09</span><span>IOS</span><span>BY OHTTNE</span></footer>
+    </div>
+  </section>
+
+  <!-- ── 휴지통 ── -->
+  <section class="win" data-win="trash" data-w="380" data-h="260" aria-labelledby="t-trash" hidden>
+    <div class="titlebar">
+      <div class="lights"><button class="l close" aria-label="닫기"></button><button class="l min" aria-label="최소화"></button><button class="l max" aria-label="크게"></button></div>
+      <h2 class="title" id="t-trash">휴지통</h2>
+    </div>
+    <div class="content trash-c">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M16 20h32l-3 36H19z" fill="#d9d9de" stroke="rgba(0,0,0,.18)"/><path d="M12 16h40v4H12z" fill="#c4c4ca"/><path d="M26 12h12v4H26z" fill="#c4c4ca"/><path d="M25 27v24M32 27v24M39 27v24" stroke="rgba(0,0,0,.14)" stroke-width="2" stroke-linecap="round"/></svg>
+      <b>휴지통이 비어 있어요.</b>
+      <p>버린 건 없고, 만들다 만 것만 조금 있어요.</p>
+      <button class="btn" data-open="apps" data-pane="wip">만드는 중 보기</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- ───────── 독 ───────── -->
+<nav class="dock" aria-label="독">
+  <button class="dk" data-open="about" data-label="ohttne에 관하여"><span class="face-slot"></span></button>
+  <button class="dk" data-open="apps" data-label="앱">
+    <svg viewBox="0 0 64 56" aria-hidden="true"><path d="M4 12a6 6 0 0 1 6-6h15l6 6h23a6 6 0 0 1 6 6v26a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6z" fill="#7fb6ef"/><path d="M4 20h56v24a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6z" fill="#a9d1fa"/></svg>
+  </button>
+  <span class="dk-sep" aria-hidden="true"></span>
+  <button class="dk" data-open="siori" data-label="시오리"><img src="/assets/apps/siori.png" alt=""></button>
+  <button class="dk" data-open="forband" data-label="포밴드"><img src="/assets/apps/forband.png" alt=""></button>
+  <button class="dk" data-open="photodesk" data-label="아사진정리해야되는데"><img src="/assets/apps/photodesk.png" alt=""></button>
+  <span class="dk-sep" aria-hidden="true"></span>
+  <a class="dk" href="mailto:ohttangent@gmail.com" data-label="메일 보내기">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="14" fill="#fff"/><rect x="4" y="4" width="56" height="56" rx="14" fill="none" stroke="rgba(0,0,0,.12)"/><rect x="14" y="20" width="36" height="26" rx="5" fill="#5aa9f7"/><path d="M14 24l18 12 18-12" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+  </a>
+  <button class="dk" data-open="trash" data-label="휴지통">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M17 18h30l-3 38H20z" fill="#dcdce1" stroke="rgba(0,0,0,.18)"/><path d="M13 14h38v4H13z" fill="#c8c8ce"/><path d="M26 10h12v4H26z" fill="#c8c8ce"/><path d="M25 26v24M32 26v24M39 26v24" stroke="rgba(0,0,0,.14)" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+</nav>
+
+<script>
+(function(){
+  'use strict';
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var coarse  = matchMedia('(hover: none)').matches;
+  var stackMQ = matchMedia('(max-width: 760px)');
+  var isStack = function(){ return stackMQ.matches; };
+  var desktop = document.getElementById('desktop');
+  var MB = 30;          // 메뉴바 높이
+  var DOCK = 96;        // 독이 차지하는 아래 여백
+
+  /* ── 캐릭터 복제 (메뉴바·독) ── */
+  var tpl = document.getElementById('face-tpl');
+  document.querySelectorAll('.face-slot').forEach(function(slot){
+    slot.replaceWith(tpl.content.firstElementChild.cloneNode(true));
+  });
+
+  /* ── 테마 ── */
+  document.querySelector('.mb-theme').addEventListener('click', function(){
+    var root = document.documentElement;
+    var dark = root.getAttribute('data-theme') === 'dark' ||
+      (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try{ localStorage.setItem('ohttne-theme', next); }catch(e){}
+  });
+
+  /* ── 시계 · 날짜 위젯 ── */
+  var fmtDate = new Intl.DateTimeFormat('ko-KR', {month:'long', day:'numeric', weekday:'short'});
+  var fmtTime = new Intl.DateTimeFormat('ko-KR', {hour:'numeric', minute:'2-digit', hour12:true});
+  var fmtDow  = new Intl.DateTimeFormat('ko-KR', {weekday:'long'});
+  var fmtMon  = new Intl.DateTimeFormat('ko-KR', {year:'numeric', month:'long'});
+  function tickClock(){
+    var d = new Date();
+    document.getElementById('clock').textContent = fmtDate.format(d) + '  ' + fmtTime.format(d);
+    document.getElementById('wd-dow').textContent = fmtDow.format(d);
+    document.getElementById('wd-day').textContent = d.getDate();
+    document.getElementById('wd-month').textContent = fmtMon.format(d);
+    document.getElementById('wd-time').textContent = fmtTime.format(d);
+  }
+  tickClock(); setInterval(tickClock, 10000);
+
+  /* ── 창 관리 ── */
+  var wins = {}, zTop = 10, focused = null, cascade = 0;
+  document.querySelectorAll('.win').forEach(function(el){
+    wins[el.dataset.win] = { id: el.dataset.win, el: el, w: +el.dataset.w, h: +el.dataset.h, open: false, min: false, placed: false };
+  });
+
+  function clampPlace(w, x, y){
+    var vw = innerWidth, vh = innerHeight;
+    var W = Math.min(w.w, vw - 16), H = Math.min(w.h, vh - MB - DOCK - 8);
+    w.el.style.width = W + 'px'; w.el.style.height = H + 'px';
+    x = Math.max(8, Math.min(x, vw - W - 8));
+    y = Math.max(6, Math.min(y, vh - MB - DOCK - H + 40));   // 최소한 제목줄은 보이게
+    w.el.style.left = x + 'px'; w.el.style.top = y + 'px';
+    w.placed = true;
+  }
+  function place(w, at){
+    if(at){ clampPlace(w, at.x, at.y); return; }
+    var n = (cascade++) % 5;
+    var W = Math.min(w.w, innerWidth - 16);
+    clampPlace(w, (innerWidth - W) / 2 - 30 + n * 26, 38 + n * 24);
+  }
+  function focus(w){
+    Object.keys(wins).forEach(function(k){ wins[k].el.classList.toggle('blur', wins[k] !== w); });
+    w.el.style.zIndex = ++zTop; focused = w;
+  }
+  function focusTop(){
+    var best = null;
+    Object.keys(wins).forEach(function(k){
+      var o = wins[k]; if(o.open && !o.min && !o.el.hidden && (!best || +o.el.style.zIndex > +best.el.style.zIndex)) best = o;
+    });
+    if(best) focus(best); else focused = null;
+  }
+  function updateDock(){
+    document.querySelectorAll('.dock [data-open]').forEach(function(b){
+      var w = wins[b.dataset.open]; b.classList.toggle('on', !!(w && w.open));
+    });
+  }
+  function open(id, opts){
+    var w = wins[id]; if(!w) return;
+    opts = opts || {};
+    if(id === 'apps' && opts.pane) setPane(opts.pane);
+    if(isStack()){
+      w.el.hidden = false; w.open = true; updateDock();
+      if(!opts.silent) w.el.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block: 'start'});
+      return;
+    }
+    if(!w.placed) place(w, opts.at);
+    var wasHidden = w.el.hidden;
+    w.el.hidden = false; w.open = true; w.min = false;
+    w.el.classList.remove('closing');
+    w.el.style.transform = ''; w.el.style.opacity = ''; w.el.style.transition = '';
+    if(wasHidden && !reduced){
+      w.el.classList.add('opening');
+      w.el.addEventListener('animationend', function h(){ w.el.classList.remove('opening'); w.el.removeEventListener('animationend', h); });
+    }
+    focus(w); updateDock();
+  }
+  function close(w){
+    function finish(){
+      w.el.hidden = true; w.el.classList.remove('closing', 'max'); w.open = false; w.min = false;
+      updateDock(); if(focused === w) focusTop();
+    }
+    if(reduced || isStack()){ finish(); return; }
+    w.el.classList.add('closing'); setTimeout(finish, 170);
+  }
+  function minimize(w){
+    var dk = document.querySelector('.dock [data-open="' + w.id + '"]') || document.querySelector('.dock [data-open="apps"]');
+    var r = w.el.getBoundingClientRect(), d = dk.getBoundingClientRect();
+    var dx = (d.left + d.width / 2) - (r.left + r.width / 2), dy = (d.top + d.height / 2) - (r.top + r.height / 2);
+    function finish(){
+      w.el.hidden = true; w.min = true;
+      w.el.style.transition = ''; w.el.style.transform = ''; w.el.style.opacity = '';
+      if(focused === w) focusTop();
+    }
+    if(reduced){ finish(); return; }
+    w.el.style.transition = 'transform .38s cubic-bezier(.5,0,.7,.4), opacity .34s ease-in';
+    w.el.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(.06)'; w.el.style.opacity = '0';
+    setTimeout(finish, 390);
+  }
+  function toggleMax(w){ w.el.classList.toggle('max'); focus(w); }
+  function arrangeInitial(){
+    var vw = innerWidth, vh = innerHeight;
+    var a = wins.about, f = wins.apps;
+    var wide = vw >= 1200;                       // 위젯 칸(왼쪽)·아이콘 칸(오른쪽)을 비워 둘 만큼 넓은가
+    var iconsCol = wide ? 116 : 0;
+    var aW = Math.min(a.w, vw - 16), fW = Math.min(f.w, vw - 16);
+    var ax = wide ? Math.round(Math.max(214, vw * 0.15)) : Math.round(Math.max(14, vw * 0.03));
+    var ay = Math.round(Math.max(20, (vh - MB - DOCK) * 0.08));
+    var fx = ax + aW + 20, fy = ay + 54;
+    var maxFx = vw - fW - iconsCol - 12;
+    if(fx > maxFx){ fx = Math.max(ax + 120, maxFx); fy = ay + 118; }
+    ['siori','forband','photodesk','trash'].forEach(function(k){ wins[k].placed = false; wins[k].el.classList.remove('max'); });
+    cascade = 0;
+    a.el.classList.remove('max'); f.el.classList.remove('max');
+    clampPlace(f, fx, fy); clampPlace(a, ax, ay);
+  }
+
+  /* 클릭 위임: 열기 · 신호등 · 사이드바 · 액션 */
+  document.addEventListener('click', function(e){
+    var t;
+    if((t = e.target.closest('[data-open]'))){
+      var opts = {};
+      if(t.dataset.pane) opts.pane = t.dataset.pane;
+      open(t.dataset.open, opts); closeMenus();
+      if(t.classList.contains('dicon')){ selectIcon(t); }
+      return;
+    }
+    if((t = e.target.closest('.l'))){
+      var w = wins[t.closest('.win').dataset.win];
+      if(t.classList.contains('close')) close(w);
+      else if(t.classList.contains('min')) minimize(w);
+      else toggleMax(w);
+      return;
+    }
+    if((t = e.target.closest('[data-pane]')) && t.closest('.finder')){ setPane(t.dataset.pane); return; }
+    if((t = e.target.closest('[data-action]'))){
+      closeMenus();
+      if(t.dataset.action === 'closeAll'){ Object.keys(wins).forEach(function(k){ if(wins[k].open) close(wins[k]); }); }
+      if(t.dataset.action === 'openAll'){ ['about','apps','siori','forband','photodesk'].forEach(function(k){ open(k); }); }
+      if(t.dataset.action === 'arrange'){
+        if(isStack()) return;
+        arrangeInitial();
+        ['siori','forband','photodesk','trash'].forEach(function(k){ if(wins[k].open && !wins[k].min){ place(wins[k]); } });
+        open('apps'); open('about');
+      }
+      return;
+    }
+    if(!e.target.closest('.dicon')) clearIconSel();
+  });
+
+  /* 창 포커스 · 드래그 */
+  desktop.addEventListener('pointerdown', function(e){
+    var winEl = e.target.closest('.win'); if(!winEl) return;
+    var w = wins[winEl.dataset.win]; if(focused !== w) focus(w);
+    var tb = e.target.closest('.titlebar');
+    if(!tb || e.target.closest('button') || isStack() || winEl.classList.contains('max') || e.button !== 0) return;
+    e.preventDefault();
+    var r = winEl.getBoundingClientRect(), ox = e.clientX - r.left, oy = e.clientY - r.top, W = r.width, moved = false;
+    function move(ev){
+      var x = ev.clientX - ox, y = ev.clientY - oy;
+      x = Math.max(90 - W, Math.min(x, innerWidth - 90));
+      y = Math.max(0, Math.min(y, innerHeight - MB - 56));
+      winEl.style.left = x + 'px'; winEl.style.top = y + 'px'; moved = true;
+    }
+    function up(){
+      removeEventListener('pointermove', move); removeEventListener('pointerup', up); removeEventListener('pointercancel', up);
+      winEl.classList.remove('dragging');
+    }
+    winEl.classList.add('dragging');
+    addEventListener('pointermove', move); addEventListener('pointerup', up); addEventListener('pointercancel', up);
+  });
+  desktop.addEventListener('dblclick', function(e){
+    var tb = e.target.closest('.titlebar'); if(!tb || e.target.closest('button') || isStack()) return;
+    toggleMax(wins[tb.closest('.win').dataset.win]);
+  });
+
+  /* Finder 사이드바 */
+  function setPane(name){
+    document.querySelectorAll('.finder .fsb-i[data-pane]').forEach(function(b){ b.classList.toggle('on', b.dataset.pane === name); });
+    document.querySelectorAll('.finder .fpane').forEach(function(p){ p.hidden = p.dataset.pane !== name; });
+    document.querySelector('#fpath span').textContent = name === 'wip' ? '만드는 중' : '모든 앱';
+    document.getElementById('fstatus').textContent = name === 'wip' ? '2개 항목, 둘 다 시오리' : '3개 항목, 만드는 중 2개';
+  }
+
+  /* 바탕화면 아이콘 선택 표시 */
+  function selectIcon(el){ clearIconSel(); el.classList.add('sel'); }
+  function clearIconSel(){ document.querySelectorAll('.dicon.sel').forEach(function(i){ i.classList.remove('sel'); }); }
+
+  /* ── 메뉴바 드롭다운 ── */
+  function closeMenus(){
+    document.querySelectorAll('.menu').forEach(function(m){ m.hidden = true; });
+    document.querySelectorAll('.mb-item.open').forEach(function(b){ b.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); });
+  }
+  document.querySelectorAll('.mb-item[data-menu]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var m = document.getElementById(btn.dataset.menu), wasOpen = !m.hidden;
+      closeMenus();
+      if(!wasOpen){
+        m.hidden = false; btn.classList.add('open'); btn.setAttribute('aria-expanded', 'true');
+        var left = btn.getBoundingClientRect().left;
+        m.style.left = Math.min(left, innerWidth - m.offsetWidth - 8) + 'px';
+      }
+    });
+    btn.addEventListener('mouseenter', function(){
+      var anyOpen = document.querySelector('.mb-item.open');
+      if(anyOpen && anyOpen !== btn) btn.click();
+    });
+  });
+  document.addEventListener('click', function(e){ if(!e.target.closest('.menu')) closeMenus(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenus(); });
+
+  /* ── 독 확대 ── */
+  var dock = document.querySelector('.dock'), dks = Array.prototype.slice.call(dock.querySelectorAll('.dk'));
+  if(!coarse && !reduced){
+    dock.addEventListener('pointermove', function(e){
+      dks.forEach(function(it){
+        var r = it.getBoundingClientRect(), c = r.left + r.width / 2, d = Math.abs(e.clientX - c);
+        var s = 1 + 0.42 * Math.max(0, 1 - d / 120);
+        it.style.transform = 'scale(' + s.toFixed(3) + ')';
+        it.style.marginLeft = it.style.marginRight = ((s - 1) * 13).toFixed(1) + 'px';
+      });
+    });
+    dock.addEventListener('pointerleave', function(){
+      dks.forEach(function(it){ it.style.transform = ''; it.style.marginLeft = it.style.marginRight = ''; });
+    });
+  }
+
+  /* ── 눈 따라오기 ── */
+  var faces = Array.prototype.slice.call(document.querySelectorAll('.face'));
+  var eyes = [];
+  faces.forEach(function(f){
+    f.querySelectorAll('.eye').forEach(function(e){ eyes.push({ sock: e, pos: e.querySelector('.pupil-pos') }); });
+  });
+  var tx = innerWidth * .5, ty = innerHeight * .4, px = tx, py = ty, lastMove = 0, nextIdle = 0;
+  addEventListener('pointermove', function(e){ tx = e.clientX; ty = e.clientY; lastMove = performance.now(); }, {passive:true});
+  addEventListener('touchstart', function(e){ var t = e.touches[0]; tx = t.clientX; ty = t.clientY; lastMove = performance.now(); }, {passive:true});
+  var MAX_X = 9, MAX_Y = 7;   // SVG 사용자 좌표 단위
+  function eyesTick(now){
+    if(now - lastMove > 4500 && now > nextIdle){          // 가만히 있으면 두리번
+      tx = innerWidth * (0.15 + Math.random() * 0.7); ty = innerHeight * (0.1 + Math.random() * 0.8);
+      nextIdle = now + 2200 + Math.random() * 2600;
+    }
+    px += (tx - px) * 0.16; py += (ty - py) * 0.16;
+    for(var i = 0; i < eyes.length; i++){
+      var e = eyes[i];
+      if(e.sock.ownerSVGElement.closest('[hidden]')) continue;
+      var r = e.sock.getBoundingClientRect(); if(!r.width) continue;
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      var dx = px - cx, dy = py - cy, d = Math.hypot(dx, dy) || 1;
+      var k = Math.min(1, d / 160);                       // 가까우면 살짝, 멀면 끝까지
+      var ux = dx / d * MAX_X * k, uy = dy / d * MAX_Y * k;
+      e.pos.style.transform = 'translate(' + ux.toFixed(2) + 'px,' + uy.toFixed(2) + 'px)';
+    }
+    requestAnimationFrame(eyesTick);
+  }
+  if(!reduced) requestAnimationFrame(eyesTick);
+  else eyes.forEach(function(e){ e.pos.style.transform = 'translate(0,2px)'; });
+
+  /* 깜빡임 */
+  (function blink(){
+    setTimeout(function(){
+      faces.forEach(function(f){ f.classList.add('blink'); });
+      setTimeout(function(){
+        faces.forEach(function(f){ f.classList.remove('blink'); });
+        if(Math.random() < 0.22){                          // 가끔 두 번
+          setTimeout(function(){ faces.forEach(function(f){ f.classList.add('blink'); });
+            setTimeout(function(){ faces.forEach(function(f){ f.classList.remove('blink'); }); }, 120); }, 160);
+        }
+      }, 120);
+      blink();
+    }, 2400 + Math.random() * 3800);
+  })();
+
+  /* 누르면 "오" */
+  var oT;
+  addEventListener('pointerdown', function(){
+    faces.forEach(function(f){ f.classList.add('o'); });
+    clearTimeout(oT); oT = setTimeout(function(){ faces.forEach(function(f){ f.classList.remove('o'); }); }, 420);
+  }, {passive:true});
+
+  /* ── 초기 배치 ── */
+  function boot(){
+    var hash = (location.hash || '').replace('#', '');
+    var alias = { download: 'siori', chapters: 'siori', shelf: 'siori' };
+    var want = wins[hash] ? hash : (alias[hash] || null);
+    if(isStack()){
+      ['about','apps','siori','forband','photodesk'].forEach(function(k){ open(k, {silent:true}); });
+      if(want) setTimeout(function(){ open(want); }, 50);
+      return;
+    }
+    arrangeInitial();
+    open('apps'); open('about');
+    if(want && want !== 'about' && want !== 'apps') open(want);
+  }
+  boot();
+  var resizeT;
+  addEventListener('resize', function(){
+    clearTimeout(resizeT);
+    resizeT = setTimeout(function(){
+      if(isStack()) return;
+      Object.keys(wins).forEach(function(k){
+        var w = wins[k]; if(!w.placed || w.el.classList.contains('max')) return;
+        clampPlace(w, parseFloat(w.el.style.left), parseFloat(w.el.style.top));
+      });
+    }, 120);
+  });
+  stackMQ.addEventListener && stackMQ.addEventListener('change', function(){
+    if(isStack()){ ['about','apps','siori','forband','photodesk'].forEach(function(k){ open(k, {silent:true}); }); }
+    else { Object.keys(wins).forEach(function(k){ wins[k].placed = false; }); arrangeInitial(); open('apps'); open('about'); }
+  });
+})();
+</script>
+<!-- 인스타그램·페이스북 인앱 브라우저에서 App Store 링크가 막히는 문제 우회 -->
+<script src="/assets/inapp-browser.js" defer></script>
+</body>
+</html>
