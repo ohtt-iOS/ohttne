@@ -129,30 +129,34 @@
     </h1>
     <p class="meta">
       <b>시오리</b>(이하 "앱")는 이용자의 개인정보를 소중히 여기며, 아래와 같이 데이터를 처리합니다.<br>
-      시행일자 (Effective date): <b>2026년 7월 8일</b> · 최종 수정: 2026년 9월 10일
+      시행일자 (Effective date): <b>2026년 7월 8일</b> · 최종 수정: 2026년 9월 27일
     </p>
   </header>
 
   <div class="lede">
     <strong>한눈에 보기.</strong> 시오리는 광고를 싣지 않고, 광고·마케팅 목적의 추적을 하지 않습니다.
     독서 기록·노트·사진·단어장은 <strong>이용자의 기기와 이용자 본인의 iCloud에만 저장</strong>되며,
-    개발자를 포함한 제3자에게 전송되지 않습니다(안드로이드판은 iCloud 대신 <strong>이용자 본인의 구글 드라이브 앱 전용 폴더</strong> — 10항 참조). 책·단어 검색어는 해당 검색 API로 전송되고,
-    앱 개선을 위한 <strong>익명 사용 통계·오류 정보</strong>가 Google Firebase를 통해 수집됩니다
-    (이용자가 쓴 기록 내용은 절대 포함되지 않습니다 — 5항 참조).
+    개발자를 포함한 제3자에게 전송되지 않습니다(안드로이드판은 iCloud 대신 <strong>이용자 본인의 구글 드라이브 앱 전용 폴더</strong> — 10항 참조).
+    예외는 이용자가 <strong>'시오리에게 편지'로 직접 보내는 글</strong>뿐이며, 이 글은 개발자에게 전달됩니다(5항). 책·단어 검색어는 해당 검색 API로 전송되고,
+    앱 개선을 위한 <strong>익명 사용 통계·오류 정보</strong>가 Google Firebase를 통해 수집됩니다. 통계에는 읽기 시작·완독한 책의 제목과 별점, 책 검색어가 포함될 수 있지만
+    이용자가 쓴 노트·인용 등 기록 내용은 포함되지 않습니다(5항 참조).
     <br><br>
     <span class="en">
     At a glance — Siori shows no ads and does no ad or marketing tracking. Your reading records, notes, photos,
     and vocabulary are stored only on your device and in your personal iCloud, and are never sent to the
-    developer or any third party. Book and dictionary search terms are sent to the relevant search APIs, and
-    anonymized usage statistics and crash reports are collected via Google Firebase — never including anything
-    you write (see §5).
+    developer or any third party — the only exception is a letter you choose to send with "Letter to Siori", which
+    reaches the developer (see §5). Book and dictionary search terms are sent to the relevant search APIs, and
+    anonymized usage statistics and crash reports are collected via Google Firebase. Statistics may include the
+    titles and ratings of books you start or finish and your book search terms, but never the notes or quotes you
+    write (see §5).
     </span>
   </div>
 
   <!-- 1 -->
   <h2><span class="toc-row"><span class="num">01</span><span class="t">수집·처리하는 정보</span><span class="leader"></span><span class="en">What we process</span></span></h2>
-  <p>앱은 계정 가입을 요구하지 않으며, 개발자가 운영하는 별도의 서버는 없습니다. 처리되는 정보는 아래와 같습니다.</p>
-  <p class="en-note">The app requires no sign-up and the developer operates no server of its own. The data involved is as follows.</p>
+  <p>앱은 계정 가입을 요구하지 않으며, 이용자 계정이나 독서 기록을 보관하는 서버가 없습니다. 개발자가 운영하는 서버(Cloudflare)는
+  <strong>'시오리에게 편지'와 검색 API 오류 보고를 받는 용도로만</strong> 쓰입니다. 처리되는 정보는 아래와 같습니다.</p>
+  <p class="en-note">The app requires no sign-up, and there is no server that stores accounts or reading records. The developer's server (Cloudflare) is used only to receive "Letter to Siori" messages and search-API error reports. The data involved is as follows.</p>
 
   <div class="tbl-scroll">
     <table>
@@ -192,16 +196,21 @@
         </tr>
         <tr>
           <td>사용 통계·오류 정보<br><span class="td-en">Usage stats · crash reports</span></td>
-          <td>앱 개선과 오류 수정을 위해 — 화면 이동, 기능 사용 이벤트, 기기 모델·OS 버전, 크래시 진단, 도서·사전 API 오류 기록 (노트·인용 등 기록 내용은 포함되지 않음, 아래 5항)</td>
+          <td>앱 개선과 오류 수정을 위해 — 화면 이동, 기능 사용 이벤트(읽기 시작·위시·완독한 책의 제목, 완독 별점, 책 검색어, 플러스 구매 결과 포함), 기기 모델·OS 버전, 크래시 진단, 도서·사전 API 오류 기록 (노트·인용 등 기록 내용은 포함되지 않음, 아래 5항)</td>
           <td>Google Firebase · 시오리 서버로 전송</td>
+        </tr>
+        <tr>
+          <td>시오리에게 편지<br><span class="td-en">Letter to Siori</span></td>
+          <td>이용자가 직접 보낸 의견을 개발자가 읽고 답하기 위해 — 편지 본문, 편지지 이미지, 서명(닉네임), 익명 설치 식별자, 앱 버전·기기 모델·OS 버전 (아래 5항)</td>
+          <td>시오리 서버(Cloudflare) 90일 보관 · 개발자 메일함</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <p>앱은 이용자의 <strong>이름·전화번호·이메일 주소·정밀 위치·생체정보 등 민감정보를 별도로 수집하지 않습니다.</strong>
+  <p>앱은 이용자의 <strong>이름·전화번호·이메일 주소·정밀 위치·생체정보 등 민감정보를 별도로 수집하지 않습니다</strong>(편지에 이용자가 직접 적은 서명 닉네임은 예외).
   <strong>회원가입과 로그인이 없어</strong> 이용자를 식별하는 계정 자체를 만들지 않습니다.</p>
-  <p class="en-note">We do not collect your name, phone number, email, precise location history, or biometric data.
+  <p class="en-note">We do not collect your name, phone number, email, precise location history, or biometric data (apart from the nickname you sign a letter with).
   There is no sign-up and no login, so we never create an account that identifies you.</p>
 
   <!-- 2 -->
@@ -251,14 +260,20 @@
   </div>
   <p>또한 앱의 안정성 확인과 개선을 위해 <strong>Google Firebase Analytics·Crashlytics</strong>를 사용합니다.
   이를 통해 전송되는 정보는 익명 식별자, 기기 모델·OS 버전, 화면 이동·기능 사용 이벤트(예: "책을 완독함"), 오류(크래시) 진단 기록입니다.
+  기능 사용 이벤트에는 <strong>읽기 시작·위시·완독한 책의 제목, 완독 별점, 책 검색어, 시오리 플러스 구매 결과(요금제 종류)</strong>가 함께 담길 수 있습니다.
   <strong>이용자가 작성한 노트·인용·소감 등 기록 내용과 이름·이메일 주소는 절대 전송되지 않으며</strong>,
   광고 식별자(IDFA)를 사용하지 않고 광고·마케팅 목적의 추적이나 프로파일링을 하지 않습니다.
   Firebase의 데이터 처리는 <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase 개인정보 문서</a>를 따릅니다.</p>
-  <p class="en-note">The app also uses Google Firebase Analytics &amp; Crashlytics for stability and improvement. This sends an anonymous identifier, device model/OS version, screen and feature-usage events, and crash diagnostics. Nothing you write (notes, quotes, reviews) and no name or email is ever sent; no advertising identifier (IDFA) is used, and there is no ad tracking or profiling. Firebase's data handling is governed by its privacy documentation.</p>
+  <p class="en-note">The app also uses Google Firebase Analytics &amp; Crashlytics for stability and improvement. This sends an anonymous identifier, device model/OS version, screen and feature-usage events, and crash diagnostics. Feature-usage events may carry the titles of books you start, wish-list, or finish, your finishing rating, your book search terms, and the result of a Siori Plus purchase (plan type). Nothing you write (notes, quotes, reviews) and no name or email is ever sent; no advertising identifier (IDFA) is used, and there is no ad tracking or profiling. Firebase's data handling is governed by its privacy documentation.</p>
   <p>위 도서·사전 API가 오류를 돌려준 경우(예: 일일 조회 한도 초과, 인증키 만료) 개발자가 이를 알고
   고칠 수 있도록 <strong>어느 API가 어떤 오류 코드로 실패했는지와 익명 식별자·앱 버전·기기 모델·OS 버전</strong>을
   시오리 서버(Cloudflare)로 보냅니다. <strong>검색어와 이용자가 작성한 기록은 포함되지 않습니다.</strong></p>
   <p class="en-note">When one of the book or dictionary APIs above returns an error (for example a daily quota limit or an expired key), the app sends which API failed with which error code, along with an anonymous identifier, app version, device model and OS version, to the Siori server (Cloudflare) so the developer can fix it. Search terms and anything you write are never included.</p>
+  <p><strong>시오리에게 편지.</strong> 이용자가 설정의 '시오리에게 편지'로 직접 편지를 보낼 때만, <strong>편지 본문과 편지지 이미지, 서명(닉네임),
+  익명 설치 식별자, 앱 버전·기기 모델·OS 버전</strong>이 시오리 서버(Cloudflare Workers)를 거쳐 개발자의 메일함으로 전달됩니다.
+  설치 식별자는 기기당 하루 발송 한도를 세는 데만 쓰입니다. 서버에 남는 사본(본문·서명·식별자·기기 정보)은 <strong>90일 뒤 자동으로 삭제</strong>되며,
+  메일로 받은 편지의 삭제를 원하시면 아래 연락처로 요청해 주세요. 편지를 보내지 않으면 아무것도 전송되지 않습니다.</p>
+  <p class="en-note">Letter to Siori — only when you send a letter from Settings, its text and letter image, your signature (nickname), an anonymous install identifier, and the app version, device model and OS version are relayed through the Siori server (Cloudflare Workers) to the developer's mailbox. The install identifier is used only to count the per-device daily limit. The server copy (text, signature, identifier, device info) is deleted automatically after 90 days; to have an emailed letter deleted, contact us below. Nothing is sent unless you send a letter.</p>
   <p>이 밖에 알림 전송을 위해 Apple의 푸시 서비스(APNs)와 iCloud 동기화(CloudKit)를 사용합니다. 앱은
   <strong>광고 네트워크를 일절 사용하지 않습니다.</strong></p>
   <p class="en-note">The app also uses Apple's push service (APNs) and iCloud sync (CloudKit). It uses no advertising networks.</p>
@@ -281,21 +296,22 @@
   <!-- 8 -->
   <h2><span class="toc-row"><span class="num">08</span><span class="t">아동의 개인정보</span><span class="leader"></span><span class="en">Children's privacy</span></span></h2>
   <p>앱은 아동을 주 대상으로 하지 않으며, 만 14세 미만 아동으로부터 고의로 개인정보를 수집하지 않습니다.
-  앱은 이용자를 식별할 수 있는 개인정보를 개발자에게 전송하지 않으므로 개발자가 보유하는 아동 정보는 없습니다.
+  개발자에게 전달되는 것은 이용자가 직접 보낸 편지뿐이며, 아동이 보낸 편지임을 알게 되면 지체 없이 삭제합니다.
   보호자께서 자녀의 앱 이용에 관해 문의가 있으시면 아래 연락처로 연락해 주세요.</p>
-  <p class="en-note">The app is not directed at children and does not knowingly collect personal information from children under 14. As no identifying personal data is sent to the developer, the developer holds no such information.</p>
+  <p class="en-note">The app is not directed at children and does not knowingly collect personal information from children under 14. The only data that reaches the developer is a letter you choose to send; if we learn a letter came from a child, we delete it promptly.</p>
 
   <!-- 9 -->
   <h2><span class="toc-row"><span class="num">09</span><span class="t">이용자의 권리</span><span class="leader"></span><span class="en">Your rights</span></span></h2>
-  <p>이용자는 언제든지 앱 안에서 자신의 데이터를 열람·수정·삭제할 수 있습니다. 개발자가 별도로 보관하는 이용자 식별 데이터가 없으므로,
-  삭제·정정 요청은 앱 내 삭제 기능 또는 iCloud 관리로 이용자가 직접 수행할 수 있습니다. 그 밖의 문의는 아래 연락처로 요청하실 수 있습니다.</p>
-  <p class="en-note">You can view, edit, and delete your data at any time within the app. The developer holds no separate identifiable copy, so access and erasure are carried out by you directly, in-app or via iCloud.</p>
+  <p>이용자는 언제든지 앱 안에서 자신의 데이터를 열람·수정·삭제할 수 있습니다. 독서 기록은 개발자가 따로 보관하지 않으므로,
+  삭제·정정은 앱 내 삭제 기능 또는 iCloud(안드로이드는 구글 드라이브) 관리로 이용자가 직접 수행할 수 있습니다.
+  개발자가 보관하는 것은 이용자가 보낸 편지뿐이며, 편지의 열람·삭제를 포함한 그 밖의 요청은 아래 연락처로 하실 수 있습니다.</p>
+  <p class="en-note">You can view, edit, and delete your data at any time within the app. The developer keeps no copy of your reading records, so access and erasure are carried out by you directly, in-app or via iCloud (Google Drive on Android). The only thing the developer holds is any letter you sent; requests about letters or anything else can be made via the contact below.</p>
 
   <!-- 10 -->
   <h2><span class="toc-row"><span class="num">10</span><span class="t">안드로이드판</span><span class="leader"></span><span class="en">Android edition</span></span></h2>
-  <p>안드로이드판 시오리도 <strong>회원가입과 로그인이 없고, 개발자가 운영하는 서버가 없습니다.</strong>
+  <p>안드로이드판 시오리도 <strong>회원가입과 로그인이 없고</strong>, 개발자가 운영하는 서버는 iOS판과 같이 <strong>편지와 검색 API 오류 보고를 받는 용도로만</strong> 쓰입니다(1·5항).
   아래는 위 항목과 <strong>다른 부분만</strong> 적습니다. 나머지는 위 내용과 같습니다.</p>
-  <p class="en-note">The Android edition also has no sign-up, no login, and no developer-run server. Only the differences from the sections above are listed here.</p>
+  <p class="en-note">The Android edition also has no sign-up and no login; as on iOS, the developer's server only receives letters and search-API error reports (§1, §5). Only the differences from the sections above are listed here.</p>
   <ul>
     <li><strong>저장과 동기화.</strong> 기록·노트·사진·단어장은 앱 전용 저장 공간에 보관됩니다. iCloud 대신
     <strong>구글 드라이브의 앱 전용 폴더(appDataFolder)</strong>로 동기화할 수 있으며, <strong>이용자가 직접 켤 때만</strong> 동작합니다.
@@ -309,16 +325,16 @@
     <li><strong>결제.</strong> 시오리 플러스와 메모지 상품의 결제는 <strong>Google Play 결제</strong>가 처리합니다.
     카드번호 등 결제 수단 정보는 <strong>앱이 보지도, 저장하지도 않으며</strong>, 앱은 "무엇을 소장하고 있는지"만 Google에 확인합니다.</li>
     <li><strong>통계 · 오류 정보 · 광고.</strong> iOS판과 같이 <strong>Google Firebase Analytics·Crashlytics</strong>를 사용합니다(5항).
-    전송되는 것은 익명 식별자, 기기 모델·OS 버전, 화면 이동·기능 사용 이벤트, 오류(크래시) 진단 기록뿐이며,
+    전송되는 것은 익명 식별자, 기기 모델·OS 버전, 화면 이동·기능 사용 이벤트(5항과 같이 책 제목·별점·검색어·구매 결과 포함), 오류(크래시) 진단 기록뿐이며,
     <strong>이용자가 쓴 기록 내용과 이름·이메일은 전송되지 않습니다.</strong>
     광고 ID(AAID)를 요청하지 않고, 광고 네트워크도 싣지 않습니다.</li>
     <li><strong>위치.</strong> 안드로이드판에는 동네책방 지도가 없어 <strong>위치 권한을 요구하지 않습니다</strong>(4항 해당 없음).</li>
-    <li><strong>검색.</strong> 5항의 도서·사전 API 가운데 예스24·카카오·Google Books·Open Library·표준국어대사전·우리말샘을 같은 방식으로 사용합니다.
+    <li><strong>검색.</strong> 5항의 도서·사전 API 가운데 예스24·카카오·Open Library·우리말샘을 같은 방식으로 사용합니다.
     전송되는 것은 검색어 또는 ISBN뿐입니다.</li>
     <li><strong>삭제.</strong> 앱을 삭제하면 기기의 데이터가 함께 지워집니다. 드라이브에 올라간 사본은
     구글 계정 → 데이터 및 개인 정보 보호 → 서드 파티 앱 및 서비스에서 연결을 끊고 삭제할 수 있습니다.</li>
   </ul>
-  <p class="en-note">On Android: records sync only into your own Google Drive app-data folder, and only if you turn it on; the app can see nothing else in your Drive. Your Google account email is stored on the device only, to show which account is connected. Text recognition runs entirely on-device with a bundled Google ML Kit model. Purchases are handled by Google Play — the app never sees payment details. Like the iOS edition, the Android edition uses Google Firebase Analytics &amp; Crashlytics (anonymous identifier, device model/OS version, screen and feature-usage events, crash diagnostics; nothing you write is ever sent — see section 5). It requests no advertising ID and has no bookshop map, so no location permission is requested.</p>
+  <p class="en-note">On Android: records sync only into your own Google Drive app-data folder, and only if you turn it on; the app can see nothing else in your Drive. Your Google account email is stored on the device only, to show which account is connected. Text recognition runs entirely on-device with a bundled Google ML Kit model. Purchases are handled by Google Play — the app never sees payment details. Like the iOS edition, the Android edition uses Google Firebase Analytics &amp; Crashlytics (anonymous identifier, device model/OS version, screen and feature-usage events including book titles, ratings, search terms and purchase results, crash diagnostics; nothing you write is ever sent — see section 5). Book search uses YES24, Kakao, Open Library and Urimalsaem. It requests no advertising ID and has no bookshop map, so no location permission is requested.</p>
 
   <!-- 11 -->
   <h2><span class="toc-row"><span class="num">11</span><span class="t">방침의 변경</span><span class="leader"></span><span class="en">Changes</span></span></h2>
