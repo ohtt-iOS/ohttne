@@ -24,6 +24,7 @@ About 포스터는 큰 눈, 다크 모드, 960px 미만은 고정 안무 없이 
     /siori/tour/       옛 시오리 스크롤리텔링 랜딩 (시오리 상세의 "기능 둘러보기")
     /about/            소개 · 연락
     /privacy.html      그대로 (App Store · Play Console이 참조)
+    /app-ads.txt       AdMob 광고 인증(게시자 pub-7463621618274722, 모든 앱 공용 — 스토어 등록정보의 웹사이트 도메인 루트에 있어야 한다)
     /forband/app-store/ 그대로 (인앱 브라우저 탈출 리다이렉트)
     _drafts/mac-desktop.html   9/16의 맥 바탕화면 버전 보관본 (배포 안 됨)
 
