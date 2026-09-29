@@ -1,0 +1,27 @@
+# SIDE B 신청 폼 → 메일 전송 Worker (www.ohttne.com/bside/ 가 호출)
+#   npx wrangler deploy        # 배포
+#   npx wrangler tail          # 실시간 로그
+name = "bside-apply"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://www.ohttne.com,https://ohttne.com"
+MAIL_FROM = "bside@ohttne.com"
+MAIL_FROM_NAME = "SIDE B"
+# 받는 사람. 무료 플랜의 Worker는 Email Routing에 "인증된 대상 주소"로만 보낼 수 있어서
+# MAIL_TO가 거부되면(E_RECIPIENT_NOT_ALLOWED) MAIL_FALLBACK_TO로 보낸다.
+# contact@ohttne.com 은 라우팅 주소(→ ohttangent@gmail.com 포워딩)라 대상 주소로 인증을 마쳐야 직접 받는다.
+MAIL_TO = "contact@ohttne.com"
+MAIL_FALLBACK_TO = "ohttangent@gmail.com"
+
+# 메일 전송 바인딩 (Email Routing이 켜진 ohttne.com 에서 보냄)
+[[send_email]]
+name = "EMAIL"
+
+# IP당 60초에 3번까지
+[[ratelimits]]
+name = "RATE"
+namespace_id = "1001"
+simple = { limit = 3, period = 60 }

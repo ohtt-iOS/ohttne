@@ -20,12 +20,14 @@ About 포스터는 큰 눈, 다크 모드, 960px 미만은 고정 안무 없이 
 ## 구조
 
     /                  앱 인덱스 (홈)
-    /siori/ /forband/ /photodesk/   앱 상세
+    /siori/ /forband/ /photodesk/ /threes/   앱 상세
     /siori/tour/       옛 시오리 스크롤리텔링 랜딩 (시오리 상세의 "기능 둘러보기")
     /about/            소개 · 연락
     /privacy.html      그대로 (App Store · Play Console이 참조)
     /app-ads.txt       AdMob 광고 인증(게시자 pub-7463621618274722, 모든 앱 공용 — 스토어 등록정보의 웹사이트 도메인 루트에 있어야 한다)
     /forband/app-store/ 그대로 (인앱 브라우저 탈출 리다이렉트)
+    /bside/            SIDE B — 1인 개발자 모임 소개 + 신청 폼 (손으로 관리, 아래 참고)
+    _bside-api/        신청 폼이 호출하는 Cloudflare Worker (배포 안 됨, wrangler로 따로 올린다)
     _drafts/mac-desktop.html   9/16의 맥 바탕화면 버전 보관본 (배포 안 됨)
 
 ## 고치는 법
@@ -36,3 +38,13 @@ About 포스터는 큰 눈, 다크 모드, 960px 미만은 고정 안무 없이 
     python3 _build/build.py --og     # + og.png · 파비콘
 
 모양은 `assets/site.css`, 움직임은 `assets/site.js`.
+
+## SIDE B (/bside/)
+
+1인 개발자 모임 신청 페이지. 별도 브랜드라 Ohtt 뼈대를 쓰지 않고 `bside/index.html`·`bside.css`·`bside.js`를 손으로 관리한다
+(build.py는 홈의 `SIDE B` 버튼만 만든다). 공유 카드·파비콘은 `python3 _build/bside_og.py`.
+
+흐름: 소개 → [같이 해볼래요?] → 같은 페이지에서 폼이 펼쳐짐(`#apply`) → 질문 10개 → [신청하기] → 완료 화면.
+폼은 `https://bside-apply.ohttangent.workers.dev/apply`(POST JSON)로 보내고, Worker가 검증한 뒤 메일로 전달한다.
+
+Worker(`_bside-api/`): `cd _bside-api && npx wrangler deploy` (wrangler 로그인 필요). 자세한 건 `_bside-api/README.md`.

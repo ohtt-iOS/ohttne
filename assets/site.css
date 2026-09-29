@@ -97,6 +97,20 @@ html.intro .index li{opacity:0;transform:translateY(12px)}
   .index .row:hover .badge{opacity:1}
 }
 
+/* 홈: SIDE B 모임 버튼 — 앱 제목 칼럼에 맞춰 놓는다 */
+.side-b{
+  display:inline-flex;align-items:center;gap:10px;margin:38px 0 0 calc(10.5px * 2.9);
+  height:34px;padding:0 14px 0 3px;border-radius:99px;box-shadow:inset 0 0 0 1px var(--ink);
+  font-size:11.5px;letter-spacing:0;white-space:nowrap;
+  transition:background .2s,color .2s,opacity .7s ease .9s,transform .7s cubic-bezier(.2,.7,.2,1) .9s;
+}
+.side-b b{display:inline-flex;align-items:center;height:28px;padding:0 11px;border-radius:99px;background:var(--ink);color:var(--bg);font-weight:700;font-size:10.5px;letter-spacing:.06em;transition:background .2s,color .2s}
+.side-b i{font-style:normal;transition:transform .2s}
+.side-b:hover{background:var(--ink);color:var(--bg)}
+.side-b:hover b{background:var(--bg);color:var(--ink)}
+.side-b:hover i{transform:translateX(3px)}
+html.intro .side-b{opacity:0;transform:translateY(12px)}
+
 /* 모서리: 링크 · 연도 */
 .corner{position:fixed;bottom:18px;z-index:40;font-size:12.5px;line-height:1.35;transition:opacity .6s ease .7s}
 .corner.l{left:var(--pad);display:flex;flex-direction:column}
@@ -179,6 +193,7 @@ a.pill svg{width:12px;height:12px;fill:currentColor;margin-right:6px;margin-top:
   .row .badge span{display:none}          /* 좁으면 아이콘만 */
   .row .badge{margin-left:.28em}
   .row .no{width:2.4em}
+  .side-b{margin-left:calc(10.5px * 2.4)}
   .cap .r{gap:14px}
 }
 

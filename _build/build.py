@@ -21,12 +21,13 @@ APPS = [
     dict(
         key="siori", title="Siori", ko="시오리", cat="독서 기록", new=False,
         poster="#f6efdc", store="https://apps.apple.com/kr/app/id6788732084",
+        play="https://play.google.com/store/apps/details?id=com.ohtt.siori.android",
         lead="책 읽다 좋았던 문장, 잊어버리기 전에. 읽는 중인 책과 마음에 남은 문장을 차곡차곡 모으는 독서 다이어리.",
         problem="여러 권을 동시에 읽다 보면 어디까지 읽었는지 헷갈리고, 좋았던 문장은 사진첩 어딘가로 사라집니다. 읽은 흔적이 흩어지지 않고 한곳에 남았으면 했어요.",
         solution="책마다 인용·메모·사진·포스트잇을 채팅하듯 남기고, 책 속 문장은 카메라로 스캔해 옮깁니다. 인물 관계도, 독서 잔디와 리딩 리시트, 집중 타이머, 단어장 위젯까지. 책 한 권을 읽는 과정 전체가 기록이 됩니다.",
-        pills=["iOS 17.3+", "iPhone", "iPad", "Mac", "Android 준비 중"],
+        pills=["iOS 17.3+", "iPhone", "iPad", "Mac", "Android 9+"],
         extra=[("기능 둘러보기", "/siori/tour/")],
-        cap=[("Released", "2026.08"), ("Platform", "iOS · iPadOS"), ("Price", "무료")],
+        cap=[("Released", "2026.08"), ("Platform", "iOS · iPadOS · Android"), ("Price", "무료")],
         shots=["독서 노트", "지금 읽는 책 서재", "리딩 로그", "리딩 리시트", "인물 관계도", "집중 타이머", "단어장"],
         desc="책 읽다 좋았던 문장, 잊어버리기 전에. 인용·메모·사진 노트, 인물 관계도, 독서 잔디, 집중 타이머, 단어장까지 담은 독서 기록 앱 시오리.",
     ),
@@ -54,9 +55,23 @@ APPS = [
         shots=["날짜별 사진첩", "밀어서 보관·삭제", "폴더로 나누기", "하루치씩", "지우기 전에 한 번 더"],
         desc="밀린 사진 정리, 하루치씩 가볍게. 날짜를 골라 스와이프로 남기고 지우는 사진 정리 앱 아사진정리해야되는데(Photodesk).",
     ),
+    dict(
+        key="threes", title="Threes", ko="Threes", cat="영상 일기", new=True,
+        poster="#fbeaee", store="https://apps.apple.com/kr/app/id6812920395",
+        lead="오늘 하루, 딱 세 컷이면 돼요. 3초짜리 영상 세 개를 이어 세로 영상 한 편으로 만드는 영상 일기.",
+        problem="하루를 영상으로 남기고 싶어도 길게 찍으면 편집이 일이 되고, 짧게 찍으려니 뭘 찍을지부터 막막했어요. 찍어 둔 영상은 결국 다시 열어 보지 않게 되고요.",
+        solution="카페면 COFFEE · ME · LOCATION, 테니스면 RACKET · PLAYER · COURT처럼 템플릿이 찍을 세 장면을 정해 줍니다. 버튼을 누르면 3초 뒤 알아서 멈추니 세 번만 찍으면 끝. 필터와 폰트, 글자색을 고르면 9:16 세로 영상으로 사진 앱에 저장돼요.",
+        pills=["iOS 17+", "iPhone"],
+        extra=[],
+        cap=[("Released", "2026.09"), ("Platform", "iOS"), ("Price", "무료")],
+        shots=["카페 3컷", "테니스 3컷", "템플릿 고르기", "3초 촬영", "완성 화면"],
+        desc="오늘 하루, 딱 세 컷이면 돼요. 3초 영상 세 개를 이어 9:16 세로 영상으로 만드는 영상 일기 앱 Threes.",
+    ),
 ]
 
 APPLE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>'
+
+PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/></svg>'
 
 EYES = ('<svg class="eyes" viewBox="0 0 72 40" aria-hidden="true" focusable="false">'
         '<g transform="translate(19 20)"><g class="eye"><ellipse class="white" rx="15" ry="18"/><g class="pp"><circle class="pupil" r="6.5"/></g></g></g>'
@@ -131,13 +146,14 @@ def tail(scripts=True, inapp=False):
 
 
 def page_home():
-    desc = f"1인 앱 스튜디오 {NAME}. 독서 기록 앱 시오리, 밴드 합주 연습 앱 포밴드, 사진 정리 앱 아사진정리해야되는데를 만듭니다."
+    desc = f"1인 앱 스튜디오 {NAME}. 독서 기록 앱 시오리, 밴드 합주 연습 앱 포밴드, 사진 정리 앱 아사진정리해야되는데, 영상 일기 앱 Threes를 만듭니다."
     return head(f"{NAME} — 취미가 오래 가도록, 작은 앱을 만듭니다", desc, "/", intro=True) + f'''<main class="home">
   <div>
     <h1 class="sr">{NAME} — 앱 목록</h1>
     <ul class="index">
 {index_rows()}
     </ul>
+    <a class="side-b" href="/bside/"><b>SIDE B</b><span>혼자 개발하는 사람들 모임</span><i>→</i></a>
   </div>
 </main>
 <div class="corner l">{links()}</div>
@@ -147,12 +163,14 @@ def page_home():
 
 def page_app(a):
     pills = "".join(f'<span class="pill">{e(p)}</span>' for p in a["pills"])
+    play = f'<a class="pill" href="{e(a["play"])}" data-breakout>{PLAY}Google Play</a>' if a.get("play") else ""
     extra = "".join(f'<a class="pill ghost" href="{h}">{e(t)} ↗</a>' for t, h in a["extra"])
     cap = "".join(f'<span><b>{e(k)}</b>{e(v)}</span>' for k, v in a["cap"])
     shots = "\n".join(
         f'      <img src="/assets/apps/{a["key"]}-{i}.webp" alt="{e(a["ko"])} — {e(s)}" width="660" height="1434" loading="lazy">'
         for i, s in enumerate(a["shots"], 1))
-    return head(f'{a["title"]} · {a["ko"]} — {NAME}', a["desc"], f'/{a["key"]}/') + f'''<main class="proj" style="--poster:{a["poster"]}">
+    name = a["title"] if a["ko"] == a["title"] else f'{a["title"]} · {a["ko"]}'
+    return head(f'{name} — {NAME}', a["desc"], f'/{a["key"]}/') + f'''<main class="proj" style="--poster:{a["poster"]}">
   <h1 class="p-title">{e(a["title"])}</h1>
   <aside class="p-side">
     <p class="ko">{e(a["ko"])} — {e(a["cat"])}</p>
@@ -164,7 +182,7 @@ def page_app(a):
     <h2>Platforms</h2>
     <div class="pills">{pills}</div>
     <h2>Get the app</h2>
-    <div class="pills"><a class="pill" href="{a["store"]}">{APPLE}App Store</a>{extra}</div>
+    <div class="pills"><a class="pill" href="{a["store"]}">{APPLE}App Store</a>{play}{extra}</div>
   </aside>
   <div class="p-main">
     <figure class="poster"><img class="icon" src="/assets/apps/{a["key"]}.png" alt="{e(a["ko"])} 앱 아이콘" width="256" height="256"></figure>
@@ -205,7 +223,7 @@ def page_about():
     <div class="cap"><span class="nm">{NAME}</span><span class="r"><span><b>Apps</b>{len(APPS)}</span><span><b>Since</b>{YEAR}</span><span><b>Made by</b>1명</span></span></div>
     <p class="statement">취미가 오래 가도록,<br>작은 앱을 만듭니다.</p>
     <div class="prose">
-      <p>책을 읽고, 밴드 합주를 하고, 밀린 사진을 정리하는 일. 제가 매일 하는 일에 필요한 도구를 직접 만들어 쓰고, 손에 익은 것부터 하나씩 App Store에 올립니다.</p>
+      <p>책을 읽고, 밴드 합주를 하고, 밀린 사진을 정리하고, 하루를 짧은 영상으로 남기는 일. 제가 매일 하는 일에 필요한 도구를 직접 만들어 쓰고, 손에 익은 것부터 하나씩 App Store에 올립니다.</p>
       <p>앱에 대한 의견이나 제안은 언제든 메일로 보내 주세요.</p>
     </div>
     <section class="p-index" aria-label="앱 목록">
@@ -253,18 +271,23 @@ def build_og():
     d.text((120, 40), "INDIE APP STUDIO", font=F(sans, 22), fill="#0b0b0b")
     d.text((W - 48, 40), "APPS   ABOUT", font=F(sans, 22), fill="#0b0b0b", anchor="ra")
     eyes(d, W / 2, 52, 1.5)
-    y = 170
+    # 앱 줄: 눈 아래(135)부터 바닥 글줄 위(540)까지 405px 안에 들어가도록 줄 간격·글자 크기를 줄인다
+    step = min(122, int(405 / (len(APPS) - 1 + 0.85)))
+    size = round(step * 104 / 122)
+    k = size / 104
+    y = 135 + (405 - ((len(APPS) - 1) * step + size)) // 2
     for n, a in enumerate(APPS, 1):
-        d.text((250, y + 14), f"[{n:02d}]", font=F(sans, 17), fill="#0b0b0b")
-        d.text((306, y), a["title"], font=F(serif, 104), fill="#0b0b0b")
-        tw = d.textlength(a["title"], font=F(serif, 104))
+        d.text((250, y + 14 * k), f"[{n:02d}]", font=F(sans, 17), fill="#0b0b0b")
+        d.text((306, y), a["title"], font=F(serif, size), fill="#0b0b0b")
+        tw = d.textlength(a["title"], font=F(serif, size))
         ic = Image.open(os.path.join(ROOT, f"assets/apps/{a['key']}.png")).convert("RGBA").resize((44, 44), Image.LANCZOS)
         m = Image.new("L", (44, 44), 0); ImageDraw.Draw(m).rounded_rectangle([0, 0, 43, 43], radius=10, fill=255)
-        bx = int(306 + tw + 34)
-        og.paste(ic, (bx, y + 50), m)
-        d.text((bx + 58, y + 50), a["ko"], font=F(("/System/Library/Fonts/AppleSDGothicNeo.ttc", 6), 18), fill="#0b0b0b")
-        d.text((bx + 58, y + 74), a["cat"], font=F(sans, 18), fill="#0b0b0b")
-        y += 122
+        bx, by = int(306 + tw + 34), int(y + 50 * k)
+        og.paste(ic, (bx, by), m)
+        d.rounded_rectangle([bx, by, bx + 43, by + 43], radius=10, outline="#dcdcdc", width=1)  # 흰 아이콘 테두리
+        d.text((bx + 58, by), a["ko"], font=F(("/System/Library/Fonts/AppleSDGothicNeo.ttc", 6), 18), fill="#0b0b0b")
+        d.text((bx + 58, by + 24), a["cat"], font=F(sans, 18), fill="#0b0b0b")
+        y += step
     d.text((48, H - 58), "www.ohttne.com", font=F(sans, 20), fill="#0b0b0b")
     d.text((W - 48, H - 58), f"©{YEAR}", font=F(("/System/Library/Fonts/AppleSDGothicNeo.ttc", 6), 20), fill="#0b0b0b", anchor="ra")
     og.save(os.path.join(ROOT, "assets/og.png"), optimize=True)
