@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="/bside/bside.css">
 <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body class="closed">
 <header class="top">
   <a class="mark" href="/bside/">SIDE B</a>
   <a class="by" href="/">Ohtt ↗</a>
@@ -40,7 +40,8 @@
       <p>개발 얘기도 하고,<br>서비스 운영하면서 생기는 고민도 나누고,<br>가끔 같이 모각코도 해요.</p>
       <p>너무 거창한 모임 말고<br>편하게 얘기할 수 있는 작은 그룹으로 시작해보려고 해요.</p>
     </div>
-    <button class="cta" type="button" id="hero-cta" data-open><i>[</i><span>같이 해볼래요?</span><i>]</i></button>
+    <button class="cta off" type="button" id="hero-cta" disabled><i>[</i><span>모집 마감</span><i>]</i></button>
+    <p class="closed-note">이번 모집은 마감되었어요. 관심 가져줘서 고마워요 :)</p>
   </section>
 
   <section class="sec" id="about" aria-labelledby="h-about">
@@ -76,11 +77,11 @@
   </section>
 
   <section class="sec apply" id="apply" aria-labelledby="h-apply">
-    <h2 id="h-apply" tabindex="-1"><span class="no">04</span>같이 해볼래요?</h2>
+    <h2 id="h-apply" tabindex="-1"><span class="no">04</span>모집이 마감되었어요</h2>
 
     <div class="apply-intro" id="apply-intro">
-      <p>질문 10개, 2~3분이면 끝나요.<br>가입이나 로그인은 없어요.</p>
-      <button class="cta" type="button" data-open><i>[</i><span>신청하기</span><i>]</i></button>
+      <p>신청해주신 분들은 답변 확인하고<br>SNS로 오픈채팅 링크 보내드릴게요 :)</p>
+      <button class="cta off" type="button" disabled><i>[</i><span>모집 마감</span><i>]</i></button>
     </div>
 
     <form id="form" class="form" hidden novalidate>

@@ -8,6 +8,7 @@
   var submitBtn = $('#submit'), submitLabel = $('span', submitBtn), formErr = $('#form-err');
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var sending = false;
+  var closed = document.body.classList.contains('closed');     // 모집 마감: 버튼이 없고 링크로 와도 폼을 열지 않는다
 
   function scrollToApply(){
     var top = apply.getBoundingClientRect().top + pageYOffset - 20;
@@ -16,6 +17,7 @@
 
   /* ── 폼 펼치기: 같은 페이지에서 그대로 열린다 ── */
   function openForm(scroll){
+    if(closed) return;
     if(form.hidden){
       intro.hidden = true; form.hidden = false;
       try{ history.replaceState(null, '', '#apply'); }catch(e){}
@@ -24,7 +26,7 @@
     updateSticky();
   }
   $$('[data-open]').forEach(function(b){ b.addEventListener('click', function(){ openForm(true); }); });
-  if(location.hash === '#apply') openForm(false);        // 링크로 바로 왔으면 열어 둔다
+  if(location.hash === '#apply' && !closed) openForm(false);   // 링크로 바로 왔으면 열어 둔다
 
   /* ── 칩(라디오·체크박스) ── */
   form.addEventListener('change', function(e){
@@ -137,6 +139,7 @@
       if(r.status === 200 && r.body.ok){ showDone(); return; }
       if(r.status === 400 && r.body.fields){ showErrors(r.body.fields); fail('입력 내용을 한 번만 확인해주세요.'); return; }
       if(r.status === 429){ fail('조금 전에 이미 보냈어요. 잠시 후 다시 시도해주세요.'); return; }
+      if(r.status === 410){ fail('모집이 마감되었어요. 관심 가져줘서 고마워요 :)'); return; }
       fail('전송이 안 됐어요. 잠시 후 다시 시도해주세요.');
     })
     .catch(function(){ fail('네트워크 연결을 확인하고 다시 시도해주세요.'); })
@@ -155,8 +158,8 @@
 
   /* ── 하단 고정 버튼 ── */
   var heroSeen = true, applySeen = false;
-  function updateSticky(){ sticky.classList.toggle('show', !heroSeen && !applySeen && form.hidden && done.hidden); }
-  if('IntersectionObserver' in window){
+  function updateSticky(){ sticky.classList.toggle('show', !closed && !heroSeen && !applySeen && form.hidden && done.hidden); }
+  if('IntersectionObserver' in window && !closed){
     new IntersectionObserver(function(en){
       heroSeen = en[0].isIntersecting || en[0].boundingClientRect.top > 0;   // 아직 안 지나갔으면 본 걸로
       updateSticky();

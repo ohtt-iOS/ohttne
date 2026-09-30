@@ -58,6 +58,10 @@ a{color:inherit;text-decoration:none}
 .cta:active{transform:scale(.99)}
 .cta:disabled{opacity:.5;cursor:default;transform:none}
 .cta:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.cta.off,.cta.off:disabled{background:var(--line);color:var(--ink-2);opacity:1;cursor:default;transform:none}   /* 모집 마감 */
+.cta.off i{opacity:.5}
+.closed-note{margin:14px 0 0;font-size:14px;color:var(--ink-2)}
+body.closed .sticky{display:none}
 
 /* ───────── 섹션 ───────── */
 .sec{margin-top:56px;padding-top:56px;border-top:1px solid var(--line)}

@@ -16,6 +16,7 @@ NAME = "Ohtt"
 MAIL = "ohttangent@gmail.com"
 INSTA = "https://www.instagram.com/ohtt_anyway/"
 YEAR = "2026"
+BSIDE_CLOSED = True      # SIDE B 모집 마감이면 홈 버튼을 회색 "모집 마감"으로 (bside/index.html의 body.closed·Worker CLOSED 와 같이 바꾼다)
 
 APPS = [
     dict(
@@ -145,6 +146,12 @@ def tail(scripts=True, inapp=False):
     return s + '</body>\n</html>\n'
 
 
+def side_b():
+    if BSIDE_CLOSED:
+        return '    <a class="side-b closed" href="/bside/"><b>SIDE B</b><span>혼자 개발하는 사람들 모임</span><i>모집 마감</i></a>'
+    return '    <a class="side-b" href="/bside/"><b>SIDE B</b><span>혼자 개발하는 사람들 모임</span><i>→</i></a>'
+
+
 def page_home():
     desc = f"1인 앱 스튜디오 {NAME}. 독서 기록 앱 시오리, 밴드 합주 연습 앱 포밴드, 사진 정리 앱 아사진정리해야되는데, 영상 일기 앱 Threes를 만듭니다."
     return head(f"{NAME} — 취미가 오래 가도록, 작은 앱을 만듭니다", desc, "/", intro=True) + f'''<main class="home">
@@ -153,7 +160,7 @@ def page_home():
     <ul class="index">
 {index_rows()}
     </ul>
-    <a class="side-b" href="/bside/"><b>SIDE B</b><span>혼자 개발하는 사람들 모임</span><i>→</i></a>
+{side_b()}
   </div>
 </main>
 <div class="corner l">{links()}</div>

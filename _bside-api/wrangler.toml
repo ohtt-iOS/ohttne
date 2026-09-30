@@ -7,6 +7,8 @@ compatibility_date = "2026-09-01"
 workers_dev = true
 
 [vars]
+# "1"이면 모집 마감: 신청을 410으로 거절한다 (페이지 body.closed·build.py BSIDE_CLOSED 와 같이 바꾼다)
+CLOSED = "1"
 ALLOWED_ORIGINS = "https://www.ohttne.com,https://ohttne.com"
 MAIL_FROM = "bside@ohttne.com"
 MAIL_FROM_NAME = "SIDE B"

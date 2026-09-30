@@ -110,6 +110,12 @@ html.intro .index li{opacity:0;transform:translateY(12px)}
 .side-b:hover b{background:var(--bg);color:var(--ink)}
 .side-b:hover i{transform:translateX(3px)}
 html.intro .side-b{opacity:0;transform:translateY(12px)}
+.side-b.closed{box-shadow:inset 0 0 0 1px var(--line);color:var(--ink-2)}
+.side-b.closed b{background:var(--mute)}
+.side-b.closed i{font-size:10.5px;letter-spacing:.02em}
+.side-b.closed:hover{background:transparent;color:var(--ink-2)}
+.side-b.closed:hover b{background:var(--mute);color:var(--bg)}
+.side-b.closed:hover i{transform:none}
 
 /* 모서리: 링크 · 연도 */
 .corner{position:fixed;bottom:18px;z-index:40;font-size:12.5px;line-height:1.35;transition:opacity .6s ease .7s}

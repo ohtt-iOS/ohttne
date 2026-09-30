@@ -48,3 +48,11 @@ About 포스터는 큰 눈, 다크 모드, 960px 미만은 고정 안무 없이 
 폼은 `https://bside-apply.ohttangent.workers.dev/apply`(POST JSON)로 보내고, Worker가 검증한 뒤 메일로 전달한다.
 
 Worker(`_bside-api/`): `cd _bside-api && npx wrangler deploy` (wrangler 로그인 필요). 자세한 건 `_bside-api/README.md`.
+
+### 모집 마감 / 재개
+
+세 군데를 같이 바꾼다. 2026-09-30 마감 상태.
+
+1. `bside/index.html` — `<body class="closed">`, 버튼 두 개는 `class="cta off" disabled` + `모집 마감`, 04 제목·문구를 마감 안내로 (재개하면 원래 문구 `같이 해볼래요?`·`신청하기`·`data-open`으로 되돌린다)
+2. `_build/build.py` — `BSIDE_CLOSED` → 홈 알약이 회색 `모집 마감`. 다시 굽기
+3. `_bside-api/wrangler.toml` — `CLOSED = "1"` 이면 Worker가 410으로 거절. `npx wrangler deploy`

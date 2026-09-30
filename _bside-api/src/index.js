@@ -24,6 +24,7 @@ export default {
       return json({ colo: request.cf && request.cf.colo, out }, 200, {});
     }
     if (request.method !== "POST" || path !== "/apply") return json({ ok: false, error: "not_found" }, 404, cors);
+    if (env.CLOSED === "1") return json({ ok: false, error: "closed" }, 410, cors);      // 모집 마감
 
     const ip = request.headers.get("CF-Connecting-IP") || "unknown";
     if (!(await allow(ip, env))) return json({ ok: false, error: "rate_limit" }, 429, cors);
