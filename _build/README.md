@@ -24,6 +24,7 @@ About 포스터는 큰 눈, 다크 모드, 960px 미만은 고정 안무 없이 
     /siori/tour/       옛 시오리 스크롤리텔링 랜딩 (시오리 상세의 "기능 둘러보기")
     /about/            소개 · 연락
     /privacy.html      그대로 (App Store · Play Console이 참조)
+    /sitemap.xml · /robots.txt   build.py가 같이 굽는다 (구글 서치 콘솔에 sitemap.xml 제출)
     /app-ads.txt       AdMob 광고 인증(게시자 pub-7463621618274722, 모든 앱 공용 — 스토어 등록정보의 웹사이트 도메인 루트에 있어야 한다)
     /forband/app-store/ 그대로 (인앱 브라우저 탈출 리다이렉트)
     /bside/            SIDE B — 1인 개발자 모임 소개 + 신청 폼 (손으로 관리, 아래 참고)
@@ -36,6 +37,9 @@ About 포스터는 큰 눈, 다크 모드, 960px 미만은 고정 안무 없이 
 
     python3 _build/build.py          # 페이지
     python3 _build/build.py --og     # + og.png · 파비콘
+
+앱 상세 페이지 `<head>`에는 Safari 스마트 앱 배너(`apple-itunes-app`)와 구조화 데이터(schema.org `MobileApplication`)가 들어간다.
+평점은 굽는 순간 iTunes lookup API(한국)에서 가져오고, 인터넷이 없으면 평점 없이 굽는다.
 
 모양은 `assets/site.css`, 움직임은 `assets/site.js`.
 

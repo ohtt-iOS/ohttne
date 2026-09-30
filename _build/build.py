@@ -8,7 +8,7 @@
 <key>-1.webp … <key>-N.webp(스크린샷 660px 폭)를 넣은 뒤 다시 굽는다.
 `_` 로 시작하는 폴더는 GitHub Pages(Jekyll)가 배포에서 뺀다.
 """
-import html, os, sys
+import datetime, html, json, os, sys, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://www.ohttne.com"
@@ -20,7 +20,7 @@ BSIDE_CLOSED = True      # SIDE B 모집 마감이면 홈 버튼을 회색 "모�
 
 APPS = [
     dict(
-        key="siori", title="Siori", ko="시오리", cat="독서 기록", new=False,
+        key="siori", kind="LifestyleApplication", title="Siori", ko="시오리", cat="독서 기록", new=False,
         poster="#f6efdc", store="https://apps.apple.com/kr/app/id6788732084",
         play="https://play.google.com/store/apps/details?id=com.ohtt.siori.android",
         lead="책 읽다 좋았던 문장, 잊어버리기 전에. 읽는 중인 책과 마음에 남은 문장을 차곡차곡 모으는 독서 다이어리.",
@@ -33,7 +33,7 @@ APPS = [
         desc="책 읽다 좋았던 문장, 잊어버리기 전에. 인용·메모·사진 노트, 인물 관계도, 독서 잔디, 집중 타이머, 단어장까지 담은 독서 기록 앱 시오리.",
     ),
     dict(
-        key="forband", title="ForBand", ko="포밴드", cat="밴드 합주 연습", new=False,
+        key="forband", kind="MultimediaApplication", title="ForBand", ko="포밴드", cat="밴드 합주 연습", new=False,
         poster="#1d1d1f", store="https://apps.apple.com/kr/app/id6793964973",
         lead="카피 연습부터 합주, 무대까지. 밴드 연습에 필요한 도구를 하나로 모은 주머니 속 연습실.",
         problem="합주 준비엔 앱이 너무 많이 필요했습니다. 느리게 듣는 플레이어, 메트로놈, 튜너, 녹음기, 세트리스트 메모까지 전부 따로따로였어요.",
@@ -45,7 +45,7 @@ APPS = [
         desc="밴드 합주 연습의 모든 것. 템포·피치 조절 플레이어, 변박 메트로놈, 튜너, 연주 영상 촬영, 세트리스트를 하나에 담은 포밴드.",
     ),
     dict(
-        key="photodesk", title="Photodesk", ko="아사진정리해야되는데", cat="사진 정리", new=True,
+        key="photodesk", kind="MultimediaApplication", title="Photodesk", ko="아사진정리해야되는데", cat="사진 정리", new=True,
         poster="#0a0a0c", store="https://apps.apple.com/kr/app/id6808960253",
         lead="밀린 사진 정리, 하루치씩 가볍게. 날짜를 고르고 넘기다 보면 어느새 그날 정리가 끝나요.",
         problem="사진첩은 ‘언젠가 정리해야지’ 하는 사이 몇만 장이 됩니다. 한 번에 다 하려니 시작조차 못 하게 돼요.",
@@ -57,7 +57,7 @@ APPS = [
         desc="밀린 사진 정리, 하루치씩 가볍게. 날짜를 골라 스와이프로 남기고 지우는 사진 정리 앱 아사진정리해야되는데(Photodesk).",
     ),
     dict(
-        key="threes", title="Threes", ko="Threes", cat="영상 일기", new=True,
+        key="threes", kind="MultimediaApplication", title="Threes", ko="Threes", cat="영상 일기", new=True,
         poster="#fbeaee", store="https://apps.apple.com/kr/app/id6812920395",
         lead="오늘 하루, 딱 세 컷이면 돼요. 3초짜리 영상 세 개를 이어 세로 영상 한 편으로 만드는 영상 일기.",
         problem="하루를 영상으로 남기고 싶어도 길게 찍으면 편집이 일이 되고, 짧게 찍으려니 뭘 찍을지부터 막막했어요. 찍어 둔 영상은 결국 다시 열어 보지 않게 되고요.",
@@ -82,7 +82,56 @@ EYES = ('<svg class="eyes" viewBox="0 0 72 40" aria-hidden="true" focusable="fal
 e = html.escape
 
 
-def head(title, desc, path, intro=False):
+def app_id(a):
+    return a["store"].rsplit("id", 1)[1]
+
+
+def ratings():
+    """App Store 평점(한국)을 굽는 시점에 가져온다. 인터넷이 없으면 평점 없이 굽는다."""
+    ids = ",".join(app_id(a) for a in APPS)
+    try:
+        with urllib.request.urlopen(f"https://itunes.apple.com/lookup?id={ids}&country=kr", timeout=8) as r:
+            res = json.load(r)["results"]
+        return {str(x["trackId"]): (x.get("averageUserRating") or 0, x.get("userRatingCount") or 0) for x in res}
+    except Exception as ex:
+        print("평점 못 가져옴 — 평점 없이 굽는다:", ex)
+        return {}
+
+
+RATINGS = {}
+
+
+def ld(obj):
+    return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False).replace("</", "<\\/") + '</script>\n'
+
+
+def app_ld(a):
+    price = dict(a["cap"]).get("Price", "무료")
+    obj = {
+        "@context": "https://schema.org", "@type": "MobileApplication",
+        "name": a["ko"], "alternateName": a["title"], "url": f'{SITE}/{a["key"]}/',
+        "description": a["desc"], "applicationCategory": a["kind"],
+        "operatingSystem": ", ".join(p for p in a["pills"] if p.startswith(("iOS", "Android"))),
+        "image": f'{SITE}/assets/apps/{a["key"]}.png',
+        "screenshot": f'{SITE}/assets/apps/{a["key"]}-1.webp',
+        "installUrl": a["store"], "inLanguage": "ko",
+        "offers": {"@type": "Offer", "price": "0" if price == "무료" else "".join(c for c in price if c.isdigit()), "priceCurrency": "KRW"},
+        "author": {"@type": "Organization", "name": NAME, "url": SITE},
+    }
+    avg, cnt = RATINGS.get(app_id(a), (0, 0))
+    if cnt:
+        obj["aggregateRating"] = {"@type": "AggregateRating", "ratingValue": round(avg, 1), "ratingCount": cnt, "bestRating": 5}
+    return ld(obj)
+
+
+def home_ld():
+    return ld({
+        "@context": "https://schema.org", "@type": "Organization", "name": NAME, "url": SITE,
+        "logo": f"{SITE}/assets/apple-touch-icon.png", "email": MAIL, "sameAs": [INSTA],
+    })
+
+
+def head(title, desc, path, intro=False, extra=""):
     intro_js = ("try{if(!sessionStorage.getItem('ohtt-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)"
                 "document.documentElement.classList.add('intro')}catch(e){}") if intro else ""
     return f'''<!DOCTYPE html>
@@ -110,7 +159,7 @@ def head(title, desc, path, intro=False):
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="/assets/site.css">
 <script>document.documentElement.classList.add('js');{intro_js}</script>
-</head>
+{extra}</head>
 <body>
 <header class="nav">
   <div class="nav-l"><a href="/"><b class="nm">{NAME}</b></a><span>Indie App Studio</span></div>
@@ -154,7 +203,7 @@ def side_b():
 
 def page_home():
     desc = f"1인 앱 스튜디오 {NAME}. 독서 기록 앱 시오리, 밴드 합주 연습 앱 포밴드, 사진 정리 앱 아사진정리해야되는데, 영상 일기 앱 Threes를 만듭니다."
-    return head(f"{NAME} — 취미가 오래 가도록, 작은 앱을 만듭니다", desc, "/", intro=True) + f'''<main class="home">
+    return head(f"{NAME} — 취미가 오래 가도록, 작은 앱을 만듭니다", desc, "/", intro=True, extra=home_ld()) + f'''<main class="home">
   <div>
     <h1 class="sr">{NAME} — 앱 목록</h1>
     <ul class="index">
@@ -177,7 +226,8 @@ def page_app(a):
         f'      <img src="/assets/apps/{a["key"]}-{i}.webp" alt="{e(a["ko"])} — {e(s)}" width="660" height="1434" loading="lazy">'
         for i, s in enumerate(a["shots"], 1))
     name = a["title"] if a["ko"] == a["title"] else f'{a["title"]} · {a["ko"]}'
-    return head(f'{name} — {NAME}', a["desc"], f'/{a["key"]}/') + f'''<main class="proj" style="--poster:{a["poster"]}">
+    meta = f'<meta name="apple-itunes-app" content="app-id={app_id(a)}">\n' + app_ld(a)
+    return head(f'{name} — {a["cat"]} 앱 · {NAME}', a["desc"], f'/{a["key"]}/', extra=meta) + f'''<main class="proj" style="--poster:{a["poster"]}">
   <h1 class="p-title">{e(a["title"])}</h1>
   <aside class="p-side">
     <p class="ko">{e(a["ko"])} — {e(a["cat"])}</p>
@@ -242,6 +292,23 @@ def page_about():
   <footer class="foot"><div class="l">{links()}</div><div class="r">©{YEAR}</div></footer>
 </main>
 ''' + tail()
+
+
+PAGES = ["/", *[f'/{a["key"]}/' for a in APPS], "/siori/tour/", "/about/", "/bside/", "/privacy.html"]
+
+
+def sitemap():
+    today = datetime.date.today().isoformat()
+    urls = "\n".join(f"  <url><loc>{SITE}{p}</loc><lastmod>{today}</lastmod></url>" for p in PAGES)
+    return f'''<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{urls}
+</urlset>
+'''
+
+
+def robots():
+    return f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n"
 
 
 def write(rel, text):
@@ -309,9 +376,12 @@ def build_og():
 
 
 if __name__ == "__main__":
+    RATINGS.update(ratings())
     write("index.html", page_home())
     for a in APPS:
         write(f'{a["key"]}/index.html', page_app(a))
     write("about/index.html", page_about())
+    write("sitemap.xml", sitemap())
+    write("robots.txt", robots())
     if "--og" in sys.argv:
         build_og()
