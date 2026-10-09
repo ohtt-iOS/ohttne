@@ -57,16 +57,16 @@ APPS = [
         desc="밀린 사진 정리, 하루치씩 가볍게. 날짜를 골라 스와이프로 남기고 지우는 사진 정리 앱 아사진정리해야되는데(Photodesk).",
     ),
     dict(
-        key="nemong", kind="MultimediaApplication", title="Nemong", ko="네몽", cat="카드뉴스 캐러셀", new=False, soon=True,
+        key="nemong", kind="MultimediaApplication", title="Nemong", ko="네몽", cat="카드뉴스 캐러셀", new=True,
         poster="#f4f4f4", store="https://apps.apple.com/kr/app/id6817196863",
         lead="사진 위에 글 한 줄. 인스타 카드뉴스와 캐러셀을 폰에서 바로 만드는 네몽.",
         problem="카드뉴스 한 벌을 만들려면 장마다 같은 자리에 같은 모양으로 글을 올려야 하는데, 사진 앱에선 한 땀 한 땀 다시 맞추게 됩니다. 디자인 툴은 폰에서 쓰기엔 무겁고요.",
         solution="사진을 고르면 글상자가 올라오고, 글꼴·색·판·외곽선을 한 번 맞추면 템플릿으로 저장해 다음 장에 바로 입힙니다. 상자를 복사해 모든 장 같은 자리에 붙이고, 표지·본문·마지막 세 장 한 벌 프리셋과 카드뉴스에서 많이 쓰는 모양 55가지를 찾아보기에서 골라 쓰세요. 글 브러시, 가리기, 움직이는 글, 피드 미리보기까지.",
         pills=["iOS 17+", "iPhone", "Android (준비 중)"],
         extra=[],
-        cap=[("Open", "2026.10 예정"), ("Platform", "iOS · Android"), ("Price", "무료 · 플러스 구독")],
+        cap=[("Released", "2026.10"), ("Platform", "iOS"), ("Price", "무료 · 플러스 구독")],
         shots=["사진 위에 글", "템플릿으로 한 번에", "찾아보기", "세 장 한 벌", "피드 미리보기"],
-        desc="사진 위에 글 한 줄. 템플릿·프리셋·찾아보기로 인스타 카드뉴스와 캐러셀을 폰에서 바로 만드는 네몽. 2026년 10월 오픈 예정.",
+        desc="사진 위에 글 한 줄. 템플릿·프리셋·찾아보기로 인스타 카드뉴스와 캐러셀을 폰에서 바로 만드는 네몽.",
     ),
     dict(
         key="threes", kind="MultimediaApplication", title="Threes", ko="Threes", cat="영상 일기", new=True,
@@ -123,11 +123,11 @@ def app_ld(a):
         "@context": "https://schema.org", "@type": "MobileApplication",
         "name": a["ko"], "alternateName": a["title"], "url": f'{SITE}/{a["key"]}/',
         "description": a["desc"], "applicationCategory": a["kind"],
-        "operatingSystem": ", ".join(p for p in a["pills"] if p.startswith(("iOS", "Android"))),
+        "operatingSystem": ", ".join(p for p in a["pills"] if p.startswith(("iOS", "Android")) and "준비 중" not in p),
         "image": f'{SITE}/assets/apps/{a["key"]}.png',
         "screenshot": f'{SITE}/assets/apps/{a["key"]}-1.webp',
         **({} if a.get("soon") else {"installUrl": a["store"]}), "inLanguage": "ko",
-        "offers": {"@type": "Offer", "price": "0" if price == "무료" else "".join(c for c in price if c.isdigit()), "priceCurrency": "KRW"},
+        "offers": {"@type": "Offer", "price": "0" if price.startswith("무료") else "".join(c for c in price if c.isdigit()), "priceCurrency": "KRW"},
         "author": {"@type": "Organization", "name": NAME, "url": SITE},
     }
     avg, cnt = RATINGS.get(app_id(a), (0, 0))
@@ -214,7 +214,7 @@ def side_b():
 
 
 def page_home():
-    desc = f"1인 앱 스튜디오 {NAME}. 독서 기록 앱 시오리, 밴드 합주 연습 앱 포밴드, 사진 정리 앱 아사진정리해야되는데, 영상 일기 앱 Threes, 카드뉴스 앱 네몽(오픈 예정)을 만듭니다."
+    desc = f"1인 앱 스튜디오 {NAME}. 독서 기록 앱 시오리, 밴드 합주 연습 앱 포밴드, 사진 정리 앱 아사진정리해야되는데, 영상 일기 앱 Threes, 카드뉴스 앱 네몽을 만듭니다."
     return head(f"{NAME} — 취미가 오래 가도록, 작은 앱을 만듭니다", desc, "/", intro=True, extra=home_ld()) + f'''<main class="home">
   <div>
     <h1 class="sr">{NAME} — 앱 목록</h1>
