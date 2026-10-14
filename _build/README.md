@@ -22,6 +22,7 @@ About 포스터는 큰 눈, 다크 모드, 960px 미만은 고정 안무 없이 
     /                  앱 인덱스 (홈)
     /siori/ /forband/ /photodesk/ /threes/   앱 상세
     /siori/tour/       옛 시오리 스크롤리텔링 랜딩 (시오리 상세의 "기능 둘러보기")
+    /siori/get/        스토어 갈림길 — iOS는 App Store, 안드로이드는 Google Play로 자동 이동, 인앱·PC는 버튼 (손으로 관리, noindex)
     /about/            소개 · 연락
     /privacy.html      그대로 (App Store · Play Console이 참조)
     /sitemap.xml · /robots.txt   build.py가 같이 굽는다 (구글 서치 콘솔에 sitemap.xml 제출)
