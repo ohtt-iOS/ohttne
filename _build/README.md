@@ -23,6 +23,7 @@ About 포스터는 큰 눈, 다크 모드, 960px 미만은 고정 안무 없이 
     /siori/ /forband/ /photodesk/ /threes/   앱 상세
     /siori/tour/       옛 시오리 스크롤리텔링 랜딩 (시오리 상세의 "기능 둘러보기")
     /siori/get/        스토어 갈림길 — iOS는 App Store, 안드로이드는 Google Play로 자동 이동, 인앱·PC는 버튼 (손으로 관리, noindex)
+    /nemong/get/<이름>/ 네몽 받기 링크 — 시오리 갈림길 + 링크별 세기(크리에이터마다 하나). _build/nemong_get.txt 에 이름 → nemong_get.py 로 굽기, 숫자는 nemong.ohttne.com/links
     /about/            소개 · 연락
     /privacy.html      그대로 (App Store · Play Console이 참조)
     /sitemap.xml · /robots.txt   build.py가 같이 굽는다 (구글 서치 콘솔에 sitemap.xml 제출)
