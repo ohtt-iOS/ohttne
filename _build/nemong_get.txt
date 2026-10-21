@@ -1,3 +1,7 @@
 # 네몽 받기 링크 — 한 줄에 이름 하나 → www.ohttne.com/nemong/get/<이름>/ (python3 _build/nemong_get.py 로 굽기)
 # 영문 소문자·숫자·-·_ 32자까지. # 뒤는 메모(누구에게 줬나 등, 페이지엔 안 나감)
+threads    # 내 스레드
 insta      # 내 인스타 프로필·스토리
+noki       # 크리에이터 noki님
+hipi       # 크리에이터 hipi님
+min        # 크리에이터 min님
