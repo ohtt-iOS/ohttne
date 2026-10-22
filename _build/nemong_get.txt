@@ -3,5 +3,6 @@
 threads    # 내 스레드
 insta      # 내 인스타 프로필·스토리
 noki       # 크리에이터 noki님
-hipi       # 크리에이터 hipi님
+hippiee    # 크리에이터 히피님 (10-22 hipi 에서 바꿈)
+hipi       # 옛 링크 — 혹시 이미 드렸으면 계속 열리게 남겨 둠(따로 셈)
 min        # 크리에이터 min님
