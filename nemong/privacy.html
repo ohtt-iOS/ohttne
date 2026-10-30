@@ -130,33 +130,39 @@
     </h1>
     <p class="meta">
       <b>네몽</b>(이하 "앱")은 이용자의 개인정보를 소중히 여기며, 아래와 같이 데이터를 처리합니다.<br>
-      시행일자 (Effective date): <b>2026년 10월 1일</b> · 개정 (Revised): <b>2026년 10월 5일</b> — Android(Google Play) 항목 추가
+      시행일자 (Effective date): <b>2026년 10월 1일</b> · 개정 (Revised): <b>[로그인 기능 출시일]</b> — 선택 로그인·플러스 연동, 계정 삭제, 문의 처리 항목 추가
     </p>
   </header>
 
   <div class="lede">
-    <strong>한눈에 보기.</strong> 네몽은 계정 가입이 없고, 광고를 싣지 않으며, 광고·마케팅 목적의 추적을 하지 않습니다.
+    <strong>한눈에 보기.</strong> 네몽은 가입 없이 모두 쓸 수 있고, 광고를 싣지 않으며, 광고·마케팅 목적의 추적을 하지 않습니다.
     이용자가 고른 사진과 작성한 글, 저장한 템플릿은 <strong>이용자의 기기에만 저장</strong>되며 개발자를 포함한 제3자에게 전송되지 않습니다.
-    앱 개선을 위한 <strong>익명 사용 통계와 오류 정보</strong>만 Google Firebase를 통해 수집됩니다(3항). Android 판은 9항을 함께 보세요.
+    앱 개선을 위한 <strong>익명 사용 통계와 오류 정보</strong>는 Google Firebase를 통해 수집됩니다(3항).
+    <strong>로그인은 선택</strong>이며, 로그인하면 아이폰·안드로이드 어디서 산 네몽 플러스든 함께 쓸 수 있도록 계정 식별자와 구매 연결 기록만 서버에 둡니다(10항). 계정은 앱에서 언제든 지울 수 있습니다(11항). Android 판은 9항을 함께 보세요.
     <br><br>
     <span class="en">
-    At a glance — Nemong has no sign-up, shows no ads, and does no ad or marketing tracking. The photos you pick, the text you write,
+    At a glance — Nemong works fully without an account, shows no ads, and does no ad or marketing tracking. The photos you pick, the text you write,
     and the templates you save stay only on your device and are never sent to the developer or any third party.
-    Only anonymized usage statistics and crash reports are collected via Google Firebase (see §3). For the Android app see also §9.
+    Anonymized usage statistics and crash reports are collected via Google Firebase (see §3). Signing in is optional: if you sign in,
+    we keep only an account identifier and purchase links on our server so that Nemong Plus bought on iPhone or Android works on both (§10).
+    You can delete your account in the app at any time (§11). For the Android app see also §9.
     </span>
   </div>
 
   <h2><span class="toc-row"><span class="num">01</span><span class="t">수집·처리하는 정보</span><span class="leader"></span><span class="en">What we process</span></span></h2>
-  <p>앱은 계정 가입을 요구하지 않으며, 이용자의 작업물을 보관하는 서버가 없습니다. 처리되는 정보는 아래와 같습니다.</p>
-  <p class="en-note">The app requires no sign-up and has no server that stores your work. The data involved is as follows.</p>
+  <p>앱은 계정 가입을 요구하지 않으며, 이용자의 작업물을 보관하는 서버가 없습니다. 처리되는 정보는 아래와 같습니다. '로그인 시' 줄은 로그인한 경우에만 더해집니다.</p>
+  <p class="en-note">The app requires no sign-up and has no server that stores your work. The data involved is as follows; rows marked "if you sign in" apply only if you sign in.</p>
   <div class="tbl-scroll">
     <table>
       <thead><tr><th>항목 (Data)</th><th>목적 (Purpose)</th><th>저장 위치 (Where)</th></tr></thead>
       <tbody>
-        <tr><td>사진<br><span class="td-en">Photos</span></td><td>이용자가 고른 사진에 글을 넣어 캐러셀을 만들기 위해. 사진 보관함은 이용자가 고른 사진만 받고, 저장은 추가 권한만 씁니다</td><td>기기(로컬)</td></tr>
+        <tr><td>사진<br><span class="td-en">Photos</span></td><td>이용자가 고른 사진 위에 글을 얹어 캐러셀을 만들기 위해. 사진 보관함은 이용자가 고른 사진만 받고, 저장은 추가 권한만 씁니다</td><td>기기(로컬)</td></tr>
         <tr><td>글·글상자·장 구성<br><span class="td-en">Text · layouts</span></td><td>작업 중인 캐러셀을 자동 저장하고 이어서 열기 위해</td><td>기기(로컬)</td></tr>
         <tr><td>템플릿·장 틀·최근 색·불러온 글꼴<br><span class="td-en">Templates · fonts</span></td><td>자주 쓰는 모양과 글꼴을 다시 쓰기 위해</td><td>기기(로컬)</td></tr>
         <tr><td>사용 통계·오류 정보<br><span class="td-en">Usage stats · crash reports</span></td><td>앱 개선과 오류 수정을 위해 — 화면 이동, 기능 사용 이벤트(저장·공유·템플릿 사용 등), 기기 모델·OS 버전, 크래시 진단. 사진·글 내용은 포함되지 않음(3항)</td><td>Google Firebase 로 전송</td></tr>
+        <tr><td>계정 정보(로그인 시)<br><span class="td-en">Account (if you sign in)</span></td><td>로그인 유지와 계정 확인 — 계정 식별자(Firebase UID), 로그인 수단(Apple·Google), 이메일 주소(Apple '나의 이메일 가리기'를 고르면 Apple 중계 주소). 이름·사진은 받지 않음</td><td>Google Firebase Authentication · 개발자 서버</td></tr>
+        <tr><td>구매 연결 기록(로그인 시)<br><span class="td-en">Purchase links (if you sign in)</span></td><td>아이폰·안드로이드에서 같은 네몽 플러스를 쓰게 하기 위해 — 스토어 거래 번호(App Store originalTransactionId·Google Play 구매 토큰·주문 번호), 상품, 상태(사용 중·만료·환불 등), 만료일, 테스트 결제 여부, 오퍼 사용 여부. 카드·결제 수단 정보는 받지 않음</td><td>개발자 서버(Cloudflare)</td></tr>
+        <tr><td>접속·문의 처리 기록(로그인 시)<br><span class="td-en">Access &amp; support records (if you sign in)</span></td><td>구매 문의에 답하고 오류를 고치기 위해 — 마지막 접속 시각, 기기 종류(iOS·Android)와 앱 버전, 스토어 알림·재확인 기록, 문의 내용과 처리 기록</td><td>개발자 서버(Cloudflare)</td></tr>
       </tbody>
     </table>
   </div>
@@ -171,11 +177,20 @@
 
   <h2><span class="toc-row"><span class="num">04</span><span class="t">보유 기간과 삭제</span><span class="leader"></span><span class="en">Retention</span></span></h2>
   <p>기기에 저장된 작업물은 이용자가 앱 안에서 지우거나 앱을 삭제하면 함께 사라집니다. Firebase에 수집된 통계는 Google의 보유 정책(기본 14개월)에 따릅니다.</p>
-  <p class="en-note">Data on your device is removed when you delete it in the app or uninstall the app. Firebase statistics follow Google's retention policy (14 months by default).</p>
+  <p>로그인한 경우: 계정 정보와 구매 연결 기록은 <strong>계정을 지울 때까지</strong> 보관하고, 계정을 지우면 바로 삭제합니다(스토어 거래 자체는 Apple·Google에 남으며, 우리 서버에서는 계정과의 연결만 지워집니다). 스토어 알림 원문과 재확인·오류 기록은 <strong>90일</strong>, 해결된 문의는 <strong>1년</strong> 뒤 자동 삭제합니다. 다만 개발자가 계정에 대해 한 조치의 기록(누가·언제·무엇을·사유)은 분쟁 대응과 처리 근거를 위해 계정 삭제 뒤에도 보관하며, 여기에는 계정 식별자만 남고 이메일은 남지 않습니다.</p>
+  <p class="en-note">Data on your device is removed when you delete it in the app or uninstall the app. Firebase statistics follow Google's retention policy (14 months by default).
+  If you sign in, account data and purchase links are kept until you delete your account and are erased immediately when you do (store transactions themselves remain with Apple/Google; we only remove the link to your account). Raw store notifications and refresh/error logs are deleted after 90 days, and resolved support tickets after one year. A record of actions the developer took on an account (who, when, what, why) is kept after deletion as evidence of handling; it contains only the account identifier, not your email.</p>
 
   <h2><span class="toc-row"><span class="num">05</span><span class="t">제3자 제공</span><span class="leader"></span><span class="en">Third parties</span></span></h2>
   <p>앱은 이용자의 개인정보를 제3자에게 판매하거나 제공하지 않습니다. 공유하기로 다른 앱에 보내는 결과물은 이용자의 선택에 따라 그 앱으로 전달됩니다.</p>
-  <p class="en-note">We never sell or share your personal data. Anything you send via the share sheet goes to the app you choose.</p>
+  <p>서비스 운영을 위해 아래 업체에 처리를 맡깁니다(처리 위탁). 로그인하지 않으면 1·2는 해당하지 않습니다.</p>
+  <ul>
+    <li><strong>Google LLC(Firebase Authentication)</strong> — 로그인과 계정 식별자 발급. 미국 등 Google 데이터센터.</li>
+    <li><strong>Cloudflare, Inc.(Workers·D1)</strong> — 구매 연결 기록과 문의 처리 기록 보관. Cloudflare 전 세계 네트워크.</li>
+    <li><strong>Google LLC(Firebase Analytics·Crashlytics)</strong> — 3항의 사용 통계·오류 정보.</li>
+    <li>구매 확인을 위해 <strong>Apple(App Store)</strong>과 <strong>Google(Google Play)</strong>에 거래 번호로 상태를 조회하고, 두 스토어가 보내는 결제 상태 알림을 받습니다.</li>
+  </ul>
+  <p class="en-note">We never sell or share your personal data. Anything you send via the share sheet goes to the app you choose. We use these processors: Google (Firebase Authentication — sign-in and account IDs), Cloudflare (Workers and D1 — purchase links and support records), Google (Firebase Analytics and Crashlytics — §3). To verify purchases we query Apple (App Store) and Google (Google Play) with the transaction identifiers and receive their payment-status notifications. The first two apply only if you sign in.</p>
 
   <h2><span class="toc-row"><span class="num">06</span><span class="t">아동의 개인정보</span><span class="leader"></span><span class="en">Children</span></span></h2>
   <p>앱은 아동을 대상으로 하지 않으며 아동의 개인정보를 의도적으로 수집하지 않습니다.</p>
@@ -196,10 +211,25 @@
     <li><strong>저장 권한(Android 9 이하).</strong> Android 9(API 28) 이하에서만 갤러리에 저장하기 위해 외부 저장소 쓰기 권한을 요청합니다. Android 10 이상에서는 권한 없이 저장됩니다. 거부해도 공유하기는 됩니다.</li>
     <li><strong>알림.</strong> 편집하다 둔 캐러셀이 있으면 다음 날 한 번 "이어하기" 알림을 보냅니다(Android 13 이상에서는 알림 권한을 한 번 묻습니다). 알림은 기기 안에서 예약되며 서버나 푸시 서비스를 쓰지 않습니다. 시스템 설정에서 언제든 끌 수 있습니다.</li>
     <li><strong>사용 통계(Google Firebase Analytics, 선택).</strong> Android 판은 Firebase Analytics만 쓰고 Crashlytics(오류 보고)는 쓰지 않습니다. 수집되는 것은 3항과 같은 익명 사용 통계(화면·기능 사용 이벤트, 기기 모델·OS·앱 버전, Analytics가 부여하는 앱 인스턴스 ID, IP 기반 대략적 위치)이며, 이용자를 식별하지 않고 <strong>광고 ID(Advertising ID)는 수집하지 않습니다</strong>. 전송은 암호화(HTTPS)됩니다. 이 통계는 개별 이용자와 연결되지 않아 개별 삭제 요청을 처리할 수 없으며, Google의 보유 정책(기본 14개월)에 따라 자동 삭제됩니다.</li>
-    <li><strong>인터넷 권한의 용도.</strong> 위 사용 통계 전송과 Google Play의 앱 업데이트 확인·별점 요청(Play In-App Update / In-App Review)에만 쓰입니다. 그 밖의 네트워크 통신은 없습니다.</li>
-    <li><strong>계정·결제·광고 없음.</strong> 회원 가입, 로그인, 인앱 결제, 광고가 없습니다. 편집 화면은 캡처·녹화가 막혀 있습니다(FLAG_SECURE).</li>
+    <li><strong>인터넷 권한의 용도.</strong> 위 사용 통계 전송, Google Play의 앱 업데이트 확인·별점 요청(Play In-App Update / In-App Review)·결제, 로그인했을 때의 계정 서버(10항)에 쓰입니다.</li>
+    <li><strong>결제·로그인.</strong> 네몽 플러스는 Google Play 결제로만 팝니다(카드 정보는 Google 이 처리하며 앱은 받지 않습니다). 로그인은 선택이며 10항과 같습니다. 광고는 없습니다. 편집 화면은 캡처·녹화가 막혀 있습니다(FLAG_SECURE).</li>
   </ul>
-  <p class="en-note">For the Android app on Google Play (package com.ohtt.nemong): photos and videos are processed only on the device — picking uses the Android Photo Picker (no full-library permission), results are saved to the gallery (Pictures/네몽, Movies/네몽), and nothing you make is uploaded anywhere. The external-storage write permission is requested only on Android 9 or lower. A single local "resume editing" reminder notification may be scheduled on the device (notification permission asked once on Android 13+); no push service is used. Only Firebase Analytics is used (no Crashlytics): anonymized usage events, device model, OS and app version, an app-instance ID and IP-based coarse location, sent over HTTPS; no Advertising ID is collected, data cannot be deleted per user, and it expires under Google's retention policy (14 months by default). Internet access is used only for these statistics and for Google Play in-app update and review prompts. No account, no purchases, no ads.</p>
+  <p class="en-note">For the Android app on Google Play (package com.ohtt.nemong): photos and videos are processed only on the device — picking uses the Android Photo Picker (no full-library permission), results are saved to the gallery (Pictures/네몽, Movies/네몽), and nothing you make is uploaded anywhere. The external-storage write permission is requested only on Android 9 or lower. A single local "resume editing" reminder notification may be scheduled on the device (notification permission asked once on Android 13+); no push service is used. Only Firebase Analytics is used (no Crashlytics): anonymized usage events, device model, OS and app version, an app-instance ID and IP-based coarse location, sent over HTTPS; no Advertising ID is collected, data cannot be deleted per user, and it expires under Google's retention policy (14 months by default). Internet access is used for these statistics, Google Play in-app update and review prompts, Google Play Billing, and — only if you sign in — the account server (§10). Nemong Plus is sold only through Google Play Billing (card details are handled by Google, never by the app). No ads.</p>
+  <h2><span class="toc-row"><span class="num">10</span><span class="t">로그인(선택)과 플러스 연동</span><span class="leader"></span><span class="en">Optional sign-in</span></span></h2>
+  <p>앱의 ⋯ › 계정에서 Apple 또는 Google로 로그인할 수 있습니다. 로그인하지 않아도 모든 기능과 이 기기에서 산 플러스는 그대로 쓸 수 있습니다.</p>
+  <ul>
+    <li>로그인하면 Google Firebase Authentication이 계정 식별자를 만들고, 이메일 주소를 함께 받습니다. Apple로 로그인하면서 '나의 이메일 가리기'를 고르면 실제 주소 대신 Apple 중계 주소가 전달됩니다.</li>
+    <li>로그인한 상태에서 결제하면, 스토어가 보내는 결제 알림을 이 계정에 연결하기 위해 계정 식별자에서 만든 값(App Store <code>appAccountToken</code>, Google Play <code>obfuscatedAccountId</code>)을 결제에 함께 싣습니다. 이 값으로는 이용자를 알아볼 수 없습니다.</li>
+    <li>기기에 있는 스토어 구매 영수증(서명된 거래 정보 또는 구매 토큰)을 서버로 보내고, 서버는 Apple·Google에 그 진위와 상태를 확인한 뒤 계정에 연결합니다. 같은 구매를 다른 계정이 다시 등록하면 마지막에 등록한 계정으로 옮겨집니다.</li>
+    <li>앱은 문의 대응을 위해 접속할 때 기기 종류(iOS·Android)와 앱 버전을 함께 보냅니다.</li>
+    <li>개발자는 구매 문의를 처리할 때만 이 기록을 열람하며, 열람과 조치는 모두 기록됩니다.</li>
+  </ul>
+  <p class="en-note">You can sign in with Apple or Google under ⋯ › Account; everything works without it. Firebase Authentication creates an account ID and receives your email (an Apple relay address if you chose "Hide My Email"). When you buy while signed in, a value derived from your account ID (App Store appAccountToken, Google Play obfuscatedAccountId) is attached to the purchase so store notifications can be linked to your account; it does not identify you. The app sends the store receipts on your device (signed transactions or purchase tokens) to our server, which verifies them with Apple/Google and links them to your account; if another account registers the same purchase later, it moves to that account. The app also sends its platform and version for support. The developer views these records only to handle purchase inquiries, and every view and action is logged.</p>
+
+  <h2><span class="toc-row"><span class="num">11</span><span class="t">계정 삭제</span><span class="leader"></span><span class="en">Deleting your account</span></span></h2>
+  <p>앱의 <strong>⋯ › 계정 › 계정 지우기</strong>에서 바로 지울 수 있습니다. 로그인 정보와 서버의 구매 연결·문의 기록이 지워지며 되돌릴 수 없습니다. 기기의 작업물은 그대로 남습니다. 앱을 쓸 수 없다면 <a href="/nemong/delete-account.html">계정 삭제 요청 페이지</a>에서 요청할 수 있습니다. 계정을 지워도 구독은 해지되지 않으니 App Store 또는 Google Play에서 해지해 주세요.</p>
+  <p class="en-note">Delete your account in the app under ⋯ › Account › Delete Account. Your sign-in and the purchase links and support records on our server are erased and cannot be restored; your work on the device stays. If you can't use the app, request deletion on the <a href="/nemong/delete-account.html">account deletion page</a>. Deleting your account does not cancel subscriptions — cancel them in the App Store or Google Play.</p>
+
   <p>개발자: Ohtt · 연락처: <a href="mailto:ohttangent@gmail.com">ohttangent@gmail.com</a> · 웹사이트: <a href="https://www.ohttne.com/">https://www.ohttne.com/</a></p>
 
 </div>
