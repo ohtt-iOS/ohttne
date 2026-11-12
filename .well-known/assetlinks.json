@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.ohtt.siori.android",
+      "sha256_cert_fingerprints": [
+        "53:F1:74:F3:9D:81:BE:B7:58:C0:10:39:E4:6D:3E:94:9E:C9:98:26:7F:AD:30:21:63:05:A0:CD:A9:C8:97:A8"
+      ]
+    }
+  }
+]

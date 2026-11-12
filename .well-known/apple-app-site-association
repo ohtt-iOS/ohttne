@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["26NS83VH7U.com.ohtt.siori"],
+        "components": [
+          { "/": "/siori/open/*", "comment": "시오리 앱으로 넘기는 주소 (연말 카드 등)" }
+        ]
+      }
+    ]
+  }
+}
