@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>개인정보 처리방침 · Croffle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --ink:#1c1c1e;
+    --ink-2:#6e6e73;
+    --ink-3:#aeaeb2;
+    --line:#e5e5ea;
+    --r-btn:8px;
+    --r-chip:6px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0e0e0e;
+      --ink:#ebebeb;
+      --ink-2:#98989e;
+      --ink-3:#5d5d63;
+      --line:#2c2c2e;
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",Segoe UI,Roboto,sans-serif;
+    line-height:1.78;font-size:16px;letter-spacing:-.01em;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 24px 96px}
+
+  /* 점선 리더 */
+  .toc-row{display:flex;align-items:baseline;gap:14px}
+  .leader{
+    flex:1;align-self:center;height:2px;
+    background-image:radial-gradient(circle, var(--ink-3) 1px, transparent 1.2px);
+    background-size:8px 2px;background-position:center;background-repeat:repeat-x;
+  }
+
+  header.top{padding:64px 0 30px;border-bottom:1px solid var(--line);margin-bottom:6px}
+  .kicker{
+    font-size:12px;font-weight:600;letter-spacing:.3em;
+    color:var(--ink-2);margin:0 0 30px;
+    font-family:ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  .kicker .toc-row{gap:18px}
+  h1{
+    font-family:"Gowun Batang","Nanum Myeongjo",Georgia,serif;
+    font-weight:400;font-size:clamp(28px,6vw,36px);line-height:1.45;
+    margin:0 0 10px;letter-spacing:.01em;
+  }
+  h1 .en{display:block;font-size:15px;color:var(--ink-3);font-style:italic;font-weight:400;margin-top:10px;font-family:Georgia,serif}
+  .meta{color:var(--ink-2);font-size:14px;margin:20px 0 0}
+  .meta b{color:var(--ink);font-weight:600}
+
+  .lede{
+    border:1px solid var(--line);border-radius:var(--r-btn);
+    padding:20px 22px;margin:30px 0 8px;
+    font-size:15.5px;color:var(--ink-2);
+  }
+  .lede strong{color:var(--ink)}
+  .lede .en{color:var(--ink-3);font-style:italic;font-size:14px;font-family:Georgia,serif}
+
+  h2{
+    font-family:"Gowun Batang",Georgia,serif;font-weight:700;
+    font-size:20px;margin:56px 0 6px;letter-spacing:.01em;
+  }
+  h2 .toc-row{gap:14px}
+  h2 .num{
+    font-size:13px;color:var(--ink-2);font-weight:400;min-width:26px;
+    font-family:ui-monospace,"SF Mono",Menlo,monospace;align-self:baseline;
+  }
+  h2 .t{white-space:nowrap}
+  h2 .en{
+    font-size:13px;color:var(--ink-3);font-style:italic;font-weight:400;
+    font-family:Georgia,serif;white-space:nowrap;
+  }
+  h3{font-size:16px;font-weight:700;margin:26px 0 4px}
+  p{margin:12px 0}
+  .en-note{color:var(--ink-3);font-size:13.5px;font-style:italic;margin:4px 0 12px;line-height:1.65;font-family:Georgia,serif}
+  ul{margin:12px 0;padding-left:2px;list-style:none}
+  li{position:relative;padding-left:18px;margin:9px 0}
+  li::before{content:"";position:absolute;left:2px;top:.78em;width:4px;height:4px;background:var(--ink-2)}
+  a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;text-decoration-color:var(--ink-3)}
+  strong{font-weight:700}
+  code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.92em}
+
+  .tbl-scroll{overflow-x:auto;margin:18px 0}
+  table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.6;min-width:520px}
+  th{
+    text-align:left;font-weight:600;font-size:12.5px;color:var(--ink-2);
+    letter-spacing:.04em;padding:10px 14px 10px 0;
+    border-bottom:1px solid var(--ink);
+  }
+  td{padding:12px 14px 12px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td b,td strong{font-weight:600}
+  .td-en{font-weight:400;color:var(--ink-3);font-size:12px;font-style:italic;font-family:Georgia,serif}
+
+  .contact{
+    border:1px solid var(--line);border-radius:var(--r-btn);
+    padding:22px;margin:60px 0 0;
+  }
+  .contact .kicker{margin:0 0 10px}
+  .contact a{font-weight:600}
+
+  footer{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    margin-top:44px;padding-top:26px;border-top:1px solid var(--line);
+    color:var(--ink-3);font-size:13px;
+  }
+  footer a{color:var(--ink-2);text-decoration:none}
+  footer a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <p class="kicker"><span class="toc-row"><span>Croffle</span><span class="leader"></span><span>PRIVACY</span></span></p>
+    <h1>개인정보 처리방침
+      <span class="en">Privacy Policy</span>
+    </h1>
+    <p class="meta">
+      <b>Croffle</b>(이하 "앱")은 이용자의 개인정보를 소중히 여기며, 아래와 같이 데이터를 처리합니다. iPhone·iPad·Mac·Android 앱에 함께 적용됩니다.<br>
+      시행일자 (Effective date): <b>2026년 11월 18일</b>
+    </p>
+  </header>
+
+  <div class="lede">
+    <strong>한눈에 보기.</strong> Croffle은 가입 없이 쓸 수 있고, 광고를 싣지 않으며, 광고·마케팅 목적의 추적을 하지 않습니다.
+    이용자가 고르거나 찍은 <strong>영상·사진·소리와 프로젝트는 기기에만 저장</strong>되며 서버로 올리지 않습니다. 자막을 만드는 음성 인식도 기기 안에서 합니다.
+    다만 이용자가 직접 쓰는 몇 가지 기능은 <strong>글(텍스트)만</strong> 서버로 보냅니다 — AI 목소리(4항), AI 캡션(5항), 스타일 공유 링크(6항). AI 목소리와 AI 캡션은 처음 쓸 때 동의를 받습니다.
+    iPhone·iPad 앱은 앱 개선을 위한 익명 사용 통계와 오류 정보를 Google Firebase로 보냅니다(3항). 로그인은 선택입니다(7항).
+    <br><br>
+    <span class="en">
+    At a glance — Croffle works without an account, shows no ads, and does no ad or marketing tracking.
+    The videos, photos and audio you pick or record, and your projects, stay on your device and are never uploaded. Speech recognition for captions runs on the device.
+    A few features you choose to use send text only to a server: AI voice (§4), AI caption (§5) and style share links (§6). AI voice and AI caption ask for your consent first.
+    The iPhone and iPad apps send anonymous usage statistics and crash reports to Google Firebase (§3). Signing in is optional (§7).
+    </span>
+  </div>
+
+  <h2><span class="toc-row"><span class="num">01</span><span class="t">수집·처리하는 정보</span><span class="leader"></span><span class="en">What we process</span></span></h2>
+  <p>앱은 가입을 요구하지 않으며, 이용자의 영상·사진·프로젝트를 보관하는 서버가 없습니다. 처리되는 정보는 아래와 같습니다. "쓸 때만" 줄은 그 기능을 쓸 때만 해당합니다.</p>
+  <p class="en-note">The app requires no sign-up and has no server that stores your videos, photos or projects. Rows marked "only when used" apply only if you use that feature.</p>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>항목 (Data)</th><th>목적 (Purpose)</th><th>저장 위치 (Where)</th></tr></thead>
+      <tbody>
+        <tr><td>영상·사진·소리<br><span class="td-en">Videos · photos · audio</span></td><td>이용자가 고르거나 찍은 미디어로 영상을 편집하기 위해</td><td>기기(로컬) — 전송 없음</td></tr>
+        <tr><td>프로젝트·자막·대본·일정<br><span class="td-en">Projects · captions · scripts</span></td><td>편집을 자동 저장하고 이어서 열기 위해, 프롬프터 촬영과 일정 관리를 위해</td><td>기기(로컬) — 전송 없음</td></tr>
+        <tr><td>음성(받아쓰기)<br><span class="td-en">Speech</span></td><td>영상 속 말소리로 자막을 만들고 무음을 찾기 위해. 기기 안 음성 인식만 씁니다</td><td>기기(로컬) — 전송 없음</td></tr>
+        <tr><td>사용 통계·오류 정보 (iPhone·iPad)<br><span class="td-en">Usage stats · crash reports</span></td><td>앱 개선과 오류 수정 — 기능 사용 이벤트, 기기 모델·OS·앱 버전, 크래시 진단. 영상·자막·글·파일 이름은 포함하지 않음(3항)</td><td>Google Firebase로 전송</td></tr>
+        <tr><td>설치 식별자<br><span class="td-en">Install ID</span></td><td>아래 서버 기능의 하루 사용 한도를 세기 위해. 앱이 처음 만들 때 정하는 무작위 값으로, 이름·기기 고유번호와 연결되지 않습니다</td><td>기기 · 개발자 서버</td></tr>
+        <tr><td>AI 목소리에 넣은 글 (쓸 때만)<br><span class="td-en">Text for AI voice</span></td><td>글을 목소리로 바꾸기 위해(4항)</td><td>저장하지 않음 — 사용량 숫자만 서버에</td></tr>
+        <tr><td>AI 캡션 재료 (쓸 때만)<br><span class="td-en">Material for AI caption</span></td><td>영상과 함께 올릴 글을 쓰기 위해 — 자막·화면 글·메모·프로젝트 이름(5항)</td><td>개발자 서버에 일부 30일</td></tr>
+        <tr><td>공유한 스타일 (쓸 때만)<br><span class="td-en">Shared styles</span></td><td>스타일을 링크로 다른 사람에게 주기 위해 — 스타일 설정·이름·견본 글·견본 그림(6항)</td><td>개발자 서버에 1년</td></tr>
+        <tr><td>계정·구매 연결 기록 (로그인 시)<br><span class="td-en">Account · purchase links</span></td><td>여러 기기에서 같은 Croffle 플러스를 쓰기 위해 — 계정 식별자, 기기 종류, 스토어 거래 번호(7항). 이메일·이름은 저장하지 않음</td><td>개발자 서버</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2><span class="toc-row"><span class="num">02</span><span class="t">권한</span><span class="leader"></span><span class="en">Permissions</span></span></h2>
+  <p><strong>사진 보관함</strong>: 편집할 영상·사진을 가져오고, 찍거나 내보낸 영상을 저장할 때만 씁니다. <strong>카메라·마이크</strong>: 프롬프터를 보며 영상을 찍거나 목소리를 녹음할 때만 씁니다. <strong>음성 인식</strong>: 자막 만들기와 대본 따라 넘기기에 쓰며 기기 안에서 처리합니다. <strong>로컬 네트워크(Mac)</strong>: 같은 Wi-Fi에 있는 스마트폰에서 영상을 바로 받아 올 때만 씁니다. 모든 권한은 거부해도 나머지 기능은 그대로 쓸 수 있습니다.</p>
+  <p class="en-note">Photo library: only to import media and save recorded or exported videos. Camera and microphone: only when you record with the prompter or record a voiceover. Speech recognition: for captions and the voice-following prompter, on the device. Local network (Mac): only to receive videos directly from a phone on the same Wi-Fi. You can decline any permission and keep using the rest of the app.</p>
+
+  <h2><span class="toc-row"><span class="num">03</span><span class="t">사용 통계·오류 정보 (Google Firebase)</span><span class="leader"></span><span class="en">Analytics</span></span></h2>
+  <p><strong>iPhone·iPad 앱</strong>은 앱 개선을 위해 Google Analytics for Firebase와 Firebase Crashlytics로 익명 사용 통계와 오류 정보를 보냅니다. 보내는 것은 어떤 기능을 썼는지(예: 내보내기, 자막 만들기, 스타일 적용 — 영어 코드와 숫자 구간), 기기 모델과 OS·앱 버전, Firebase가 붙이는 앱 인스턴스 ID, IP로 짐작한 대략적 지역, 크래시 진단 정보입니다. <strong>영상·사진·자막·글의 내용, 프로젝트·파일 이름은 보내지 않습니다.</strong> 광고 식별자(IDFA)를 쓰지 않고, 광고 개인화를 끄며, 이용자 식별자를 붙이지 않습니다. 통계는 14개월 보관되며, 분석을 위해 Google BigQuery(미국)에도 저장됩니다. 앱 안에 통계를 끄는 설정은 없습니다. Google의 처리 방식은 <a href="https://firebase.google.com/support/privacy">Firebase 개인정보 보호 안내</a>를 참고하세요.</p>
+  <p class="en-note">The iPhone and iPad apps send anonymous usage statistics and crash reports via Google Analytics for Firebase and Firebase Crashlytics: which features are used (coded names and numeric ranges), device model, OS and app version, the app-instance ID assigned by Firebase, approximate region derived from IP, and crash diagnostics. The content of your videos, photos, captions or text, and project or file names, are never sent. No advertising identifier (IDFA) is used, ad personalization is off, and no user ID is attached. Statistics are kept for 14 months and are also stored in Google BigQuery (US) for analysis. There is no in-app switch to turn statistics off.</p>
+  <p><strong>Mac·Android 앱</strong>에는 사용 통계·오류 보고 SDK가 들어 있지 않습니다.</p>
+  <p class="en-note">The Mac and Android apps contain no analytics or crash-reporting SDK.</p>
+
+  <h2><span class="toc-row"><span class="num">04</span><span class="t">AI 목소리</span><span class="leader"></span><span class="en">AI voice</span></span></h2>
+  <p>iPhone·iPad·Mac에서 AI 목소리를 쓰면, 처음에 동의를 받은 뒤 <strong>이용자가 고른 글과 목소리 설정</strong>을 개발자 서버를 거쳐 ElevenLabs(미국)로 보내 음성을 만듭니다. 개발자 서버는 글과 만든 음성을 저장하지 않으며, 하루 한도를 세기 위해 설치 식별자별 그날 사용량(글자 수)만 남깁니다. 설치 식별자와 IP 주소는 ElevenLabs에 넘기지 않습니다. Croffle 플러스 이용자는 더 높은 한도를 받기 위해 App Store가 서명한 구매 확인 정보를 함께 보내며, 서버는 확인만 하고 원문을 저장하지 않습니다(구매를 구별하는 짧은 해시와 그날 사용량만 남김). 목소리 미리 듣기 파일은 ElevenLabs와 Google 저장소에서 직접 내려받습니다. 동의는 앱에서 언제든 철회할 수 있습니다.</p>
+  <p class="en-note">When you use AI voice on iPhone, iPad or Mac, after you consent the text you chose and the voice settings are sent through the developer's server to ElevenLabs (US) to generate speech. Our server does not store the text or the audio; it keeps only a per-day usage count per install ID. The install ID and your IP address are not passed to ElevenLabs. Croffle Plus subscribers also send an App Store–signed proof of purchase to get the higher limit; the server verifies it and does not store the original (only a short hash and that day's usage). Voice previews are downloaded directly from ElevenLabs and Google storage. You can withdraw consent in the app at any time.</p>
+
+  <h2><span class="toc-row"><span class="num">05</span><span class="t">AI 캡션</span><span class="leader"></span><span class="en">AI caption</span></span></h2>
+  <p>AI 캡션(영상과 함께 올릴 글 쓰기)을 쓰면, 처음에 동의를 받은 뒤 <strong>그 영상의 자막·화면 글·이용자가 적은 메모·프로젝트 이름</strong>을 개발자 서버를 거쳐 Anthropic(미국)으로 보내 글을 만듭니다. 설치 식별자도 오용 방지를 위해 함께 전달됩니다. <strong>영상과 사진은 보내지 않습니다.</strong> 더 좋은 글을 쓰도록 다듬고 오류를 고치기 위해 메모, 프로젝트 이름, 자막 앞부분(300자), 만든 캡션을 설치 식별자와 함께 <strong>30일</strong> 보관한 뒤 지우며, 이 기록은 개발자가 볼 수 있습니다. 하루 횟수 제한을 위해 IP 주소별 그날 횟수를 <strong>8일</strong> 보관합니다. 동의는 앱에서 언제든 철회할 수 있습니다.</p>
+  <p class="en-note">When you use AI caption (writing a post caption for your video), after you consent the video's captions, on-screen text, your memo and the project name are sent through the developer's server to Anthropic (US). The install ID is passed along for abuse prevention. Videos and photos are never sent. To improve results and fix errors we keep the memo, project name, the first 300 characters of the captions and the generated caption, together with the install ID, for 30 days, then delete them; the developer can view these records. A per-day request count per IP address is kept for 8 days for rate limiting. You can withdraw consent in the app at any time.</p>
+
+  <h2><span class="toc-row"><span class="num">06</span><span class="t">스타일 공유 링크</span><span class="leader"></span><span class="en">Style share links</span></span></h2>
+  <p>내 스타일을 링크로 공유하면 <strong>스타일 설정(글꼴 이름·색·효과), 스타일 이름, 견본 글, 견본 그림</strong>이 개발자 서버에 올라가며, 링크를 아는 사람은 누구나 볼 수 있습니다. 견본 글에는 이용자가 쓴 글의 앞부분이 들어갈 수 있으니, 공개되면 곤란한 글이 든 스타일은 공유하지 마세요. 영상·사진·글꼴 파일은 올라가지 않습니다. 올린 파일은 <strong>1년</strong> 뒤 자동으로 지워지고, 링크 기록(이름·종류·설치 식별자·열어 본 횟수)은 운영을 위해 보관합니다. 링크를 그 전에 내리거나 부적절한 링크를 신고하려면 아래 문의 주소로 알려 주세요.</p>
+  <p class="en-note">When you share a style as a link, the style settings (font names, colors, effects), its name, a sample text and a preview image are uploaded to the developer's server, and anyone with the link can view them. The sample text may contain the beginning of text you wrote, so do not share styles containing text you would not want public. Videos, photos and font files are not uploaded. Uploaded files are deleted automatically after one year; the link record (name, kind, install ID, view counts) is kept for operations. To take a link down earlier or to report a link, contact us at the address below.</p>
+
+  <h2><span class="toc-row"><span class="num">07</span><span class="t">계정(선택)과 구독</span><span class="leader"></span><span class="en">Account (optional) and subscription</span></span></h2>
+  <p>로그인은 선택이며, 로그인하지 않아도 앱의 기능과 구독을 쓸 수 있습니다. 지금은 iPhone·iPad·Mac에서 Apple로 로그인할 수 있습니다. 로그인하면 여러 기기에서 같은 Croffle 플러스를 쓰도록 아래 정보를 개발자 서버에 둡니다.</p>
+  <p class="en-note">Signing in is optional; the app and subscriptions work without it. Sign in with Apple is currently available on iPhone, iPad and Mac. If you sign in, we keep the following on our server so that Croffle Plus works across your devices.</p>
+  <ul>
+    <li><strong>계정 정보</strong>: 무작위 계정 식별자, 로그인 수단(Apple), Apple이 앱마다 따로 주는 이용자 식별자. <strong>이메일·이름은 서버에 저장하지 않습니다</strong>(받은 경우 기기 안에만 보관).</li>
+    <li><strong>기기·접속 기록</strong>: 무작위 기기 식별자, 기기 종류(iPhone·iPad·Mac), 앱 버전, 로그인·마지막 접속 시각. 한 계정은 기기 3대까지 쓸 수 있고, 180일 동안 쓰지 않은 기기는 로그아웃됩니다.</li>
+    <li><strong>구매 연결 기록</strong>: App Store 거래 번호, 상품, 구매·만료·환불 시각. 카드 등 결제 수단 정보는 받지 않습니다.</li>
+  </ul>
+  <p><strong>계정 삭제</strong>: 앱의 설정 › 계정 › 계정 지우기에서 언제든 지울 수 있습니다. 지우면 계정 정보와 기기·접속 기록을 바로 삭제하고 Apple 로그인 연결을 해제합니다. 구매 기록은 계정과의 연결만 끊은 채(누구의 것인지 알 수 없는 상태로) 남겨, 같은 구매가 여러 계정에 중복으로 쓰이는 것을 막는 데만 씁니다. 스토어 거래 자체는 Apple에 남습니다.</p>
+  <p class="en-note">Deleting your account: Settings › Account › Delete account, at any time. Account data and device/access records are erased immediately and the Sign in with Apple link is revoked. Purchase records are kept only in unlinked form (no longer tied to any account) to prevent the same purchase being reused across accounts. The store transaction itself remains with Apple.</p>
+  <p><strong>구독 결제</strong>는 App Store(Apple)가 처리하며, 앱은 카드 정보를 받지 않습니다. 구독은 Apple 계정 설정에서 언제든 해지할 수 있습니다.</p>
+  <p class="en-note">Subscription payments are handled by the App Store (Apple); the app never receives card details. You can cancel in your Apple account settings at any time.</p>
+
+  <h2><span class="toc-row"><span class="num">08</span><span class="t">그 밖의 통신</span><span class="leader"></span><span class="en">Other network use</span></span></h2>
+  <ul>
+    <li><strong>글꼴</strong>: 글꼴 목록과 글꼴 파일을 개발자의 글꼴 서버(<code>fonts.ohttne.com</code>, Cloudflare)에서 내려받습니다. 식별 정보나 작업물은 보내지 않습니다.</li>
+    <li><strong>음성 인식 모델</strong>: 기기 안 음성 인식에 필요한 언어 모델은 Apple(Android는 기기의 음성 서비스)이 내려받습니다.</li>
+    <li><strong>GIF 검색 (iPhone·iPad·Android)</strong>: GIPHY 검색 화면을 앱 안에서 열며, 검색어와 접속 정보는 GIPHY로 전달됩니다(<a href="https://support.giphy.com/hc/en-us/articles/360032872931">GIPHY 개인정보 처리방침</a>).</li>
+    <li><strong>음악</strong>: 음악을 듣거나 넣을 때 음원 파일을 제공처(incompetech.com)에서 내려받습니다.</li>
+    <li><strong>AI 앱 연결 (Mac, 기본 꺼짐)</strong>: 이용자가 켜면 이 Mac 안에서만 열리는 연결로 Claude 같은 AI 앱이 Croffle을 조작합니다. Croffle은 이 과정에서 프로젝트 정보를 개발자 서버로 보내지 않습니다. 다만 연결한 AI 앱은 받은 프로젝트 정보·받아쓴 글·장면 그림을 그 앱의 회사로 보낼 수 있으며, 이는 그 회사의 방침을 따릅니다.</li>
+    <li><strong>스마트폰에서 가져오기 (Mac)</strong>: 같은 Wi-Fi 안에서 스마트폰이 Mac으로 직접 보내며, 외부 서버를 거치지 않습니다.</li>
+    <li><strong>문의·문제 신고</strong>: 이용자가 메일로 보낼 때만, 이용자가 확인한 진단 정보(앱·OS 버전, 기기 모델, 최근 로그 — 파일 이름과 글 내용은 가림)가 첨부됩니다.</li>
+    <li><strong>다른 앱으로 보내기</strong>: 내보낸 영상을 YouTube·Instagram·TikTok 등으로 보내면 이용자의 선택에 따라 그 앱으로 전달됩니다.</li>
+  </ul>
+  <p class="en-note">Fonts are downloaded from the developer's font server (fonts.ohttne.com, Cloudflare) with no identifiers. On-device speech models are downloaded by Apple (or the device speech service on Android). GIF search opens GIPHY inside the app; search terms and connection data go to GIPHY. Music files are downloaded from the provider (incompetech.com) when you preview or add a track. AI app connection (Mac, off by default) is a local-only connection on your Mac; Croffle sends nothing to our servers for it, but the AI app you connect may send the project information, transcripts and frames it receives to its own provider under that provider's policy. "Import from phone" (Mac) transfers directly over the same Wi-Fi. Diagnostics (versions, device model, redacted recent logs) are attached only to emails you choose to send. Videos you share go to the app you choose.</p>
+
+  <h2><span class="toc-row"><span class="num">09</span><span class="t">보유 기간과 삭제</span><span class="leader"></span><span class="en">Retention and deletion</span></span></h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>항목 (Data)</th><th>보유 기간 (Retention)</th></tr></thead>
+      <tbody>
+        <tr><td>기기에 저장된 프로젝트·미디어·대본</td><td>이용자가 앱에서 지우거나 앱을 삭제할 때까지</td></tr>
+        <tr><td>사용 통계 (Firebase)</td><td>14개월 (Google 보유 정책)</td></tr>
+        <tr><td>AI 목소리 사용량 (글 내용 없음)</td><td>설치 식별자별 하루 사용량 숫자를 운영 통계로 보관</td></tr>
+        <tr><td>AI 캡션 기록</td><td>30일 뒤 삭제 · IP별 하루 횟수는 8일 뒤 삭제</td></tr>
+        <tr><td>공유한 스타일</td><td>파일은 1년 뒤 삭제 · 링크 기록은 보관(요청하면 삭제)</td></tr>
+        <tr><td>계정·기기 기록</td><td>계정을 지울 때까지 — 지우면 바로 삭제</td></tr>
+        <tr><td>구매 연결 기록</td><td>계정을 지우면 계정과의 연결을 끊고 보관</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>설치 식별자로 남은 기록(AI 목소리 사용량, AI 캡션 기록, 스타일 링크)의 삭제나 열람을 원하면 <a href="mailto:ohttangent@gmail.com">ohttangent@gmail.com</a> 로 알려 주세요. 스타일 링크는 링크 주소를 함께 보내 주시면 됩니다. 앱을 삭제하면 기기의 설치 식별자도 함께 사라집니다.</p>
+  <p class="en-note">To request deletion of or access to records tied to an install ID (AI voice usage, AI caption logs, style links), email ohttangent@gmail.com — for style links, include the link. Uninstalling the app removes the install ID from your device.</p>
+
+  <h2><span class="toc-row"><span class="num">10</span><span class="t">처리 위탁·국외 이전</span><span class="leader"></span><span class="en">Processors and transfers</span></span></h2>
+  <p>앱은 이용자의 개인정보를 판매하지 않으며, 아래 업체 외의 제3자에게 제공하지 않습니다. 서비스 운영을 위해 아래 업체에 처리를 맡기며, 이 과정에서 정보가 국외로 이전됩니다.</p>
+  <p class="en-note">We never sell your personal data. We use the following processors, which involves transfer outside your country.</p>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>업체 (Processor)</th><th>맡기는 일 · 항목</th><th>나라</th></tr></thead>
+      <tbody>
+        <tr><td>Cloudflare, Inc.</td><td>개발자 서버·글꼴 서버 운영(Workers·D1·KV·R2) — 4~7항의 서버 기록</td><td>미국 등 Cloudflare 전 세계 네트워크</td></tr>
+        <tr><td>Google LLC</td><td>Firebase Analytics·Crashlytics·BigQuery — 3항의 사용 통계·오류 정보(iPhone·iPad)</td><td>미국</td></tr>
+        <tr><td>ElevenLabs Inc.</td><td>AI 목소리 — 음성으로 바꿀 글(쓸 때만)</td><td>미국</td></tr>
+        <tr><td>Anthropic PBC</td><td>AI 캡션 — 자막·화면 글·메모·프로젝트 이름, 설치 식별자(쓸 때만)</td><td>미국</td></tr>
+        <tr><td>Apple Inc.</td><td>로그인(Apple로 로그인), 구독 결제와 구매 확인</td><td>미국</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>전송은 모두 암호화(HTTPS)됩니다. AI 목소리·AI 캡션으로 보내는 것을 원하지 않으면 그 기능의 동의를 하지 않거나 철회하면 되며, 나머지 기능은 그대로 쓸 수 있습니다.</p>
+  <p class="en-note">All transfers are encrypted (HTTPS). If you do not want data sent for AI voice or AI caption, decline or withdraw consent for that feature; the rest of the app keeps working.</p>
+
+  <h2><span class="toc-row"><span class="num">11</span><span class="t">아동의 개인정보</span><span class="leader"></span><span class="en">Children</span></span></h2>
+  <p>앱은 아동을 대상으로 하지 않으며 아동의 개인정보를 의도적으로 수집하지 않습니다.</p>
+  <p class="en-note">The app is not directed at children and does not knowingly collect personal data from children.</p>
+
+  <h2><span class="toc-row"><span class="num">12</span><span class="t">문의</span><span class="leader"></span><span class="en">Contact</span></span></h2>
+  <p>개인정보 처리에 관한 문의·열람·삭제 요청: <a href="mailto:ohttangent@gmail.com">ohttangent@gmail.com</a></p>
+  <p class="en-note">Questions, access or deletion requests: ohttangent@gmail.com</p>
+
+  <h2><span class="toc-row"><span class="num">13</span><span class="t">변경</span><span class="leader"></span><span class="en">Changes</span></span></h2>
+  <p>기능이 더해져 처리하는 정보가 바뀌면 이 페이지에 먼저 게시하고 시행일자를 갱신합니다.</p>
+  <p class="en-note">If new features change what we process, this page is updated first with a new effective date.</p>
+
+  <h2><span class="toc-row"><span class="num">14</span><span class="t">Android(Google Play) 판에 관하여</span><span class="leader"></span><span class="en">Android app</span></span></h2>
+  <p>Google Play에서 배포하는 Croffle Android 앱(패키지 <code>com.ohtt.croffle</code>)에는 위 내용이 그대로 적용되며, 플랫폼에 따라 다른 점은 아래와 같습니다.</p>
+  <ul>
+    <li><strong>미디어는 기기 안에서만 처리됩니다.</strong> 영상·사진 고르기는 Android 사진 선택기(Photo Picker)를 쓰므로 보관함 전체 접근 권한을 요청하지 않으며, 내보낸 영상은 기기의 갤러리(<em>Movies/Croffle</em>)에 저장됩니다.</li>
+    <li><strong>사용 통계·오류 보고·광고 SDK가 없습니다.</strong> 광고 ID(Advertising ID)를 수집하지 않습니다.</li>
+    <li><strong>인터넷 권한의 용도.</strong> 글꼴 내려받기, AI 캡션(5항), 스타일 공유 링크(6항), GIF 검색·음악 내려받기(8항)에 쓰입니다. AI 목소리, 로그인, 구독 결제는 지금 Android 판에 없습니다.</li>
+    <li><strong>카메라·마이크·음성 인식·알림</strong>은 촬영·녹음·자막 만들기·내보내기 진행 알림에만 쓰며, 음성 인식은 기기 안 인식만 씁니다.</li>
+    <li><strong>기기 백업.</strong> Android 자동 백업을 켜 둔 경우 앱 설정(설치 식별자 포함)이 이용자의 Google 계정 백업에 들어갈 수 있습니다.</li>
+    <li><strong>삭제 요청.</strong> AI 캡션 기록과 스타일 링크의 삭제는 <a href="mailto:ohttangent@gmail.com">ohttangent@gmail.com</a> 로 요청할 수 있습니다.</li>
+  </ul>
+  <p class="en-note">For the Android app on Google Play (package com.ohtt.croffle): media is processed only on the device — picking uses the Android Photo Picker and exports are saved to the gallery (Movies/Croffle). No analytics, crash-reporting or ad SDKs are included and no Advertising ID is collected. Internet access is used for font downloads, AI caption (§5), style share links (§6), GIF search and music downloads (§8). AI voice, sign-in and subscriptions are not currently in the Android app. Camera, microphone, speech recognition and notifications are used only for recording, captions and export progress; speech recognition runs on the device. If Android auto backup is on, app settings (including the install ID) may be included in your Google account backup. Deletion of AI caption logs and style links can be requested at ohttangent@gmail.com.</p>
+  <p>개발자: Ohtt · 연락처: <a href="mailto:ohttangent@gmail.com">ohttangent@gmail.com</a> · 웹사이트: <a href="https://www.ohttne.com/">https://www.ohttne.com/</a></p>
+
+</div>
+</body>
+</html>
