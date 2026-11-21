@@ -129,7 +129,7 @@
     </h1>
     <p class="meta">
       <b>시오리</b>(이하 "앱")는 이용자의 개인정보를 소중히 여기며, 아래와 같이 데이터를 처리합니다.<br>
-      시행일자 (Effective date): <b>2026년 7월 8일</b> · 최종 수정: 2026년 9월 27일
+      시행일자 (Effective date): <b>2026년 7월 8일</b> · 최종 수정: 2026년 11월 21일
     </p>
   </header>
 
@@ -137,15 +137,15 @@
     <strong>한눈에 보기.</strong> 시오리는 광고를 싣지 않고, 광고·마케팅 목적의 추적을 하지 않습니다.
     독서 기록·노트·사진·단어장은 <strong>이용자의 기기와 이용자 본인의 iCloud에만 저장</strong>되며,
     개발자를 포함한 제3자에게 전송되지 않습니다(안드로이드판은 iCloud 대신 <strong>이용자 본인의 구글 드라이브 앱 전용 폴더</strong> — 10항 참조).
-    예외는 이용자가 <strong>'시오리에게 편지'로 직접 보내는 글</strong>뿐이며, 이 글은 개발자에게 전달됩니다(5항). 책·단어 검색어는 해당 검색 API로 전송되고,
+    예외는 이용자가 <strong>'시오리에게 편지'로 직접 보내는 글</strong>과 <strong>링크로 공유하기로 한 연말 카드</strong>뿐입니다. 편지는 개발자에게 전달되고, 연말 카드는 링크를 아는 사람이 볼 수 있게 서버에 올라갑니다(5항). 책·단어 검색어는 해당 검색 API로 전송되고,
     앱 개선을 위한 <strong>익명 사용 통계·오류 정보</strong>가 Google Firebase를 통해 수집됩니다. 통계에는 읽기 시작·완독한 책의 제목과 별점, 책 검색어가 포함될 수 있지만
     이용자가 쓴 노트·인용 등 기록 내용은 포함되지 않습니다(5항 참조).
     <br><br>
     <span class="en">
     At a glance — Siori shows no ads and does no ad or marketing tracking. Your reading records, notes, photos,
     and vocabulary are stored only on your device and in your personal iCloud, and are never sent to the
-    developer or any third party — the only exception is a letter you choose to send with "Letter to Siori", which
-    reaches the developer (see §5). Book and dictionary search terms are sent to the relevant search APIs, and
+    developer or any third party — the only exceptions are a letter you choose to send with "Letter to Siori", which
+    reaches the developer, and a year-end card you choose to share as a link, which is uploaded so that anyone with the link can view it (see §5). Book and dictionary search terms are sent to the relevant search APIs, and
     anonymized usage statistics and crash reports are collected via Google Firebase. Statistics may include the
     titles and ratings of books you start or finish and your book search terms, but never the notes or quotes you
     write (see §5).
@@ -155,8 +155,8 @@
   <!-- 1 -->
   <h2><span class="toc-row"><span class="num">01</span><span class="t">수집·처리하는 정보</span><span class="leader"></span><span class="en">What we process</span></span></h2>
   <p>앱은 계정 가입을 요구하지 않으며, 이용자 계정이나 독서 기록을 보관하는 서버가 없습니다. 개발자가 운영하는 서버(Cloudflare)는
-  <strong>'시오리에게 편지'와 검색 API 오류 보고를 받는 용도로만</strong> 쓰입니다. 처리되는 정보는 아래와 같습니다.</p>
-  <p class="en-note">The app requires no sign-up, and there is no server that stores accounts or reading records. The developer's server (Cloudflare) is used only to receive "Letter to Siori" messages and search-API error reports. The data involved is as follows.</p>
+  <strong>'시오리에게 편지'와 검색 API 오류 보고를 받고, 이용자가 링크로 공유한 연말 카드를 보여 주는 용도로만</strong> 쓰입니다. 처리되는 정보는 아래와 같습니다.</p>
+  <p class="en-note">The app requires no sign-up, and there is no server that stores accounts or reading records. The developer's server (Cloudflare) is used only to receive "Letter to Siori" messages and search-API error reports, and to show year-end cards you choose to share as a link. The data involved is as follows.</p>
 
   <div class="tbl-scroll">
     <table>
@@ -203,6 +203,11 @@
           <td>시오리에게 편지<br><span class="td-en">Letter to Siori</span></td>
           <td>이용자가 직접 보낸 의견을 개발자가 읽고 답하기 위해 — 편지 본문, 편지지 이미지, 서명(닉네임), 익명 설치 식별자, 앱 버전·기기 모델·OS 버전 (아래 5항)</td>
           <td>시오리 서버(Cloudflare) 90일 보관 · 개발자 메일함</td>
+        </tr>
+        <tr>
+          <td>연말 카드 (링크 공유)<br><span class="td-en">Year-end card (shared link)</span></td>
+          <td>이용자가 '링크 공유'를 고른 카드를 링크로 보여 주기 위해 — 카드에 적은 이름, 그 해 다 읽은 책의 제목·저자·쪽수, 고른 문구와 출처, 독서 통계(읽은 쪽수·시간·가장 많이 읽은 달), 디자인, 카드 미리보기 그림 (아래 5항)</td>
+          <td>시오리 서버(Cloudflare) · 이듬해 2월 말까지</td>
         </tr>
       </tbody>
     </table>
@@ -274,6 +279,14 @@
   설치 식별자는 기기당 하루 발송 한도를 세는 데만 쓰입니다. 서버에 남는 사본(본문·서명·식별자·기기 정보)은 <strong>90일 뒤 자동으로 삭제</strong>되며,
   메일로 받은 편지의 삭제를 원하시면 아래 연락처로 요청해 주세요. 편지를 보내지 않으면 아무것도 전송되지 않습니다.</p>
   <p class="en-note">Letter to Siori — only when you send a letter from Settings, its text and letter image, your signature (nickname), an anonymous install identifier, and the app version, device model and OS version are relayed through the Siori server (Cloudflare Workers) to the developer's mailbox. The install identifier is used only to count the per-device daily limit. The server copy (text, signature, identifier, device info) is deleted automatically after 90 days; to have an emailed letter deleted, contact us below. Nothing is sent unless you send a letter.</p>
+  <p><strong>연말 카드.</strong> 연말 카드는 기기 안에서 만들어지며, 이미지로 저장할 때는 아무것도 전송되지 않습니다.
+  이용자가 <strong>'링크 공유'를 고른 경우에만</strong> 카드 내용 — <strong>카드에 적은 이름, 그 해 다 읽은 책의 제목·저자·쪽수, 고른 문구와 그 책 제목·쪽, 독서 통계(읽은 쪽수·시간·가장 많이 읽은 달), 디자인과 카드 미리보기 그림</strong> — 이
+  시오리 서버(Cloudflare Workers, card.ohttne.com)에 저장되고, <strong>링크를 아는 사람은 누구나 볼 수 있습니다</strong>(검색엔진에는 노출되지 않도록 설정합니다).
+  카드에는 계정·기기 식별자가 담기지 않으며, 카드를 고치거나 지울 수 있는 열쇠는 만든 기기에만 있습니다(서버에는 열쇠의 해시만 남습니다).
+  카드는 <strong>앱의 '링크 삭제'로 언제든 지울 수 있고</strong>, 지우지 않아도 <strong>카드 연도 이듬해 3월 1일이 되면 자동으로 삭제</strong>됩니다.
+  하루 만들기 횟수 제한을 위해 접속 IP는 <strong>날마다 바뀌는 해시로만</strong> 세며 IP 원문은 저장하지 않습니다. 서버에는 카드 조회 수와 신고 수가 함께 기록되며,
+  신고된 카드는 개발자가 내용을 확인하고 지울 수 있습니다.</p>
+  <p class="en-note">Year-end card — cards are made on your device, and saving one as an image sends nothing. Only if you choose "Share link" are the card's contents (the name you put on it; the titles, authors and page counts of books you finished that year; the quote you picked with its book and page; reading stats such as pages, time and busiest month; the design and a preview image) stored on the Siori server (Cloudflare Workers, card.ohttne.com), where anyone with the link can view them (we ask search engines not to index them). Cards carry no account or device identifier, and the key to edit or delete a card stays on the device that made it (the server keeps only its hash). You can delete a card at any time with "Delete link" in the app; otherwise it is deleted automatically on March 1 of the year after the card's year. To enforce a daily creation limit, IP addresses are counted only as a hash that changes every day — the address itself is never stored. View and report counts are kept with the card, and the developer may review and remove a reported card.</p>
   <p>이 밖에 알림 전송을 위해 Apple의 푸시 서비스(APNs)와 iCloud 동기화(CloudKit)를 사용합니다. 앱은
   <strong>광고 네트워크를 일절 사용하지 않습니다.</strong></p>
   <p class="en-note">The app also uses Apple's push service (APNs) and iCloud sync (CloudKit). It uses no advertising networks.</p>
@@ -290,28 +303,29 @@
     <li>모든 데이터는 이용자가 직접 삭제하기 전까지 기기(및 이용자 iCloud)에 보관됩니다.</li>
     <li>앱 안에서 개별 기록·노트·책·단어를 삭제하면 해당 데이터가 제거되며, iCloud 동기화 사용 시 다른 기기에서도 반영됩니다.</li>
     <li>앱을 삭제하면 기기에 저장된 로컬 데이터가 함께 삭제됩니다. iCloud에 동기화된 데이터는 iOS 설정 → Apple 계정 → iCloud에서 관리·삭제할 수 있습니다.</li>
+    <li>링크로 공유한 연말 카드는 앱의 '링크 삭제'로 지우거나, 카드 연도 이듬해 3월 1일에 자동으로 삭제됩니다. 앱을 지운 뒤에는 카드를 지울 열쇠가 기기에서 사라지므로, 그 전에 지우고 싶으면 아래 연락처로 카드 링크와 함께 요청해 주세요.</li>
   </ul>
-  <p class="en-note">Data is kept until you delete it. Deleting items in-app removes them (and syncs the deletion). Removing the app deletes local data; iCloud-synced data can be managed in iOS Settings → your Apple Account → iCloud.</p>
+  <p class="en-note">Data is kept until you delete it. Deleting items in-app removes them (and syncs the deletion). Removing the app deletes local data; iCloud-synced data can be managed in iOS Settings → your Apple Account → iCloud. A shared year-end card can be removed with "Delete link" in the app and is deleted automatically on March 1 of the following year; if you have already removed the app, send us the card link and we will delete it.</p>
 
   <!-- 8 -->
   <h2><span class="toc-row"><span class="num">08</span><span class="t">아동의 개인정보</span><span class="leader"></span><span class="en">Children's privacy</span></span></h2>
   <p>앱은 아동을 주 대상으로 하지 않으며, 만 14세 미만 아동으로부터 고의로 개인정보를 수집하지 않습니다.
-  개발자에게 전달되는 것은 이용자가 직접 보낸 편지뿐이며, 아동이 보낸 편지임을 알게 되면 지체 없이 삭제합니다.
+  개발자에게 전달되거나 서버에 남는 것은 이용자가 직접 보낸 편지와 링크로 공유한 연말 카드뿐이며, 아동이 보낸 것임을 알게 되면 지체 없이 삭제합니다.
   보호자께서 자녀의 앱 이용에 관해 문의가 있으시면 아래 연락처로 연락해 주세요.</p>
-  <p class="en-note">The app is not directed at children and does not knowingly collect personal information from children under 14. The only data that reaches the developer is a letter you choose to send; if we learn a letter came from a child, we delete it promptly.</p>
+  <p class="en-note">The app is not directed at children and does not knowingly collect personal information from children under 14. The only data that reaches the developer's server is a letter you choose to send or a year-end card you choose to share as a link; if we learn either came from a child, we delete it promptly.</p>
 
   <!-- 9 -->
   <h2><span class="toc-row"><span class="num">09</span><span class="t">이용자의 권리</span><span class="leader"></span><span class="en">Your rights</span></span></h2>
   <p>이용자는 언제든지 앱 안에서 자신의 데이터를 열람·수정·삭제할 수 있습니다. 독서 기록은 개발자가 따로 보관하지 않으므로,
   삭제·정정은 앱 내 삭제 기능 또는 iCloud(안드로이드는 구글 드라이브) 관리로 이용자가 직접 수행할 수 있습니다.
-  개발자가 보관하는 것은 이용자가 보낸 편지뿐이며, 편지의 열람·삭제를 포함한 그 밖의 요청은 아래 연락처로 하실 수 있습니다.</p>
-  <p class="en-note">You can view, edit, and delete your data at any time within the app. The developer keeps no copy of your reading records, so access and erasure are carried out by you directly, in-app or via iCloud (Google Drive on Android). The only thing the developer holds is any letter you sent; requests about letters or anything else can be made via the contact below.</p>
+  개발자가 보관하는 것은 이용자가 보낸 편지와 링크로 공유한 연말 카드뿐이며, 연말 카드는 앱에서 직접 지울 수 있습니다. 그 밖의 요청은 아래 연락처로 하실 수 있습니다.</p>
+  <p class="en-note">You can view, edit, and delete your data at any time within the app. The developer keeps no copy of your reading records, so access and erasure are carried out by you directly, in-app or via iCloud (Google Drive on Android). The developer holds only letters you sent and year-end cards you shared as a link (which you can delete in the app); other requests can be made via the contact below.</p>
 
   <!-- 10 -->
   <h2><span class="toc-row"><span class="num">10</span><span class="t">안드로이드판</span><span class="leader"></span><span class="en">Android edition</span></span></h2>
-  <p>안드로이드판 시오리도 <strong>회원가입과 로그인이 없고</strong>, 개발자가 운영하는 서버는 iOS판과 같이 <strong>편지와 검색 API 오류 보고를 받는 용도로만</strong> 쓰입니다(1·5항).
+  <p>안드로이드판 시오리도 <strong>회원가입과 로그인이 없고</strong>, 개발자가 운영하는 서버는 iOS판과 같이 <strong>편지와 검색 API 오류 보고를 받고, 링크로 공유한 연말 카드를 보여 주는 용도로만</strong> 쓰입니다(1·5항).
   아래는 위 항목과 <strong>다른 부분만</strong> 적습니다. 나머지는 위 내용과 같습니다.</p>
-  <p class="en-note">The Android edition also has no sign-up and no login; as on iOS, the developer's server only receives letters and search-API error reports (§1, §5). Only the differences from the sections above are listed here.</p>
+  <p class="en-note">The Android edition also has no sign-up and no login; as on iOS, the developer's server only receives letters and search-API error reports and shows year-end cards you share as a link (§1, §5). Only the differences from the sections above are listed here.</p>
   <ul>
     <li><strong>저장과 동기화.</strong> 기록·노트·사진·단어장은 앱 전용 저장 공간에 보관됩니다. iCloud 대신
     <strong>구글 드라이브의 앱 전용 폴더(appDataFolder)</strong>로 동기화할 수 있으며, <strong>이용자가 직접 켤 때만</strong> 동작합니다.
