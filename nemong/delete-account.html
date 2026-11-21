@@ -176,7 +176,7 @@
     </select>
     <label for="note">덧붙일 말(선택)<span class="en">Anything else (optional)</span></label>
     <textarea id="note" placeholder="예: 쓰던 폰을 잃어버렸어요"></textarea>
-    <label class="check"><input id="ok" type="checkbox" required> <span>계정과 서버의 구매 연결 기록이 지워지고 되돌릴 수 없다는 것, 구독은 따로 해지해야 한다는 것을 확인했어요.<br><span class="small">I understand this can't be undone and that subscriptions must be cancelled separately.</span></span></label>
+    <label class="check"><input id="ok" type="checkbox" required> <span>계정과 서버의 구매 연결 기록·커뮤니티 글이 지워지고 되돌릴 수 없다는 것, 구독은 따로 해지해야 한다는 것을 확인했어요.<br><span class="small">I understand this can't be undone and that subscriptions must be cancelled separately.</span></span></label>
     <button type="submit">삭제 요청 메일 쓰기 · Email deletion request</button>
     <p class="small">메일 앱이 열리지 않으면 <a href="mailto:ohttangent@gmail.com?subject=%5B%EB%84%A4%EB%AA%BD%5D%20%EA%B3%84%EC%A0%95%20%EC%82%AD%EC%A0%9C%20%EC%9A%94%EC%B2%AD">ohttangent@gmail.com</a>으로 제목 "[네몽] 계정 삭제 요청", 로그인 이메일과 수단을 적어 보내 주세요.</p>
   </form>
@@ -191,6 +191,9 @@
         <tr><td>스토어 알림·오류 기록<br><span class="td-en">Store notifications, error logs</span></td><td>계정과 연결을 끊고 90일 뒤 자동 삭제 · Unlinked, auto-deleted after 90 days</td></tr>
         <tr><td>개발자 조치 기록(누가·언제·무엇을·사유)<br><span class="td-en">Record of actions taken by the developer</span></td><td>처리 근거로 보관 — 계정 식별자만, 이메일 없음 · Kept as evidence of handling (account ID only, no email)</td></tr>
         <tr><td>다른 기기와 이어 하기 작업 사본(켠 경우)<br><span class="td-en">Work copies for syncing (if turned on)</span></td><td>바로 삭제 · Deleted immediately</td></tr>
+        <tr><td>커뮤니티 프로필·올린 템플릿·좋아요·저장·차단<br><span class="td-en">Community profile, posts, likes, saves, blocks</span></td><td>바로 삭제 — 공개 그림은 전송망 캐시에 최대 하루 남을 수 있고, 다른 사람이 이미 저장한 템플릿은 그 사람 기기에 남음 · Deleted immediately; public images may stay in the CDN cache for up to a day, and copies others already saved stay on their devices</td></tr>
+        <tr><td>커뮤니티 닉네임<br><span class="td-en">Community nickname</span></td><td>사칭을 막으려고 30일 동안 다른 사람이 못 쓰게 해 둔 뒤 풀림 · Held for 30 days so no one can impersonate you, then released</td></tr>
+        <tr><td>내가 한 신고·영구 정지 기록<br><span class="td-en">Reports you made · ban records</span></td><td>신고는 처리 근거로 신고한 사람을 지운 채 남음, 영구 정지 해시는 정지가 끝날 때까지 · Reports stay with you removed as the reporter; a ban hash stays until the ban ends</td></tr>
         <tr><td>기기의 사진·글·템플릿<br><span class="td-en">Your work on the device</span></td><td>그대로(앱을 지우면 사라짐) · Stays on your device</td></tr>
         <tr><td>사용 통계(Firebase)<br><span class="td-en">Usage statistics (Firebase)</span></td><td>계정과 연결되지 않은 익명 통계 — Google 보유 정책(14개월)에 따라 자동 삭제 · Not linked to your account; expires after 14 months</td></tr>
       </tbody>
